@@ -1,8 +1,8 @@
 import {Link} from 'react-router-dom';
 
 
-const Card = ({cel}) => {
-    const {id, marca, modelo, img, price} = cel
+const Card = ({id, marca, modelo, img, price}) => {
+
     
   return (
     <div>
