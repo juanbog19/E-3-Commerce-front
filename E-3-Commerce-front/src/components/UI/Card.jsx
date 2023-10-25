@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 
 
-export default function Card({cel}) {
+const Card = ({cel}) => {
     const {id, marca, modelo, img, price} = cel
     
   return (
@@ -22,7 +22,8 @@ export default function Card({cel}) {
         <Link to={`/detail/${id}`} >
             <button>Details</button>
         </Link>
-
-    </div>
-  )
+</div>
+)
 }
+
+export default Card;
