@@ -1,8 +1,11 @@
+
 /* *****El código comentado será funcional cuando obtengamos las rutas del back y la correspondiente action de redux, también deberá
 importarse una libreria de icons**** */
 
+
 // import { useState } from "react";
 // import { useDispatch } from "react-redux";
+
 
 
 // const SearchBar = () => {
@@ -84,8 +87,8 @@ const SearchBar = () => {
 				</button>
                 <button className='px-3 py-2 ml-1 text-gray-100 rounded-lg bg-primary hover:bg-secondary' onClick={handlerReset}>
                 Reset
-                </button>                
-                
+                </button>            
+
 			</div>
     )
 }
