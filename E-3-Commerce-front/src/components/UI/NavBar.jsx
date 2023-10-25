@@ -4,15 +4,17 @@ import { Link } from 'react-router-dom';
 //COMPLETAR LINK EN LOGIN Y SIGN UP
 const NavBar = () => {
     return (
-        <div>
+        <div className="flex items-center mr-5">
 
             <div>
                 <h2>Logo</h2>
             </div>      
 
             <div>
-                <Link to="/tienda">Tienda</Link>
-                <Link to="/servicio-tecnico">Servicio Técnico</Link>
+                <Link to="/tienda">
+                <button>Tienda</button>                    
+                </Link>
+                <Link to="/servicio-tecnico"><button>Servicio Técnico</button></Link>
             </div>
 
             <div>
