@@ -1,8 +1,8 @@
-import React from 'react';
-import Login from '../UI/Login'; // Importa el componente Login
-import SignUp from '../UI/SignUp'; // Importa el componente SignUp
 
-const UsuarioLogin = () => {
+import Login from '../UI/Login'; // Importa el componente Login
+import SignUp from '../UI/SingUp'; // Importa el componente SignUp
+
+const UsersLogin = () => {
   return (
     <div>
       <h1>Bienvenido</h1>
@@ -18,4 +18,4 @@ const UsuarioLogin = () => {
   );
 };
 
-export default UsuarioLogin;
+export default UsersLogin;

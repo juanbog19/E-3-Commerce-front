@@ -1,7 +1,6 @@
 
 //Al igual que el componente Login.jsx debemos agregarle lo mismo y en este estara la auth de terceros.
-
-import React, { useState } from 'react';
+import { useState } from "react";
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
