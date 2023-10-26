@@ -1,5 +1,5 @@
 import Login from '../UI/Login'; // Importa el componente Login
-import SignUp from '../UI/SignUp'; // Importa el componente SignUp
+import SignUp from '../UI/SingUp'; // Importa el componente SignUp
 
 const UsersLogin = () => {
   return (
