@@ -80,7 +80,7 @@ const SearchBar = () => {
     };
 
     return(
-        <div>
+        <div className="border-black">
 				<input value='celphone' onChange={handleInputChange} onKeyPress={handleKeyPress} type='search' placeholder='Buscar...' className="px-12 py-2 border-black rounded-lg"/>
 				<button className='px-3 py-2 ml-1 text-gray-100 rounded-lg bg-primary hover:bg-secondary' onClick={handleOnClick}>
                 Buscar

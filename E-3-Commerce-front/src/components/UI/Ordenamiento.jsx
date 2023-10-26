@@ -1,5 +1,9 @@
 const Ordenamiento = () => {
     
+    const handleOrder = () => {
+        
+    }
+    
     return(
         <div>
             <div className="flex flex-col items-center">

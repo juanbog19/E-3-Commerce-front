@@ -1,4 +1,4 @@
-/* eslint-disable no-irregular-whitespace */
+
 import Card from "./Card";
 
 
@@ -9,7 +9,6 @@ const Cards = () => {
         {id: 2, marca: "Xiamoi", modelo:20, img:"https://promart.vteximg.com.br/arquivos/ids/564309-1000-1000/image-a17969df02b54880b56ce5e871b3e4dd.jpg?v=637388265739730000", price:120},
         {id: 3, marca: "Motorola", modelo:20, img:"https://th.bing.com/th/id/OIP.gEeXCt2ch4YuDY-Rl5ePiQHaHa?pid=ImgDet&rs=1", price:110},
         {id: 4, marca: "Samsung", modelo:13 , img:"https://th.bing.com/th/id/R.b9b7d8d10efa4ea1dac3701c75ae7fa0?rik=zzJ%2f5Yfvqcfs%2bg&riu=http%3a%2f%2fwww.wired.com%2fwp-content%2fuploads%2f2015%2f08%2fsamsung-story1.jpg&ehk=h7gfKa6tDguTqhVu715IAkgSgv0t%2bW8LYw97%2fIHOA7o%3d&risl=&pid=ImgRaw&r=0", price:780},
-        // eslint-disable-next-line no-irregular-whitespace
         {id: 4, marca: "iPhone", modelo:13 , img:"https://th.bing.com/th/id/OIP.YQs0gSDQv4dvxEszxD6MVAHaGH?pid=ImgDet&rs=1", price:780},
     ]
 
@@ -21,8 +20,8 @@ const Cards = () => {
             celphone={celphone}
             />
         )}
-    </div>
-  )
+    </div>
+    )
 };
 
 export default Cards;
