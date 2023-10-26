@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getUsers, putUser,updatedsUser,createUsersVerify, loginUser, logoutUser } from '../actions/userActions';
+import {getUsers, putUser,updatedsUser,loginUser, logoutUser } from '../actions/userActions';
 
 const loadUserFromLocalStorage = () => {
   try {
