@@ -33,7 +33,8 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  // <React.StrictMode>
+  // <React.Striode>
+
   <BrowserRouter>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -41,6 +42,6 @@ root.render(
       </PersistGate>
     </Provider>
   </BrowserRouter>
-  // </React.StrictMode>
+  // </React.Striode
 );
 
