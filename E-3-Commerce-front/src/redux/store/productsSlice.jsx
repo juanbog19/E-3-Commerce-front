@@ -19,6 +19,22 @@ export const getAllProducts = createAsyncThunk(
   }
 );
 
+export const searchProductsByModel = createAsyncThunk(
+    "products/searchProductsByModel",
+    async (model) => {
+      try {
+        const response = await axios.get(`${URL_PRODUCTS}/?model=${model}`, {
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+        return response.data;
+      } catch (error) {
+        throw new Error(error.response.data.message);
+      }
+    }
+  );
+  
 export const getProductsId = createAsyncThunk(
   "products/getProductsId",
   async (id) =>{
@@ -106,6 +122,17 @@ const productSlice = createSlice({
         state.products = action.payload;
       })
       .addCase(getAllProducts.rejected, (state, action) => {
+        state.loading = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(searchProductsByModel.pending, (state) => {
+        state.loading = "loading";
+      })
+      .addCase(searchProductsByModel.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+        state.products = action.payload;
+      })
+      .addCase(searchProductsByModel.rejected, (state, action) => {
         state.loading = "failed";
         state.error = action.error.message;
       })
