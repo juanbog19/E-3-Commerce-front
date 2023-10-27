@@ -20,7 +20,7 @@ const configReducer = {
 const reducers = combineReducers({
   banner:BannerSlice,
   products:ProductsSlice,
-  searchProducts:searchSlice,
+  search:searchSlice,
   
 });
 
