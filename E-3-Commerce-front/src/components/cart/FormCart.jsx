@@ -7,5 +7,4 @@ const FormCart = () => {
         </div>
     )
 }
-
 export default FormCart;

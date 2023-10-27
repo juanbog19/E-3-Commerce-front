@@ -1,3 +1,10 @@
+const handleType = (event) => {
+    // Handle the change in the "Marca" select here
+  };
+  
+  const handlePrice = (event) => {
+    // Handle the change in the "Modelo", "Memoria RAM", "Almacenamiento", or "Procesador" select here
+  };
 const Filters = () => {
     return(
         <div className="flex justify-center space-x-4 mb-4">
@@ -16,8 +23,10 @@ const Filters = () => {
         <legend>Modelo</legend>
         <select onChange={(event) => handlePrice(event)} defaultValue="all">
             <option value="all">Todos los modelos</option>
-            <option value="13 Pro Max">13 Pro Max</option>
-            <option value="15 Pro">15 Pro</option>
+            <option value="11">iphone 11</option>
+            <option value="Samsung">Samsung S23+</option>
+            <option value="Oppo">Oppo N2 Flip </option>
+            <option value="iphone 15 Pro">15 Pro</option>
         </select>
         </div>
 
@@ -38,6 +47,7 @@ const Filters = () => {
             <option value="32 GB">32 GB</option>
             <option value="64 GB">64 GB</option>
             <option value="128 GB">128 GB</option>
+            <option value="256 GB">256 GB</option>
         </select>
         </div>
 
@@ -48,17 +58,7 @@ const Filters = () => {
             <option value="Android">Android</option>
             <option value="iOs">iOs</option>
         </select>
-        </div>
-
-        <div className="flex flex-col items-center">
-        <legend>Batería</legend>
-        <select onChange={(event) => handlePrice(event)} defaultValue="all">
-            <option value="all">Todas las capacidades</option>
-            <option value="3227 mAh">3227 mAh</option>
-            <option value="2406 mAh">2406 mAh</option>
-            <option value="4352 mAh">4352 mAh</option>
-        </select>
-        </div>      
+        </div>  
 
         </div>
     
