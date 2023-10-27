@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
  const URL_SEARCH = "http://localhost:3001/products"
 
@@ -11,14 +11,17 @@ async (model) => {
   return data;
 });
 ///////////////////////////////////////////////////////////////////////////////////////
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  data: [],
+  status: "idle",
+  error: null,
+};
 
 const searchSlice = createSlice({
   name: 'search',
-  initialState: {
-     data: [],
-     status: 'idle',
-     error: null
-     },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder

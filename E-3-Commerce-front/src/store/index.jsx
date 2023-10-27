@@ -6,9 +6,9 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 // Se importan los reducers creados para cada slice.
 
-import BannerSlice from "../redux/BannerSlice";
-import ProductsSlice from "../redux/ProductsSlice";
-import searchSlice from "../redux/searchSlice";
+import BannerSlice from "./bannerSlice";
+import ProductsSlice from "./productsSlice";
+import searchSlice from "./searchSlice";
 
 // Configuración de Redux Persist.
 const configReducer = {
