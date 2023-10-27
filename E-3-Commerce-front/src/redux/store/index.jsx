@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 // Se importan los reducers creados para cada slice.
 import bannerSlice from './../features/bannerSlice';
 import productSlice from './../features/productSlice';
-import userSlice from './../features/userSlice';
+//import userSlice from './../features/userSlice';
 
 
 // Configuración de Redux Persist.
@@ -20,7 +20,6 @@ const configReducer = {
 const reducers = combineReducers({
   banner: bannerSlice,
   product: productSlice,
-  user: userSlice,
 });
 
 // Se aplica la persistencia al reducer combinado.
