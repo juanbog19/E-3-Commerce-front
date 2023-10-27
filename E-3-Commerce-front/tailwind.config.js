@@ -7,10 +7,16 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
+      backgroundColor: {
+        'primary': '#b000ff',
+        'secondary': '#bfc2fc',
+      },
+      colors: {  'primary': '#b000ff',
+        'secondary': '#bfc2fc',
       }
     },
   },
+  
   plugins: [
     ['prettier-plugin-tailwindcss'],
   ],
