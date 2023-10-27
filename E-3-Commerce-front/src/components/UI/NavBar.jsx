@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import CartButton from "../cart/CartButton";
 import PhonePulse from "../../assets/PhonePulse.jpg";
 import "./navbar.css";
-import About from "../pages/About";
-import Home from "../pages/Home";
+import About from "../../components/pages/About";
+import Home from "../../components/pages/Home";
 
 const NavBar = () => {
   return (
