@@ -6,6 +6,9 @@ import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 // Se importan los reducers creados para cada slice.
 
+import BannerSlice from "../redux/BannerSlice";
+import ProductsSlice from "../redux/ProductsSlice";
+import searchSlice from "../redux/searchSlice";
 
 // Configuración de Redux Persist.
 const configReducer = {
@@ -15,6 +18,9 @@ const configReducer = {
 
 // Se combinan los reducers en uno solo.
 const reducers = combineReducers({
+  banner:BannerSlice,
+  products:ProductsSlice,
+  searchProducts:searchSlice,
   
 });
 
