@@ -1,6 +1,6 @@
 //componente al cual le debemos poner validaciones y hay que esperar el redux para poder manejar los estados.
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Login = () => {
   const [username, setUsername] = useState('');

@@ -25,7 +25,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import store from "./components/redux/store/index.jsx";
+import store from "./redux/store/index.jsx";
 
 let persistor = persistStore(store);
 
@@ -33,7 +33,8 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  // <React.StrictMode>
+  // <React.Striode>
+
   <BrowserRouter>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -41,6 +42,6 @@ root.render(
       </PersistGate>
     </Provider>
   </BrowserRouter>
-  // </React.StrictMode>
+  // </React.Striode
 );
 
