@@ -1,3 +1,10 @@
+const handleType = (event) => {
+    // Handle the change in the "Marca" select here
+  };
+  
+  const handlePrice = (event) => {
+    // Handle the change in the "Modelo", "Memoria RAM", "Almacenamiento", or "Procesador" select here
+  };
 const Filters = () => {
     return(
         <div className="flex justify-center space-x-4 mb-4">
