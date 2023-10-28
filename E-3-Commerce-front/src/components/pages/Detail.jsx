@@ -1,39 +1,64 @@
-import { useEffect } from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
-import {getProductsId} from '../../store/productsSlice'
-//import axios from "axios";
+import { useEffect } from "react";
+import {getProductsId} from '../../store/productsSlice';
 
-//const URL_PRODUCTS = "http://localhost:3001/products";
-//`${URL_PRODUCTS}/${id}`
 
 const Detail = () => {
-    //const {marca, modelo, img, price} = celphone
-    //Types:{detail.type && detail.type.join(', ')}
-    const {id}= useParams();
-    const dispatch = useDispatch();
-    const products = useSelector((state)=> state.products.products)
-    
+ 
+  const {id} =useParams();
+  const dispatch = useDispatch();
 
-    useEffect(()=>{
-     //axios.get(`http://localhost:3001/products/${id}`)
+  useEffect(()=>{
     dispatch(getProductsId(id))
-    },[dispatch,id])
+  },[dispatch, id])
+
+  const product = useSelector((state)=>state.products.product);
+  console.log('aqui mi product', product)
+
+  // if (!product) {   
+  //   return <div>Cargando...</div>;
+  // }
+  // const imageLink = product.image; 
 
   return (
     <div>
-        <div>
-            <p>Marca:{products.brand}</p>
-        </div>
-        <img src={products.image} alt={products.brand}/>
-        <div>
-            <p>Modelo:{products.model}</p>
-        </div>
-        <div>
-            <p>Precio:{products.price}</p>
-        </div>
-    </div>
-  )
+      {product &&(
+      <div>
+       <p>Marca: {product.brand.name}</p>
+       <a href={product.image} target="_blank" rel="noopener noreferrer">
+         <img src={product.image} alt={product.brand.name} />
+       </a>
+       <div>
+         <p>Modelo: {product.model}</p>
+       </div>
+       <div>
+         <p>Precio: {product.price}</p>
+       </div>
+    </div>  
+      )}
+      </div>    
+  )
 }
 
 export default Detail;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
