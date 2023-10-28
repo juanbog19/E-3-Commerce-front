@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+
   tailwindConfig: './styles/tailwind.config.js',
   content: [
     "./index.html",
@@ -16,7 +17,7 @@ export default {
       }
     },
   },
-  
+    
   plugins: [
     ['prettier-plugin-tailwindcss'],
   ],
