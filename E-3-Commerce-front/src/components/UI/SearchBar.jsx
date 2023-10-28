@@ -58,7 +58,6 @@ importarse una libreria de icons**** */
 
 // export default SearchBar;
 
-
 const SearchBar = () => {
 
     
@@ -81,11 +80,14 @@ const SearchBar = () => {
 
     return(
         <div className="border-black">
-				<input value='celphone' onChange={handleInputChange} onKeyPress={handleKeyPress} type='search' placeholder='Buscar...' className="px-12 py-2 border-black rounded-lg"/>
-				<button className='px-3 py-2 ml-1 text-gray-100 rounded-lg bg-primary hover:bg-secondary' onClick={handleOnClick}>
-                Buscar
-				</button>
-                <button className='px-3 py-2 ml-1 text-gray-100 rounded-lg bg-primary hover:bg-secondary' onClick={handlerReset}>
+				<input value='Search cellphone' onChange={handleInputChange} onKeyPress={handleKeyPress} type='search' placeholder='Buscar...==' className="px-12 py-2 border-black rounded-lg"/>
+				<button
+  className={`px-3 py-2 ml-1 text-black-100 rounded-lg bg-b000ff hover:bg-secondary`}
+  onClick={handleOnClick}
+>
+  Buscar
+</button>
+                <button className='px-3 py-2 ml-1 text-black-100 rounded-lg bg-b000ff hover:bg-secondary' onClick={handlerReset}>
                 Reset
                 </button>            
 

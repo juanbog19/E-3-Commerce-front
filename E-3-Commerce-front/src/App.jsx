@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Detail from "./components/pages/Detail";
 import NavBar from "./components/UI/NavBar";
+import About from "./components/pages/About"
 import UsersLogin from "./components/pages/UsersLogin";
 import CartPayment from "./components/cart/CartPayment";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/cart" element={<CartPayment />}/>
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/login' element={<UsersLogin />}/>
+        <Route path='/about' element={<About />}/>
         {/* Rutas admin */}
         <Route path='/admin' element={<Dashboard />}/>
         <Route path='/admin/brands' element={<Brands />}/>

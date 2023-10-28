@@ -1,21 +1,21 @@
 import {Link} from 'react-router-dom';
 
 
-const Card = ({id, marca, modelo, img, price}) => {
+const Card = ({id, image, brand, model, price}) => {
 
     
   return (
     <div>
         <div>
-            <img src={img} alt={marca} />
+            <img src={image} alt={brand} />
         </div>
 
         <div>
-            <h2>{marca}</h2>
+            <h2>{brand}</h2>
         </div>
 
         <div>
-            <p>Modelo:{modelo}</p>
+            <p>Modelo:{model}</p>
             <p>Price:{price}</p>
         </div>
 
