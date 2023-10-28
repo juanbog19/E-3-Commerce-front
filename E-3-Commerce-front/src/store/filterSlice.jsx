@@ -5,10 +5,13 @@ const baseURL = "http://localhost:3001";
 
 export const fetchFilteredProducts = createAsyncThunk (
   "filters/fetchFilteredProducts",
-   async ( {filters, dispatch} ) => {
+  async ({ filterBy, filterValue }, dispatch ) => {
     try {
       const response = await axios.get( `${baseURL}/productsFilter`, {
-        params: filters, // ajustar cómo se pasan los filtros a la URL según tu backend
+        params: {
+          filterBy,
+          filterValue,
+        }, // ajustar cómo se pasan los filtros a la URL según tu backend
         
       });
       dispatch( setFilteredProducts( response.data ));
