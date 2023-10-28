@@ -1,4 +1,21 @@
+/* import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchOrderedProducts } from '../../store/orderingSlice'; */
+
 const Ordenamiento = () => {
+
+    /* const dispatch = useDispatch();
+    const products = useSelector((state) => state.ordering.products);
+
+    useEffect(() => {
+        // Llamada para obtener productos ordenados (aquí especifica tus parámetros)
+        dispatch(fetchOrderedProducts({
+            filterBy: 'brand',
+            filterValue: 'Samsung',
+            orderBy: 'name',
+            orderValue: 'AZ'
+        }));
+    }, [dispatch]); */
     
     const handleOrder = () => {
         
