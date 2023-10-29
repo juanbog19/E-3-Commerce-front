@@ -10,7 +10,7 @@ const Login = () => {
 
   }
   return (
-    <div>
+    <div className='mt-20'>
       <h2>Login</h2>
       <div>
         <label>Username:</label>
