@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 
 export default function Dashboard() {
     return (
-        <div>
+        <div className='mt-20'>
             <div>
                 <Sidebar/>
             </div>
