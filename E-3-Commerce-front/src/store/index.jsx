@@ -7,6 +7,8 @@ import thunk from "redux-thunk";
 // Se importan los reducers creados para cada slice.
 import bannerSlice from "./bannerSlice";
 import productSlice from "./productsSlice";
+import filtersSlice from "./filterSlice";
+import orderingSlice from "./orderingSlice";
 //import userSlice from './../features/userSlice';
 
 
@@ -20,6 +22,8 @@ const configReducer = {
 const reducers = combineReducers({
   banners: bannerSlice,
   products: productSlice,
+  filters: filtersSlice,
+  ordering: orderingSlice
 });
 
 // Se aplica la persistencia al reducer combinado.

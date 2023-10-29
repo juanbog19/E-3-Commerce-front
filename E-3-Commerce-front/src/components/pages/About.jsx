@@ -1,5 +1,5 @@
 //import './About.css'; // Create a CSS file for styling
-import aboutImage from '../assets/About.png'; // Import the PNG image
+import aboutImage from '../../assets/About.png'; // Import the PNG image
 
 const About = () => {
   return (
