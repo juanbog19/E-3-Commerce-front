@@ -1,9 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import SearchBar from '../UI/SearchBar';
-import Footer from './Footer'
+import Footer from './Footer';
 import Card from '../UI/Card';
-import Paginated from '../UI/Paginated'
+import Paginated from '../UI/Paginated';
+import Filters from '../UI/Filters';
+import Ordenamiento from '../UI/Ordenamiento';
 import { getAllProducts } from '../../store/productsSlice';
 
 const Home = () => {
@@ -15,6 +17,7 @@ const Home = () => {
   }, []);
 
   const { products } = useSelector((state) => state.products);
+  //console.log(products);
 
   const [currentPage, setCurrentPage] = useState(1) //lo seteo en 1 porque siempre arranco por la primer pagina
   const productsPerPage = 8//cantidad de Brand que debe haber por pagina
@@ -36,6 +39,15 @@ const Home = () => {
       <div>
         <SearchBar />
       </div>
+
+      <div>
+        <Ordenamiento/>
+      </div>      
+
+      <div>
+        <Filters/>
+      </div>
+
       <div className='flex flex-wrap justify-around'>
         {currentProduct.map((product) => (
           <Card
@@ -54,7 +66,7 @@ const Home = () => {
         {currentProduct.length <= 0 && <p>No hay productos disponibles</p>}
       </div>
       <div>
-        <Paginated productsPerPage={productsPerPage} allProducts={products.length} paginado={paginado} />
+        <Paginated productsPerPage={productsPerPage} allProducts={products.length} paginado={paginado} currentPage={currentPage}/>
       </div>
       <div>
         <Footer />

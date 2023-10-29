@@ -1,9 +1,10 @@
-/* import { useDispatch, useSelector } from 'react-redux';
-import { setFilter, fetchFilteredProducts } from '../../store/filterSlice'; */
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter, fetchFilteredProducts } from '../../store/filterSlice';
 
 const Filters = () => {
 
-    /* const dispatch = useDispatch();
+   /* const dispatch = useDispatch();
     const filters = useSelector((state) => state.filters);
 
     const handleChange = (event) => {
@@ -14,70 +15,125 @@ const Filters = () => {
         dispatch(fetchFilteredProducts(filters));
     }; */
 
-    const handleType = (event) => {
-    // Handle the change in the "Marca" select here
-    };
-    
-    const handlePrice = (event) => {
-    // Handle the change in the "Modelo", "Memoria RAM", "Almacenamiento", or "Procesador" select here
-    };
-    return(
-        <div className="flex justify-center space-x-4 mb-4">
 
-        <div className="flex flex-col items-center">
+
+  const { products } = useSelector((state) => state.products);
+
+  //Obtengo las option para mapear en el renderizado
+  const brands = products.map((p) => p.brand.name);
+  const uniqueBrands = [...new Set(brands)];
+
+  const memory = products.map((p) => p.memory);
+  const uniqueMemory = [...new Set(memory)];
+
+  const storage = products.map((p) => p.storage);
+  const uniqueStorage = [...new Set(storage)];
+
+  const size = products.map((p) => p.size);
+  const uniqueSize = [...new Set(size)];
+
+  const processor = products.map((p)=>p.cpu);
+  const uniqueProcessor = [ ...new Set(processor)]
+
+  const dispatch = useDispatch();
+  const filters = useSelector((state) => state.filters);
+
+  //Handler para cada selector
+  const handleBrand = (event) => {
+    const { value } = event.target; //value seleccionado 
+    dispatch(setFilter({ filterBy: 'brand', filterValue: value })); //setteo para acceder a las rutas
+    dispatch(fetchFilteredProducts(filters)); //obtengo resultado del filtrado
+  };
+
+  const handleRam = (event) => {
+    const { value } = event.target;
+    dispatch(setFilter({ filterType: 'memory', filterValue: value }));
+    dispatch(fetchFilteredProducts(filters));
+  };
+
+  const handleStorage = (event) => {
+    const { value } = event.target;
+    dispatch(setFilter({ filterType: 'storage', filterValue: value }));
+    dispatch(fetchFilteredProducts(filters));
+  };
+
+  const handleSize = (event) => {
+    const { value } = event.target;
+    dispatch(setFilter({ filterType: 'size', filterValue: value }));
+    dispatch(fetchFilteredProducts(filters));
+  };
+
+  const handleProcessor = (event) => {
+    const { value } = event.target;
+    dispatch(setFilter({ filterType: 'cpu', filterValue: value }));
+    dispatch(fetchFilteredProducts(filters));
+  };
+
+  return (
+    <div className="flex justify-center space-x-4 mb-4">
+      <div className="flex flex-col items-center">
+
         <legend>Marca</legend>
-        <select onChange={(event) => handleType(event)} defaultValue="all">
-            <option value="all">Todas las marcas</option>
-            <option value="Iphone">Iphone</option>
-            <option value="Samsung">Samsung</option>
-            <option value="Motorola">Motorola</option>
+        <select onChange={(event) => handleBrand(event)} defaultValue="all">
+          <option value="all">Todas las marcas</option>
+          {uniqueBrands.map((b, index)=>(
+            <option key={index} value={b} >
+                {b}
+            </option>
+          ))}
         </select>
-        </div>
+      </div>
 
-        <div className="flex flex-col items-center">
-        <legend>Modelo</legend>
-        <select onChange={(event) => handlePrice(event)} defaultValue="all">
-            <option value="all">Todos los modelos</option>
-            <option value="11">iphone 11</option>
-            <option value="Samsung">Samsung S23+</option>
-            <option value="Oppo">Oppo N2 Flip </option>
-            <option value="iphone 15 Pro">15 Pro</option>
-        </select>
-        </div>
-
-        <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center">
         <legend>Memoria RAM</legend>
-        <select onChange={(event) => handlePrice(event)} defaultValue="all">
-            <option value="all">Todas las capacidades</option>
-            <option value="4 GB">4 GB</option>
-            <option value="6 GB">6 GB</option>
-            <option value="8 GB">8 GB</option>
+        <select onChange={(event) => handleRam(event)} defaultValue="all">
+          <option value="all">Todas las capacidades</option>
+          {uniqueMemory.map((m, index) => (
+            <option key={index} value={m}>
+              {m}
+            </option>
+          ))}
         </select>
-        </div>
+      </div>
 
-        <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center">
         <legend>Almacenamiento</legend>
-        <select onChange={(event) => handlePrice(event)} defaultValue="all">
-            <option value="all">Todas las capacidades</option>
-            <option value="32 GB">32 GB</option>
-            <option value="64 GB">64 GB</option>
-            <option value="128 GB">128 GB</option>
-            <option value="256 GB">256 GB</option>
+        <select onChange={(event) => handleStorage(event)} defaultValue="all">
+          <option value="all">Todas las capacidades</option>
+          {uniqueStorage.map((s, index) => (
+            <option key={index} value={s}>
+              {s}
+            </option>
+          ))}
         </select>
-        </div>
+      </div>
 
-        <div className="flex flex-col items-center">
-        <legend>Procesador</legend>
-        <select onChange={(event) => handlePrice(event)} defaultValue="all">
-            <option value="all">Todos los procesadores</option>
-            <option value="Android">Android</option>
-            <option value="iOs">iOs</option>
+      <div className="flex flex-col items-center">
+        <legend>Tamaño de pantalla</legend>
+        <select onChange={(event) => handleSize(event)} defaultValue="all">
+          <option value="all">Todos los tamaños</option>
+          {uniqueSize.map((sz, index) => (
+            <option key={index} value={sz}>
+              {sz}
+            </option>
+          ))}
         </select>
-        </div>  
+      </div>
 
-        </div>
-    
-    )
-}
+      <div className="flex flex-col items-center">
+        <legend>CPU</legend>
+        <select onChange={(event) => handleProcessor(event)} defaultValue="all">
+          <option value="all">Todos los procesadores</option>
+          {uniqueProcessor.map((sz, index) => (
+            <option key={index} value={sz}>
+              {sz}
+            </option>
+          ))}
+        </select>
+      </div>
+
+    </div>
+  );
+};
 
 export default Filters;
