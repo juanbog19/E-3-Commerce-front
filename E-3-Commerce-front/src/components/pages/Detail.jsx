@@ -1,23 +1,64 @@
-const Detail = ({ cellphone }) => {
-  const { marca, modelo, img, price } = cellphone;
-  const imageLink = "https://i5.walmartimages.com.mx/mg/gm/3pp/asr/630dab4b-abca-4516-80a3-0b42bea87173.8628b4e2e9ac75322b696448053b949d.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF";
+import {useParams } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
+import { useEffect } from "react";
+import {getProductsId} from '../../store/productsSlice';
+
+
+const Detail = () => {
+ 
+  const {id} =useParams();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getProductsId(id))
+  },[dispatch, id])
+
+  const product = useSelector((state)=>state.products.product);
+  console.log('aqui mi product', product)
+
+  // if (!product) {   
+  //   return <div>Cargando...</div>;
+  // }
+  // const imageLink = product.image; 
 
   return (
     <div>
+      {product &&(
       <div>
-        <p>Marca: {marca}</p>
-      </div>
-      <a href={imageLink} target="_blank" rel="noopener noreferrer">
-        <img src={img} alt={marca} />
-      </a>
-      <div>
-        <p>Modelo: {modelo}</p>
-      </div>
-      <div>
-        <p>Precio: {price}</p>
-      </div>
-    </div>
-  );
-};
+       <p>Marca: {product.brand.name}</p>
+       <a href={product.image} target="_blank" rel="noopener noreferrer">
+         <img src={product.image} alt={product.brand.name} />
+       </a>
+       <div>
+         <p>Modelo: {product.model}</p>
+       </div>
+       <div>
+         <p>Precio: {product.price}</p>
+       </div>
+    </div>  
+      )}
+      </div>    
+  )
+}
 
 export default Detail;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

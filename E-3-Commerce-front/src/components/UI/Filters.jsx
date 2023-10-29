@@ -1,11 +1,26 @@
-const handleType = (event) => {
-    // Handle the change in the "Marca" select here
-  };
-  
-  const handlePrice = (event) => {
-    // Handle the change in the "Modelo", "Memoria RAM", "Almacenamiento", or "Procesador" select here
-  };
+/* import { useDispatch, useSelector } from 'react-redux';
+import { setFilter, fetchFilteredProducts } from '../../store/filterSlice'; */
+
 const Filters = () => {
+
+    /* const dispatch = useDispatch();
+    const filters = useSelector((state) => state.filters);
+
+    const handleChange = (event) => {
+    const { name, value } = event.target;
+        dispatch(setFilter({ filterType: name, filterValue: value }));
+
+            // Llamar a la acción para cargar los productos filtrados
+        dispatch(fetchFilteredProducts(filters));
+    }; */
+
+    const handleType = (event) => {
+    // Handle the change in the "Marca" select here
+    };
+    
+    const handlePrice = (event) => {
+    // Handle the change in the "Modelo", "Memoria RAM", "Almacenamiento", or "Procesador" select here
+    };
     return(
         <div className="flex justify-center space-x-4 mb-4">
 
