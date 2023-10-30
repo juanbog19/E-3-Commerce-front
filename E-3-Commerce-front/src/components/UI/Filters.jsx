@@ -1,84 +1,108 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFilter, fetchFilteredProducts } from '../../store/filterSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { setFilteredProducts } from "../../store/productsSlice";
+import { useEffect, useState } from "react";
 
 const Filters = () => {
-
-   /* const dispatch = useDispatch();
-    const filters = useSelector((state) => state.filters);
-
-    const handleChange = (event) => {
-    const { name, value } = event.target;
-        dispatch(setFilter({ filterType: name, filterValue: value }));
-
-            // Llamar a la acción para cargar los productos filtrados
-        dispatch(fetchFilteredProducts(filters));
-    }; */
-
-
-
+  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
 
-  //Obtengo las option para mapear en el renderizado
-  const brands = products.map((p) => p.brand.name);
-  const uniqueBrands = [...new Set(brands)];
+  const [brandState, setBrandsState] = useState("");
+  const [cpuState, setCpuState] = useState("");
+  const [memoryState, setmemoryState] = useState("");
+  const [storageState, setStorageState] = useState("");
+  const [sizeState, setSizeState] = useState("");
 
-  const memory = products.map((p) => p.memory);
-  const uniqueMemory = [...new Set(memory)];
+  // OPCIONES PARA SELECCIONAR DENTRO DE LOS FILTROS
+  const brandValues = (products) => {
+    const results = [];
+    products.forEach((p) => {
+      const brand = p.brand.name;
+      if (!results.includes(brand)) {
+        results.push(brand);
+      }
+    });
+    return results;
+  };
 
-  const storage = products.map((p) => p.storage);
-  const uniqueStorage = [...new Set(storage)];
+  const cpuValues = (products) => {
+    const results = [];
+    products.forEach((p) => {
+      const cpu = p.cpu;
+      if (!results.includes(cpu)) {
+        results.push(cpu);
+      }
+    });
+    return results;
+  };
 
-  const size = products.map((p) => p.size);
-  const uniqueSize = [...new Set(size)];
+  const memoryValues = (products) => {
+    const results = [];
+    products.forEach((p) => {
+      const mem = p.memory;
+      if (!results.includes(mem)) {
+        results.push(mem);
+      }
+    });
+    return results;
+  };
 
-  const processor = products.map((p)=>p.cpu);
-  const uniqueProcessor = [ ...new Set(processor)]
+  const storageValues = (products) => {
+    const results = [];
+    products.forEach((p) => {
+      const storage = p.storage;
+      if (!results.includes(storage)) {
+        results.push(storage);
+      }
+    });
+    return results;
+  };
 
-  const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters);
+  const sizeValues = (products) => {
+    const results = [];
+    products.forEach((p) => {
+      const size = p.size;
+      if (!results.includes(size)) {
+        results.push(size);
+      }
+    });
+    return results;
+  };
 
   //Handler para cada selector
   const handleBrand = (event) => {
-    const { value } = event.target; //value seleccionado 
-    dispatch(setFilter({ filterBy: 'brand', filterValue: value })); //setteo para acceder a las rutas
-    dispatch(fetchFilteredProducts(filters)); //obtengo resultado del filtrado
+    const value = event.target.value; //value seleccionado+
+    dispatch(setFilteredProducts({ filterBy: "brand", filterValue: value }));
   };
 
   const handleRam = (event) => {
     const { value } = event.target;
-    dispatch(setFilter({ filterType: 'memory', filterValue: value }));
-    dispatch(fetchFilteredProducts(filters));
+    dispatch(setFilteredProducts({ filterBy: "memory", filterValue: value }));
   };
 
   const handleStorage = (event) => {
     const { value } = event.target;
-    dispatch(setFilter({ filterType: 'storage', filterValue: value }));
-    dispatch(fetchFilteredProducts(filters));
+    dispatch(setFilteredProducts({ filterBy: "storage", filterValue: value }));
   };
 
   const handleSize = (event) => {
     const { value } = event.target;
-    dispatch(setFilter({ filterType: 'size', filterValue: value }));
-    dispatch(fetchFilteredProducts(filters));
+    dispatch(setFilteredProducts({ filterBy: "size", filterValue: value }));
   };
 
   const handleProcessor = (event) => {
     const { value } = event.target;
-    dispatch(setFilter({ filterType: 'cpu', filterValue: value }));
-    dispatch(fetchFilteredProducts(filters));
+    dispatch(setFilteredProducts({ filterBy: "cpu", filterValue: value }));
   };
 
   return (
     <div className="flex justify-center space-x-4 mb-4">
       <div className="flex flex-col items-center">
-
         <legend>Marca</legend>
         <select onChange={(event) => handleBrand(event)} defaultValue="all">
           <option value="all">Todas las marcas</option>
-          {uniqueBrands.map((b, index)=>(
-            <option key={index} value={b} >
-                {b}
+          {brandValues(products).map((item, index) => (
+            <option key={index} value={item}>
+              {item}
             </option>
           ))}
         </select>
@@ -88,9 +112,9 @@ const Filters = () => {
         <legend>Memoria RAM</legend>
         <select onChange={(event) => handleRam(event)} defaultValue="all">
           <option value="all">Todas las capacidades</option>
-          {uniqueMemory.map((m, index) => (
-            <option key={index} value={m}>
-              {m}
+          {memoryValues(products).map((item, index) => (
+            <option key={index} value={item}>
+              {item}
             </option>
           ))}
         </select>
@@ -100,9 +124,9 @@ const Filters = () => {
         <legend>Almacenamiento</legend>
         <select onChange={(event) => handleStorage(event)} defaultValue="all">
           <option value="all">Todas las capacidades</option>
-          {uniqueStorage.map((s, index) => (
-            <option key={index} value={s}>
-              {s}
+          {storageValues(products).map((item, index) => (
+            <option key={index} value={item}>
+              {item}
             </option>
           ))}
         </select>
@@ -112,9 +136,9 @@ const Filters = () => {
         <legend>Tamaño de pantalla</legend>
         <select onChange={(event) => handleSize(event)} defaultValue="all">
           <option value="all">Todos los tamaños</option>
-          {uniqueSize.map((sz, index) => (
-            <option key={index} value={sz}>
-              {sz}
+          {sizeValues(products).map((item, index) => (
+            <option key={index} value={item}>
+              {item}
             </option>
           ))}
         </select>
@@ -124,14 +148,13 @@ const Filters = () => {
         <legend>CPU</legend>
         <select onChange={(event) => handleProcessor(event)} defaultValue="all">
           <option value="all">Todos los procesadores</option>
-          {uniqueProcessor.map((sz, index) => (
-            <option key={index} value={sz}>
-              {sz}
+          {cpuValues(products).map((item, index) => (
+            <option key={index} value={item}>
+              {item}
             </option>
           ))}
         </select>
       </div>
-
     </div>
   );
 };

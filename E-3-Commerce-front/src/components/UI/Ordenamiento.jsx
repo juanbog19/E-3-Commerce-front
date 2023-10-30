@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchOrderedProducts } from '../../store/orderingSlice'; */
 
 const Ordenamiento = () => {
-
-    /* const dispatch = useDispatch();
+  /* const dispatch = useDispatch();
     const products = useSelector((state) => state.ordering.products);
 
     useEffect(() => {
@@ -16,22 +15,20 @@ const Ordenamiento = () => {
             orderValue: 'AZ'
         }));
     }, [dispatch]); */
-    
-    const handleOrder = () => {
-        
-    }
-    
-    return(
-        <div>
-            <div className="flex flex-col items-center">
-                <legend>Ordenamiento</legend>
-                <select onChange={handleOrder}>          
-                    <option value='A-Z'>Precio de menor a mayor</option>
-                    <option value='Z-A'>Precio de mayor a menor</option>
-                </select>
-        </div>
-        </div>
-    )
+
+  const handleOrder = () => {};
+
+  return (
+    <div>
+      <div className="flex flex-col items-center">
+        <legend>Ordenamiento</legend>
+        <select onChange={handleOrder}>
+          <option value="minMax">Precio de menor a mayor</option>
+          <option value="maxMin">Precio de mayor a menor</option>
+        </select>
+      </div>
+    </div>
+  );
 };
 
 export default Ordenamiento;
