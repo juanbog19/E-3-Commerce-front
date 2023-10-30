@@ -1,4 +1,4 @@
-const Paginated = ({ productsPerPage, allProducts, paginado }) => {
+const Paginated = ({ productsPerPage, allProducts, paginado, currentPage}) => {
 
     const pageNumber = []
     const cantPaginas = Math.ceil(allProducts / productsPerPage)
@@ -15,7 +15,13 @@ const Paginated = ({ productsPerPage, allProducts, paginado }) => {
 
                 {pageNumber && pageNumber.map(number => ( //si en pageNumber hay algo mapealo
                     <span key={number}>
-                        <button onClick={() => paginado(number)}>{number}</button> {/* y por cada elemento renderizame un boton y agregales un evento onClick, el cual establecera el numero de pagina en el que me encuentro*/}
+                        <button
+                            onClick={() => paginado(number)}
+                            className={number === currentPage ? 'bg-gray-300' : ''}
+                            disabled={number === currentPage}
+                        >
+                            {number}
+                        </button> {/* y por cada elemento renderizame un boton y agregales un evento onClick, el cual establecera el numero de pagina en el que me encuentro*/}
                     </span>
                 ))}
 
