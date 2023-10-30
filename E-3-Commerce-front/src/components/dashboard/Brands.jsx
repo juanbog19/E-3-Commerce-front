@@ -23,17 +23,16 @@ export default function Brands() {
     //console.log(brands)
 
     return (
-        <div>
+        <div className='mt-20'>
             <Sidebar />
             <div className="mb-3 text-center">
                 <h3><b>Lista de Marcas</b></h3>
-                <div className='flex flex-start ml-20 px-20'>
-                    <Link className="px-1 py-1 mr-2 bg-red-400 hover:bg-secondary" to={`/admin/brands/create`}>Crear Marca
-                    </Link>
+                <div className='flex flex-start px-6'>
+                    <Link className=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to={`/admin/brands/create`}>Crear Marca +</Link>
                 </div>
                 <ul>
                     {brands.map((brand) => (
-                        <li className="flex justify-between my-2 border-b border-secondary" key={brand.id}>
+                        <li className="flex justify-between my-2 border-b border-secondary py-1" key={brand.id}>
                             <div className="flex">
                                 {brand.image !== null ? <img src={brand.image} alt='Brand' className="rounded-full shadow-lg w-14 h-14" /> : ''}
                                 <div className="ml-2">
@@ -42,10 +41,10 @@ export default function Brands() {
                                 </div>
                             </div>
                             <div>
-                                <Link className="px-1 py-1 mr-2 bg-blue-400 hover:bg-secondary" to={`/admin/brands/edit/${brand.id}`}>
+                                <Link className="mr-2 text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800" to={`/admin/brands/edit/${brand.id}`}>
                                     Editar
                                 </Link>
-                                <button className="px-1 py-1 mr-2 bg-blue-400 hover:bg-secondary">Eliminar</button>
+                                <button className="mr-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Eliminar</button>
                             </div>
                         </li>
                     ))}

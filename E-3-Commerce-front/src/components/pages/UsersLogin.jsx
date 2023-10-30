@@ -9,10 +9,10 @@ const UsersLogin = () => {
         <h2>Iniciar sesión</h2>
         <Login />
       </div>
-      <div>
+      {/* <div>
         <h2>Registrarse</h2>
         <SignUp />
-      </div>
+      </div> */}
     </div>
   );
 };
