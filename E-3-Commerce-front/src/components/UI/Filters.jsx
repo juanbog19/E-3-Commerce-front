@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter, fetchFilteredProducts } from '../../store/filterSlice';
+import { useState } from 'react';
 
-const Filters = () => {
+const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSizeChange,onProcessorChange }) => {
 
    /* const dispatch = useDispatch();
     const filters = useSelector((state) => state.filters);
@@ -15,7 +16,11 @@ const Filters = () => {
         dispatch(fetchFilteredProducts(filters));
     }; */
 
-
+    const [brand, setBrand] = useState("all");
+    const [ram, setRam] = useState("all");
+    const [storages, setStorages] = useState("all");
+    const [sizes, setSizes] = useState("all");
+    const [processors, setProcessors] = useState("all");
 
   const { products } = useSelector((state) => state.products);
 
@@ -35,38 +40,62 @@ const Filters = () => {
   const processor = products.map((p)=>p.cpu);
   const uniqueProcessor = [ ...new Set(processor)]
 
-  const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters);
+  // const dispatch = useDispatch();
+  // const filters = useSelector((state) => state.filters);
 
   //Handler para cada selector
-  const handleBrand = (event) => {
-    const { value } = event.target; //value seleccionado 
-    dispatch(setFilter({ filterBy: 'brand', filterValue: value })); //setteo para acceder a las rutas
-    dispatch(fetchFilteredProducts(filters)); //obtengo resultado del filtrado
+  // const handleBrand = (event) => {
+  //   const { value } = event.target; //value seleccionado 
+  //   dispatch(setFilter({ filterBy: 'brand', filterValue: value })); //setteo para acceder a las rutas
+  //   dispatch(fetchFilteredProducts(filters)); //obtengo resultado del filtrado
+  // };
+
+  // const handleRam = (event) => {
+  //   const { value } = event.target;
+  //   dispatch(setFilter({ filterType: 'memory', filterValue: value }));
+  //   dispatch(fetchFilteredProducts(filters));
+  // };
+
+  // const handleStorage = (event) => {
+  //   const { value } = event.target;
+  //   dispatch(setFilter({ filterType: 'storage', filterValue: value }));
+  //   dispatch(fetchFilteredProducts(filters));
+  // };
+
+  // const handleSize = (event) => {
+  //   const { value } = event.target;
+  //   dispatch(setFilter({ filterType: 'size', filterValue: value }));
+  //   dispatch(fetchFilteredProducts(filters));
+  // };
+
+  // const handleProcessor = (event) => {
+  //   const { value } = event.target;
+  //   dispatch(setFilter({ filterType: 'cpu', filterValue: value }));
+  //   dispatch(fetchFilteredProducts(filters));
+  // };
+
+  const handleOrder = (e) => {
+    onOrderChange(e.target.value);
+  }; 
+
+  const handleBrand = (e)=>{
+    onBrandChange(e.target.value)
   };
 
-  const handleRam = (event) => {
-    const { value } = event.target;
-    dispatch(setFilter({ filterType: 'memory', filterValue: value }));
-    dispatch(fetchFilteredProducts(filters));
+  const handleRam = (e) => {
+    onRamChange(e.target.value)
   };
 
-  const handleStorage = (event) => {
-    const { value } = event.target;
-    dispatch(setFilter({ filterType: 'storage', filterValue: value }));
-    dispatch(fetchFilteredProducts(filters));
+  const handleStorage = (e) => {
+    onStorageChange(e.target.value)
   };
 
-  const handleSize = (event) => {
-    const { value } = event.target;
-    dispatch(setFilter({ filterType: 'size', filterValue: value }));
-    dispatch(fetchFilteredProducts(filters));
+  const handleSize = (e) => {
+    onSizeChange(e.target.value)
   };
 
-  const handleProcessor = (event) => {
-    const { value } = event.target;
-    dispatch(setFilter({ filterType: 'cpu', filterValue: value }));
-    dispatch(fetchFilteredProducts(filters));
+  const handleProcessor = (e) => {
+    onProcessorChange(e.target.value)
   };
 
   return (
@@ -84,7 +113,7 @@ const Filters = () => {
         </select>
       </div>
 
-      <div className="flex flex-col items-center">
+      {/* <div className="flex flex-col items-center">
         <legend>Memoria RAM</legend>
         <select onChange={(event) => handleRam(event)} defaultValue="all">
           <option value="all">Todas las capacidades</option>
@@ -118,7 +147,7 @@ const Filters = () => {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
 
       <div className="flex flex-col items-center">
         <legend>CPU</legend>
@@ -131,6 +160,16 @@ const Filters = () => {
           ))}
         </select>
       </div>
+
+      <div>
+            <div className="flex flex-col items-center">
+                <legend>Ordenamiento</legend>
+                <select onChange={handleOrder}>
+                    <option value='A-Z'>Precio de menor a mayor</option>
+                    <option value='Z-A'>Precio de mayor a menor</option>
+                </select>
+            </div>
+        </div>
 
     </div>
   );
