@@ -17,13 +17,60 @@ const Home = () => {
   }, []);
 
   const { products } = useSelector((state) => state.products);
+ 
+   
+   //prueda filtrado para demo 1
+   const [brandType, setBrandType] = useState("all");
+   const [ramType, setRamType] = useState("all");
+   const [storageType, setStorageType] = useState("all");
+   const [sizeType, setSizeType] = useState("all");
+   const [processorType, setProcessorType] = useState("all");
+   
+   const handleBrand = (brand) => {
+     setBrandType(brand)
+   };
+ 
+   const handleRam = (ram) => {
+     setRamType(ram)
+   };
+ 
+   const handleStorage = (storage) => {
+     setStorageType(storage)
+   };
+ 
+   const handleSize = (size) => {
+     setSizeType(size)
+   };
+ 
+   const handleProcessor = (processor) => {
+     setProcessorType(processor)
+   };
+ 
+   const copyProducts = products
+   const filteredProducts = copyProducts.filter((product) => {
+     const brand = product.brand.name;
+     const ram = product.memory;
+     const storage = product.sttorage;
+     const size = product.size;
+     const cpu = product.cpu
+ 
+     const brandCondition = brandType === "all" || brand === brandType;
+     const ramCondition = ramType === 'all' || ram === ramType;
+     const storageCondition = storageType === 'all' || storage === storageType;
+     const sizeCondition = sizeType === 'all' || size === sizeType;
+     const cpuCondition = processorType === 'all' || cpu === processorType;
+ 
+     return brandCondition && ramCondition && storageCondition && sizeCondition && cpuCondition;
+   });
+ 
   //console.log(products);
 
   const [currentPage, setCurrentPage] = useState(1) //lo seteo en 1 porque siempre arranco por la primer pagina
   const productsPerPage = 8//cantidad de Brand que debe haber por pagina
   const indexOfLastProduct = currentPage * productsPerPage // 1 * 6 = 6
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage // 6 - 6 = 0
-  const currentProduct = Array.isArray(products) ? products.slice(indexOfFirstProduct, indexOfLastProduct) : [];
+  const renderProducts = filteredProducts ? filteredProducts : products
+  const currentProduct = Array.isArray(renderProducts) ? renderProducts.slice(indexOfFirstProduct, indexOfLastProduct) : [];
 
   const paginado = (pageNumber) => { //establece el numero de pagina  
     setCurrentPage(pageNumber)
@@ -33,6 +80,26 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [currentPage])
 
+  //prueba ordenamiento para demo 1
+  const [orderBy, setOrderBy] = useState("A-Z");
+  const handleOrderChange = (newOrder) => {
+    setOrderBy(newOrder);
+  };
+
+  if (orderBy === "A-Z") {
+    currentProduct.sort((a, b) =>
+      a.price > b.price ? 1 : -1
+    );
+  } else if (orderBy === "Z-A") {
+    currentProduct.sort((a, b) =>
+      a.price < b.price ? 1 : -1
+    );
+  }
+
+  console.log(currentProduct);
+
+
+ 
 
   return (
     <div >
@@ -40,12 +107,19 @@ const Home = () => {
         <SearchBar />
       </div>
 
-      <div>
-        <Ordenamiento/>
-      </div>      
+      {/* <div>
+        <Ordenamiento onOrderChange={handleOrderChange}/>
+      </div>       */}
 
       <div>
-        <Filters/>
+        <Filters 
+        onBrandChange={handleBrand}
+        onOrderChange={handleOrderChange}
+        onRamChange={handleRam}
+        onStorageChange={handleStorage}
+        onSizeChange={handleSize}  
+        onProcessorChange={handleProcessor}      
+        />
       </div>
 
       <div className='flex flex-wrap justify-around'>
