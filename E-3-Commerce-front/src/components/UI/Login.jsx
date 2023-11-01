@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/index";
 import Swal from "sweetalert2";
-
-/* import { useState } from 'react';*/
 
 const Login = () => {
   /*   const [username, setUsername] = useState('');
@@ -40,7 +37,7 @@ const Login = () => {
   return (
     <div className="mt-20 flex justify-center">
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
-        <form className="space-y-6" action="#">
+        <form className="space-y-6" onSubmit={handleSubmit(handleLogin)}>
           <h5 className="flex justify-center text-xl font-medium text-gray-900 dark:text-black">
             Bienvenido/a de nuevo
           </h5>
