@@ -7,7 +7,7 @@ export default function Dashboard() {
             <div>
                 <Sidebar/>
             </div>
-            <div className='flex justify-center border font-bold'>Bienvenido/a al panel administrativo</div>
+            <div className='flex justify-center border font-bold sm:ml-64'>Bienvenido/a al panel administrativo</div>
         </div>
     )
 }

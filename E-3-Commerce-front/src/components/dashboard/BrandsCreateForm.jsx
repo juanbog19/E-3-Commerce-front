@@ -51,7 +51,7 @@ export default function BrandsCreateForm() {
     }
 
     return (
-        <div className='mt-20'>
+        <div className='mt-4 ml-64'>
             <Sidebar />
 
             <div className='flex justify-center'>
