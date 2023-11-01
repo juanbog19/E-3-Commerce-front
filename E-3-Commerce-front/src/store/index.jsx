@@ -10,7 +10,7 @@ import productSlice from "./productsSlice";
 import filtersSlice from "./filterSlice";
 import orderingSlice from "./orderingSlice";
 import brandsSlice from "./brandsSlice";
-//import userSlice from './../features/userSlice';
+import userSlice from "./userSlice";
 
 // Configuración de Redux Persist.
 const configReducer = {
@@ -25,6 +25,7 @@ const reducers = combineReducers({
   products: productSlice,
   filters: filtersSlice,
   ordering: orderingSlice,
+  user: userSlice,
 });
 
 // Se aplica la persistencia al reducer combinado.
@@ -36,4 +37,4 @@ const store = configureStore({
   middleware: [thunk],
 });
 
-export default store;
+export default store;
