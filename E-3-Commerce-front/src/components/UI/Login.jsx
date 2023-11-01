@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch } from "react-redux";
-import { loginUser } from './userSlice';
+import { loginUser } from '../../store/userSlice';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
