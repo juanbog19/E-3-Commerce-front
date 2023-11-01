@@ -1,54 +1,41 @@
-import { useForm } from 'react-hook-form';
-import { useDispatch } from "react-redux";
-import { loginUser } from '../../store/userSlice';
-import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../store/index";
+import Swal from "sweetalert2";
 
 /* import { useState } from 'react';*/
 
 const Login = () => {
-/*   const [username, setUsername] = useState('');
+  /*   const [username, setUsername] = useState('');
   const [password, setPassword] = useState(''); */
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.user.loading);
 
-  const handleLogin = handleSubmit(async (formData) => {
+  const { register, handleSubmit, errors } = useForm();
+
+  const handleLogin = async (data) => {
     try {
-      // Realizar validaciones de usuario y contraseña aquí
-      const { username, password } = formData;
-      if (!username || !password) {
-        throw new Error("Usuario y contraseña son obligatorios");
-      }
-
-      // Dispatch de la acción de Redux
-      await dispatch(loginUser({ username, password }));
-
-      // Si la acción se completó con éxito, mostrar SweetAlert
+      await dispatch(loginUser(data));
       Swal.fire({
         icon: "success",
         title: "¡Inicio de sesión exitoso!",
-        text: "¡Bienvenido de nuevo!",
+        showConfirmButton: false,
+        timer: 1500,
       });
     } catch (error) {
-      // Si hay un error, mostrar SweetAlert de error
       Swal.fire({
         icon: "error",
-        title: "Error",
-        text: error.message,
+        title: "¡Error!",
+        text: error,
+        showConfirmButton: false,
+        timer: 1500,
       });
     }
-  });
+  };
 
-/*   const handleLogin = () => {
-
-  } */
 
   return (
     <div className="mt-20 flex justify-center">
@@ -64,12 +51,21 @@ const Login = () => {
             <input
               type="email"
               name="email"
-              {...register("username", { required: "Este campo es obligatorio" })}
               id="email"
+              ref={register({
+                required: "Este campo es requerido",
+                pattern: {
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                  message: "Ingresa un correo electrónico válido",
+                },
+              })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               placeholder="nombre@dominio.com"
               required
             />
+            {errors.email && (
+              <p className="text-red-500 text-xs">{errors.email.message}</p>
+            )}
           </div>
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
@@ -79,13 +75,20 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
-              {...register("password", { required: "Este campo es obligatorio" })}
+              ref={register({
+                required: "Este campo es requerido",
+                minLength: {
+                  value: 6,
+                  message: "La contraseña debe tener al menos 6 caracteres",
+                },
+              })}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               required
             />
-            {errors.username && <span>{errors.username.message}</span>}
-            {errors.password && <span>{errors.password.message}</span>}
+            {errors.password && (
+              <p className="text-red-500 text-xs">{errors.password.message}</p>
+            )}
           </div>
           <div className="flex items-start">
             <div className="flex items-start">
@@ -105,9 +108,10 @@ const Login = () => {
           </div>
           <button
             type="submit"
+            disabled={loading}
             className="w-full text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
           >
-            Ingresar
+            {loading ? "Cargando..." : "Ingresar"}
           </button>
           <div className="text-sm font-medium text-gray-500 dark:text-gray-700">
             <div className="flex flex-col items-center">
@@ -124,5 +128,5 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 export default Login;
