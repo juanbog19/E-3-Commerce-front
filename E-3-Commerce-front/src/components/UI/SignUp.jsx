@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { signUpUser } from "../../store/index";
+import { signUpUser } from "../../store/userSlice";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
-  /*   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState(''); */
 
   const {
     register,
@@ -63,7 +60,7 @@ const SignUp = () => {
               type="text"
               name="username"
               id="username"
-              {...register("username", { required: true })}
+              ref= {register("username", { required: true })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               placeholder="Ingresa tu usuario"
               required
@@ -80,7 +77,7 @@ const SignUp = () => {
               type="email"
               name="email"
               id="email"
-              {...register("email", { required: true })}
+              ref={register("email", { required: true })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               placeholder="nombre@dominio.com"
               required
@@ -97,7 +94,7 @@ const SignUp = () => {
               type="password"
               name="password"
               id="password"
-              {...register("password", { required: true, minLength: 6 })}
+              ref={register("password", { required: true, minLength: 6 })}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               required
@@ -114,7 +111,7 @@ const SignUp = () => {
             </label>
             <input
               type="password"
-              {...register("confirmPassword", { required: true })}
+              ref={register("confirmPassword", { required: true })}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               required
