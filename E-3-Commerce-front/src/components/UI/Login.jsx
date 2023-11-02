@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../store/index";
+import { loginUser } from "../../store/userSlice";
+import GoogleLoginButton from "./GoogleLoginButton";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  /*   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState(''); */
 
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.user.loading);
@@ -32,7 +31,6 @@ const Login = () => {
       });
     }
   };
-
 
   return (
     <div className="mt-20 flex justify-center">
@@ -119,6 +117,12 @@ const Login = () => {
               >
                 Registrate
               </Link>
+            </div>
+
+            <div>
+              <h2>Iniciar sesión</h2>
+              {/* Renderiza el botón de inicio de sesión con Google */}
+              <GoogleLoginButton/>
             </div>
           </div>
         </form>

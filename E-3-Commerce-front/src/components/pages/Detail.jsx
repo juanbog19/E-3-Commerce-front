@@ -33,6 +33,24 @@ const Detail = () => {
          <p>Modelo: {product.model}</p>
        </div>
        <div>
+         <p>Memoria: {product.memory}</p>
+       </div>
+       <div>
+         <p>Almacenamiento: {product.storage}</p>
+       </div>
+       <div>
+         <p>CPU: {product.cpu}</p>
+       </div>
+       <div>
+         <p>Bateria: {product.battery}</p>
+       </div>
+       <div>
+         <p>Tamaño: {product.size}</p>
+       </div>
+       <div>
+         <p>Caracteristicas Especiales: {product.special_features}</p>
+       </div>
+       <div>
          <p>Precio: {product.price}</p>
        </div>
     </div>  
