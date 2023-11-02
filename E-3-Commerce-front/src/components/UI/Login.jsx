@@ -1,12 +1,11 @@
+/* eslint-disable react/jsx-no-undef */
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../store/index";
+import { loginUser, setToken, setError } from "../../store/userSlice";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  /*   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState(''); */
 
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.user.loading);
@@ -33,6 +32,22 @@ const Login = () => {
     }
   };
 
+  const responseGoogle = (response) => {
+    // Manejar la respuesta de Google
+    const { tokenId } = response;
+    dispatch(loginUser(tokenId))
+      .then((data) => {
+        if (data.token) {
+          dispatch(setToken(data.token));
+        } else {
+          dispatch(setError('Error de autenticación'));
+        }
+      })
+      .catch((error) => {
+        dispatch(setError(error.message));
+      });
+    console.log(response);
+  };
 
   return (
     <div className="mt-20 flex justify-center">
@@ -119,6 +134,18 @@ const Login = () => {
               >
                 Registrate
               </Link>
+            </div>
+
+            <div>
+              <h2>Iniciar sesión</h2>
+              {/* Renderiza el botón de inicio de sesión con Google */}
+              <GoogleLogin
+                clientId="579782132065-5lrtgi0vadgd456rvurshopd7ghu8qju.apps.googleusercontent.com" // Reemplaza con tu ID de cliente de Google
+                buttonText="Iniciar sesión con Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+              />
             </div>
           </div>
         </form>

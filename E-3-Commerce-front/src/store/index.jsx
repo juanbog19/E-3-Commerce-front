@@ -26,6 +26,8 @@ const reducers = combineReducers({
   filters: filtersSlice,
   ordering: orderingSlice,
   user: userSlice,
+  setToken: userSlice,
+  setError: userSlice
 });
 
 // Se aplica la persistencia al reducer combinado.
