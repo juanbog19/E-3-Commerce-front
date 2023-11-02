@@ -1,22 +1,82 @@
-//import React from 'react'
+import {useParams } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
+import { useEffect } from "react";
+import {getProductsId} from '../../store/productsSlice';
 
-const Detail = ({celphone}) => {
-    const {marca, modelo, img, price} = celphone
+
+const Detail = () => {
+ 
+  const {id} =useParams();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getProductsId(id))
+  },[dispatch, id])
+
+  const product = useSelector((state)=>state.products.product);
+  console.log('aqui mi product', product)
+
+  // if (!product) {   
+  //   return <div>Cargando...</div>;
+  // }
+  // const imageLink = product.image; 
 
   return (
     <div>
-        <div>
-            <p>Marca:{marca}</p>
-        </div>
-        <img src={img} alt={marca}/>
-        <div>
-            <p>Modelo:{modelo}</p>
-        </div>
-        <div>
-            <p>Precio:{price}</p>
-        </div>
-    </div>
-  )
+      {product &&(
+      <div>
+       <p>Marca: {product.brand.name}</p>
+       <a href={product.image} target="_blank" rel="noopener noreferrer">
+         <img src={product.image} alt={product.brand.name} />
+       </a>
+       <div>
+         <p>Modelo: {product.model}</p>
+       </div>
+       <div>
+         <p>Memoria: {product.memory}</p>
+       </div>
+       <div>
+         <p>Almacenamiento: {product.storage}</p>
+       </div>
+       <div>
+         <p>CPU: {product.cpu}</p>
+       </div>
+       <div>
+         <p>Bateria: {product.battery}</p>
+       </div>
+       <div>
+         <p>Tamaño: {product.size}</p>
+       </div>
+       <div>
+         <p>Caracteristicas Especiales: {product.special_features}</p>
+       </div>
+       <div>
+         <p>Precio: {product.price}</p>
+       </div>
+    </div>  
+      )}
+      </div>    
+  )
 }
 
 export default Detail;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

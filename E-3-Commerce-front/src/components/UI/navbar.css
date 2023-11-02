@@ -1,0 +1,17 @@
+.navbar-small {
+    padding: 10px;
+  }
+  
+  .navbar-medium {
+    padding: 20px;
+  }
+  
+  .navbar-large {
+    padding: 30px;
+  }
+
+  .dark-mode {
+    --bg-dark-mode: #121212; /* Dark background color */
+    --text-dark-mode: #ffffff; /* Dark text color */
+    /* Add more dark mode styles here */
+  }

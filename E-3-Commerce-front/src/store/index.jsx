@@ -5,10 +5,12 @@ import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 // Se importan los reducers creados para cada slice.
-
 import bannerSlice from "./bannerSlice";
-import productsSlice from "./productsSlice";
-import searchSlice from "./searchSlice";
+import productSlice from "./productsSlice";
+import filtersSlice from "./filterSlice";
+import orderingSlice from "./orderingSlice";
+import brandsSlice from "./brandsSlice";
+import userSlice from "./userSlice";
 
 // Configuración de Redux Persist.
 const configReducer = {
@@ -18,10 +20,14 @@ const configReducer = {
 
 // Se combinan los reducers en uno solo.
 const reducers = combineReducers({
-  banner:bannerSlice,
-  products:productsSlice,
-  search:searchSlice,
-  
+  banners: bannerSlice,
+  brands: brandsSlice,
+  products: productSlice,
+  filters: filtersSlice,
+  ordering: orderingSlice,
+  user: userSlice,
+  setToken: userSlice,
+  setError: userSlice
 });
 
 // Se aplica la persistencia al reducer combinado.

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+
   tailwindConfig: './styles/tailwind.config.js',
   content: [
     "./index.html",
@@ -7,10 +8,16 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
+      backgroundColor: {
+        'primary': '#b000ff',
+        'secondary': '#bfc2fc',
+      },
+      colors: {  'primary': '#b000ff',
+        'secondary': '#bfc2fc',
       }
     },
   },
+    
   plugins: [
     ['prettier-plugin-tailwindcss'],
   ],
