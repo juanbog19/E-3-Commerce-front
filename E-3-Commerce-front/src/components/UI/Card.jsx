@@ -1,7 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../store/cartSlice';
 
 
 const Card = ({ id, image, brand, model, price, memory, storage, size }) => {
+    
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleChange = () => {
+        const item = { id, image, brand, model, price, memory, storage, size };
+        dispatch(addItem(item));
+        navigate('/checkout');
+      };
 
     return (
         <>
@@ -32,10 +43,11 @@ const Card = ({ id, image, brand, model, price, memory, storage, size }) => {
                             </svg>
                             <span className="bg-blue-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-800 ml-3">5.0</span>
                         </div>
-                        <div className='flex items-center justify-between'>
+                        {/* <div className='flex items-center justify-between'>
                             <span className="text-3xl font-bold text-gray-900">${price}</span>
                             <a href="#" className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Añadir al carrito</a>
-                        </div>
+                        </div> */}
+                        <button onClick={handleChange} >Añadir al carrito</button>
                     </div>
                 </div>
             </div>
