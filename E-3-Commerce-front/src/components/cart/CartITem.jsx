@@ -9,11 +9,11 @@ useDispatch de react-redux para enviar acciones al store y utiliza las acciones 
 para agregar o eliminar elementos del carrito.
 */
 import { useDispatch } from "react-redux";
-import { addItem, removeItem } from "../../store/cartSlice"; 
+import { addItem, removeItem, clearStore } from "../../store/cartSlice"; 
 import Swal from "sweetalert2";
 
 const CartItem = (props) => {
-  const { id, image, brand, model, price, memory, storage, size } = props;
+  const { id, img, brand, model, price } = props;
   
   const dispatch = useDispatch();
 
@@ -27,12 +27,14 @@ const CartItem = (props) => {
     Swal.fire("Producto eliminado", "Click para continuar", "info");
   };
 
+  
+
   return (
     <li className="flex justify-between pb-2 my-2 border-b border-secondary">
       <div className="flex">
-        {image ? (
+        {img ? (
           <img
-            src={image}
+            src={img}
             alt={model}
             className={`w-16 h-16 rounded-full shadow-lg mr-2`}
           />
@@ -41,7 +43,7 @@ const CartItem = (props) => {
         )}
 
         <div>
-          <h3 className="text-xl font-bold">{model}</h3>
+          <h3 className="text-xl font-bold">{brand}</h3>
           <div className="text-stone-600 text-sm">Unit: ${price}</div>
           <button
             className="font-semibold text-sm text-stone-900 hover:text-primary"
@@ -49,12 +51,13 @@ const CartItem = (props) => {
           >
             Eliminar
           </button>
-          <button
+          {/* <button
             className="font-semibold text-sm text-stone-900 hover:text-primary ml-1"
             onClick={add}
           >
             Agregar
-          </button>
+          </button> */}
+          
         </div>
       </div>
 
