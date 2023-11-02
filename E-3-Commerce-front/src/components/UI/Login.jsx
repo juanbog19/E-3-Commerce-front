@@ -1,8 +1,8 @@
-/* eslint-disable react/jsx-no-undef */
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, setToken, setError } from "../../store/userSlice";
+import { loginUser } from "../../store/userSlice";
+import GoogleLoginButton from "./GoogleLoginButton";
 import Swal from "sweetalert2";
 
 const Login = () => {
@@ -30,23 +30,6 @@ const Login = () => {
         timer: 1500,
       });
     }
-  };
-
-  const responseGoogle = (response) => {
-    // Manejar la respuesta de Google
-    const { tokenId } = response;
-    dispatch(loginUser(tokenId))
-      .then((data) => {
-        if (data.token) {
-          dispatch(setToken(data.token));
-        } else {
-          dispatch(setError('Error de autenticación'));
-        }
-      })
-      .catch((error) => {
-        dispatch(setError(error.message));
-      });
-    console.log(response);
   };
 
   return (
@@ -139,13 +122,7 @@ const Login = () => {
             <div>
               <h2>Iniciar sesión</h2>
               {/* Renderiza el botón de inicio de sesión con Google */}
-              <GoogleLogin
-                clientId="579782132065-5lrtgi0vadgd456rvurshopd7ghu8qju.apps.googleusercontent.com" // Reemplaza con tu ID de cliente de Google
-                buttonText="Iniciar sesión con Google"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={'single_host_origin'}
-              />
+              <GoogleLoginButton/>
             </div>
           </div>
         </form>
