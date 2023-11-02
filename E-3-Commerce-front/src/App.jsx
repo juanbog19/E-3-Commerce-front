@@ -13,6 +13,7 @@ import Login from "./components/UI/Login";
 import SignUp from "./components/UI/SignUp";
 import Users from "./components/dashboard/Users";
 import Orders from "./components/dashboard/Orders";
+import PaypalPayment from "./components/UI/Paypal";
 
 const App = () => {
   const location = useLocation();
@@ -35,6 +36,7 @@ const App = () => {
         <Route path='/admin/products/create' element={<ProductsCreateForm />} />
         <Route path='/admin/users' element={<Users />} />
         <Route path='/admin/orders' element={<Orders />} />
+        <Route path='/pay' element={<PaypalPayment/>}/>
       </Routes>
     </div>
   )
