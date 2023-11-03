@@ -9,7 +9,7 @@ import bannerSlice from "./bannerSlice";
 import productSlice from "./productsSlice";
 import filtersSlice from "./filterSlice";
 import orderingSlice from "./orderingSlice";
-import brandsSlice from "./brandsSlice";
+import brandsSlice from "./BrandsSlice";
 import userSlice from "./userSlice";
 import cartSlice from "./cartSlice";
 
