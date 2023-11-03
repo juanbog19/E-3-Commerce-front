@@ -50,7 +50,7 @@ const Home = () => {
    const filteredProducts = copyProducts.filter((product) => {
      const brand = product.brand.name;
      const ram = product.memory;
-     const storage = product.sttorage;
+     const storage = product.storage;
      const size = product.size;
      const cpu = product.cpu
  
@@ -110,7 +110,7 @@ const Home = () => {
       {/* <div>
         <Ordenamiento onOrderChange={handleOrderChange}/>
       </div>       */}
-
+      <div className='flex'>
       <div>
         <Filters 
         onBrandChange={handleBrand}
@@ -146,6 +146,7 @@ const Home = () => {
             <div><span className="font-medium">¡Oops!</span> No hay productos disponibles.</div>
           </div>
         }
+      </div>
       </div>
       <div>
         <Paginated productsPerPage={productsPerPage} allProducts={products.length} paginado={paginado} currentPage={currentPage}/>
