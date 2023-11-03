@@ -10,7 +10,7 @@ La acción "clearStore" reinicia el estado del carrito, asignando el estado inic
 Es importante destacar que el código utiliza la función "current" de Redux Toolkit para acceder al estado actual en el log de la consola.
 */
 import { createSlice, current } from "@reduxjs/toolkit";
-const initialState = { items: [0], total: 0 };
+const initialState = { items: [], total: 0 };
 
 const cartSlice = createSlice({
   name: "cart",
@@ -25,9 +25,10 @@ const cartSlice = createSlice({
       if (!existingItem) {
         state.items.push({
           id: newItem.id,
-          name: newItem.model,
+          brand: newItem.brand,
+          model: newItem.model,
           price: newItem.price,
-        //   quant: newItem.amount,
+          quant: 1,
           img: newItem.image,
         });
       } else {

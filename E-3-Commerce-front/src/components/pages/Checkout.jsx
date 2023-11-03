@@ -2,23 +2,29 @@ import CartIcon from "../cart/CartIcon";
 import CartItem from "../cart/CartITem";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { clearStore } from "../../store/cartSlice";
 
 const Checkout = () =>{
 
     //EMI SLICE
     const items = useSelector( ( state ) => state.cart.items );
     const total = useSelector( ( state ) => state.cart.total );
+    const dispatch = useDispatch();
     
 
-       const cantItems = items.length;
+    const cantItems = items.length;
     const hasItems = cantItems > 0 ? true : false;
 
-
+    const limpiar = () => {
+        dispatch(clearStore());
+        
+      };
 
 
 
     return(
-        <div className="max-w-4xl mx-auto">
+        <div className="mt-20">
             <h1 className="text-2xl text-gray-700 uppercase text-center mb-3">CARRITO DE COMPRAS</h1>
 
         
@@ -53,7 +59,7 @@ const Checkout = () =>{
                         name={ item.model }
                         price={ item.price }
                         // quant={ item.quant }
-                        img={ item.image }
+                        img={ item.img }
                     />
                     ))}
                 </ul>
@@ -63,6 +69,9 @@ const Checkout = () =>{
                     <p className="m-0 mb-2 font-semibold text-lg">
                     Total: <span className="text-primary">{total} USD</span>{" "}
                     </p>
+                    <button onClick={limpiar} >
+            Limpiar
+          </button>
                     {/* {isLoggedIn && (
                     <Button label="Proceder al pago" onClick={ toggleModal } />
                     )}
