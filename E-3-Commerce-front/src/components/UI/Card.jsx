@@ -1,6 +1,7 @@
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../store/cartSlice';
+import Swal from "sweetalert2";
 
 
 const Card = ({ id, image, brand, model, price, memory, storage, size }) => {
@@ -8,10 +9,13 @@ const Card = ({ id, image, brand, model, price, memory, storage, size }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleChange = () => {
+ 
+
+      const add = () => {
         const item = { id, image, brand, model, price, memory, storage, size };
         dispatch(addItem(item));
-        navigate('/checkout');
+        Swal.fire("Producto agregado", "Click para continuar", "success");
+        navigate('/checkout')
       };
 
     return (
@@ -43,11 +47,12 @@ const Card = ({ id, image, brand, model, price, memory, storage, size }) => {
                             </svg>
                             <span className="bg-blue-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-800 ml-3">5.0</span>
                         </div>
-                        {/* <div className='flex items-center justify-between'>
+                        <div className='flex items-center justify-between'>
                             <span className="text-3xl font-bold text-gray-900">${price}</span>
-                            <a href="#" className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Añadir al carrito</a>
-                        </div> */}
-                        <button onClick={handleChange} className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Añadir al carrito</button>
+                            <button onClick={add} className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Añadir al carrito</button>
+                            
+                        </div>
+                        
                     </div>
                 </div>
             </div>

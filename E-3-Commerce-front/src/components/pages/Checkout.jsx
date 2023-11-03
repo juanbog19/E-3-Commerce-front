@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearStore } from "../../store/cartSlice";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Checkout = () =>{
 
@@ -72,8 +73,8 @@ const Checkout = () =>{
                         Total: <span className="text-primary">{total} USD</span>{" "}
                         </p>
                         <div>
-                        <button onClick={limpiar} className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" >
-                        Vaciar carrito
+                        <button onClick={limpiar} className="flex text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" >
+                        Vaciar carrito <FaShoppingCart></FaShoppingCart>
                     </button>
                         </div>
 

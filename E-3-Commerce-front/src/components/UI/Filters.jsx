@@ -100,7 +100,16 @@ const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSiz
 
   return (
     <div className="flex justify-center space-x-4 mb-4">
+      
       <div className="flex flex-col items-center">
+
+        
+          <legend>Ordenamiento</legend>
+            <select onChange={handleOrder}>
+              <option value='A-Z'>Precio de menor a mayor</option>
+              <option value='Z-A'>Precio de mayor a menor</option>
+            </select>
+        
 
         <legend>Marca</legend>
         <select onChange={(event) => handleBrand(event)} defaultValue="all">
@@ -111,7 +120,21 @@ const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSiz
             </option>
           ))}
         </select>
+
+
+        <legend>CPU</legend>
+        <select onChange={(event) => handleProcessor(event)} defaultValue="all">
+          <option value="all">Todos los procesadores</option>
+          {uniqueProcessor.map((sz, index) => (
+            <option key={index} value={sz}>
+              {sz}
+            </option>
+          ))}
+        </select>
       </div>
+
+      
+      
 
       {/* <div className="flex flex-col items-center">
         <legend>Memoria RAM</legend>
@@ -148,28 +171,9 @@ const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSiz
           ))}
         </select>
       </div> */}
+      
 
-      <div className="flex flex-col items-center">
-        <legend>CPU</legend>
-        <select onChange={(event) => handleProcessor(event)} defaultValue="all">
-          <option value="all">Todos los procesadores</option>
-          {uniqueProcessor.map((sz, index) => (
-            <option key={index} value={sz}>
-              {sz}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-            <div className="flex flex-col items-center">
-                <legend>Ordenamiento</legend>
-                <select onChange={handleOrder}>
-                    <option value='A-Z'>Precio de menor a mayor</option>
-                    <option value='Z-A'>Precio de mayor a menor</option>
-                </select>
-            </div>
-        </div>
+     
 
     </div>
   );

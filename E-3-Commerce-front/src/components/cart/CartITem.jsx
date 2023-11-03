@@ -12,16 +12,14 @@ import { useDispatch } from "react-redux";
 import { addItem, removeItem, clearStore } from "../../store/cartSlice"; 
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
 
 const CartItem = (props) => {
   const { id, img, brand, model, price } = props;
   
   const dispatch = useDispatch();
 
-  const add = () => {
-    dispatch(addItem({ ...props }));
-    Swal.fire("Producto agregado", "Click para continuar", "success");
-  };
+  
 
   const remove = () => {
     dispatch(removeItem(id));
@@ -54,10 +52,10 @@ const CartItem = (props) => {
       <div className="text-right grid content-end">
         <span className="text-semibold text-lg text-primary"> {price}USD</span>
         <button
-            className="font-semibold text-sm text-stone-900 hover:text-primary"
+            className="flex font-semibold text-sm text-stone-900 hover:text-primary text-xs"
             onClick={remove}
           >
-            Eliminar
+            Eliminar producto <FaTrashAlt></FaTrashAlt> 
           </button>
       </div>     
     </li>
