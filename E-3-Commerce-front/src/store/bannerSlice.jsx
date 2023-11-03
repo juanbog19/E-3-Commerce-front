@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_BANNERS = "http://localhost:3001/banners";
+const URL_BANNERS = "https://e-3-commerce-back-production.up.railway.app/banners";
 
 export const getBanners = createAsyncThunk(
     "banners/getBanners",
