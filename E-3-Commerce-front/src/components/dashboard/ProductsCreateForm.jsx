@@ -5,7 +5,7 @@ import axios from "axios";
 import UploadWidget from "../UI/UploadWidget";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../../store/productsSlice";
-import { getAllBrands } from "../../store/brandsSlice";
+import { getAllBrands } from "../../store/BrandsSlice";
 
 export default function ProductsCreateForm() {
     const dispatch = useDispatch();
