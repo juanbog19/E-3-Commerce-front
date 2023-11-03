@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
- const URL_SEARCH = "http://localhost:3001/products"
+ const URL_SEARCH = "https://e-3-commerce-back-production.up.railway.app/products"
 
 
 export const searchSlice = createAsyncThunk(
