@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_BRANDS = "http://localhost:3001/brands";
+const URL_BRANDS = "https://e-3-commerce-back-production.up.railway.app/";
 
 export const getAllBrands = createAsyncThunk(
   "products/getAllBrands",
