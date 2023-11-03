@@ -129,4 +129,3 @@ const bannersSlice = createSlice({
 });
 
 export default bannersSlice.reducer;
-

@@ -3,11 +3,12 @@ import axios from "axios";
 
 const baseURL = "http://localhost:3001/";
 
-export const loginUser = createAsyncThunk("user/login", async ({ userData, tokenId }) => {
+export const loginUser = createAsyncThunk("user/login",
+  async ({ userData, tokenId }) => {
   try {
-    const response = await axios.post(`${baseURL}login`, { userData, googleToken: tokenId }, {
+    const response = await axios.get(`${baseURL}login`, userData, { googleToken: tokenId }, {
       headers: {
-        'Content-Type': 'application/json',
+        Accept: 'application/json',
       }
     }); 
     return response.data;

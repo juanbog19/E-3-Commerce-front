@@ -34,7 +34,7 @@ export const searchProductsByModel = createAsyncThunk(
       }
     }
   );
-  
+
 export const getProductsId = createAsyncThunk(
   "products/getProductsId",
   async (id) =>{
@@ -125,6 +125,7 @@ const productSlice = createSlice({
         state.loading = "failed";
         state.error = action.error.message;
       })
+
       .addCase(searchProductsByModel.pending, (state) => {
         state.loading = "loading";
       })
