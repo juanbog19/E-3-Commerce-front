@@ -11,13 +11,13 @@ const Paginated = ({ productsPerPage, allProducts, paginado, currentPage}) => {
 
     return (
         <nav className='w-full h-12 '>
-            <div className='space-x-1 text-center bg-white border-2 border-black border-double rounded-full shadow-xl '>
+            <div className='space-x-1 text-center bg-white rounded-full '>
 
                 {pageNumber && pageNumber.map(number => ( //si en pageNumber hay algo mapealo
                     <span key={number}>
                         <button
                             onClick={() => paginado(number)}
-                            className={number === currentPage ? 'bg-gray-300' : ''}
+                            className={number === currentPage ? 'bg-violet-300' : ''}
                             disabled={number === currentPage}
                         >
                             {number}

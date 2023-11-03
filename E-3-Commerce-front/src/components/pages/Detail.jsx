@@ -1,7 +1,8 @@
-import {useParams } from "react-router-dom";
+import {useParams, Link } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from "react";
 import {getProductsId} from '../../store/productsSlice';
+import { FaArrowLeft } from "react-icons/fa";
 
 
 const Detail = () => {
@@ -22,39 +23,59 @@ const Detail = () => {
   // const imageLink = product.image; 
 
   return (
-    <div>
+    <div className="flex justify-center ml-4 mr-4 mt-20 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
       {product &&(
-      <div>
-       <p>Marca: {product.brand.name}</p>
-       <a href={product.image} target="_blank" rel="noopener noreferrer">
-         <img src={product.image} alt={product.brand.name} />
-       </a>
+      <div className="flex">
+
+        <div  className="w-1/3">
+          <a href={product.image} target="_blank" rel="noopener noreferrer">
+            <img src={product.image} alt={product.brand.name} />
+          </a>
+        </div>
+
+
+
+       <div className="w-2/3 mt-10">        
+       <h1 className="font-semibold text-lg">{product.brand.name} {product.model}</h1>   
        <div>
-         <p>Modelo: {product.model}</p>
-       </div>
+         <p>{product.special_features}</p>
+       </div>    
        <div>
-         <p>Memoria: {product.memory}</p>
+         <p>RAM: {product.memory}GB</p>
        </div>
+
        <div>
-         <p>Almacenamiento: {product.storage}</p>
+         <p>Almacenamiento: {product.storage}GB</p>
        </div>
+
        <div>
          <p>CPU: {product.cpu}</p>
        </div>
+
        <div>
-         <p>Bateria: {product.battery}</p>
+         <p>Bateria: {product.battery}mAh</p>
        </div>
+
        <div>
-         <p>Tamaño: {product.size}</p>
+         <p>Tamaño: {product.size}"</p>
+       </div>       
+
+       <div className="font-semibold">
+         <p>{product.price}USD</p>
        </div>
-       <div>
-         <p>Caracteristicas Especiales: {product.special_features}</p>
+
        </div>
-       <div>
-         <p>Precio: {product.price}</p>
-       </div>
+       
     </div>  
+    
       )}
+
+      <Link to='/'>
+        <button className="flex text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
+        >
+          <FaArrowLeft></FaArrowLeft> </button>
+      </Link>
+      
       </div>    
   )
 }

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { searchProductsByModel, getAllProducts } from '../../store/productsSlice';
+import { FaRedo, FaSearch } from "react-icons/fa";
 
 const SearchBar = () => {
 
@@ -41,10 +42,10 @@ const SearchBar = () => {
         className='ml-2 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800'
         onClick={handleOnClick}
       >
-        Buscar
+        <FaSearch></FaSearch>
       </button>
       <button className='ml-2 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800' onClick={handlerReset}>
-        Reset
+        <FaRedo></FaRedo>
       </button>
 
     </div>
