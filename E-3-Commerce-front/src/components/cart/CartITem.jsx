@@ -11,6 +11,7 @@ para agregar o eliminar elementos del carrito.
 import { useDispatch } from "react-redux";
 import { addItem, removeItem, clearStore } from "../../store/cartSlice"; 
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const CartItem = (props) => {
   const { id, img, brand, model, price } = props;
@@ -30,41 +31,37 @@ const CartItem = (props) => {
   
 
   return (
-    <li className="flex justify-between pb-2 my-2 border-b border-secondary">
+    <li className="flex justify-between my-2 border-secondary">
+      
       <div className="flex">
         {img ? (
           <img
             src={img}
             alt={model}
-            className={`w-16 h-16 rounded-full shadow-lg mr-2`}
+            className='w-20 h-20 shadow-lg mr-2'
           />
         ) : (
           <p>Missing img</p>
         )}
 
         <div>
-          <h3 className="text-xl font-bold">{brand}</h3>
-          <div className="text-stone-600 text-sm">Unit: ${price}</div>
-          <button
+        <Link to={`/detail/${id}`}>
+          <h3 className="text-xl font-bold">{brand} {model}</h3>         
+        </Link> 
+        </div>
+      </div>
+
+      <div className="text-right grid content-end">
+        <span className="text-semibold text-lg text-primary"> {price}USD</span>
+        <button
             className="font-semibold text-sm text-stone-900 hover:text-primary"
             onClick={remove}
           >
             Eliminar
           </button>
-          {/* <button
-            className="font-semibold text-sm text-stone-900 hover:text-primary ml-1"
-            onClick={add}
-          >
-            Agregar
-          </button> */}
-          
-        </div>
-      </div>
-
-      <div className="text-right grid content-end">
-        <span className="text-semibold text-lg text-primary">${price}</span>
-      </div>
+      </div>     
     </li>
+    
   );
 };
 

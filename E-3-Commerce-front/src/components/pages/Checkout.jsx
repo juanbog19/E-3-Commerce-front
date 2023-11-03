@@ -25,12 +25,12 @@ const Checkout = () =>{
 
     return(
         <div className="mt-20">
-            <h1 className="text-2xl text-gray-700 uppercase text-center mb-3">CARRITO DE COMPRAS</h1>
+            <h1 className="text-2xl text-gray-700 uppercase text-center mb-3">Tu carrito</h1>
 
         
         {/* SI NO HAY PRODUCTOS AGREGADOS AL CARRITO */}
         {!hasItems && (
-                <div className="text-center mt-10">
+                <div className="text-center mt-10 bg-white border border-gray-200 shadow sm:p-6 md:p-8 dark:border-gray-300">
                 <h2 className="text-stone-600 mb-2">Tu carrito de compras esta vacío</h2>
 
                 <div className="w-40 mx-auto mb-3 text-stone-00">
@@ -49,33 +49,37 @@ const Checkout = () =>{
 
         {/* SI HAY PRODUCTOS AGREGADOS AL CARRITO */}
         {hasItems && (
-                <div className="bg-white p-4">
-                <p className="text-right">Price</p>
-                <ul>
+                <div className="flex bg-white p-4">
+                
+                <ul className="w-3/4 bg-white p-4 mx-auto p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
                     {items.map(( item ) => (
                     <CartItem
                         key={ item.id }
                         id={ item.id }
-                        name={ item.model }
+                        brand={item.brand}
+                        model={ item.model }
                         price={ item.price }
-                        // quant={ item.quant }
                         img={ item.img }
                     />
                     ))}
                 </ul>
 
-                <div className="text-right">
-                    <p className="m-0 text-stone-600 text-xs">Cantidad de productos: { cantItems } </p>
-                    <p className="m-0 mb-2 font-semibold text-lg">
-                    Total: <span className="text-primary">{total} USD</span>{" "}
-                    </p>
-                    <button onClick={limpiar} >
-            Limpiar
-          </button>
-                    {/* {isLoggedIn && (
-                    <Button label="Proceder al pago" onClick={ toggleModal } />
-                    )}
-                    {!isLoggedIn && <Button label="Login" to="/login" />} */}
+                <div className="flex items-center justify-center w-1/4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
+                    <div>
+                        <p className="mb-5">Resumen de compra</p>
+                        <p className="text-stone-600 text-xs">Cantidad de productos: { cantItems } </p>
+                        <p className="font-semibold text-lg">
+                        Total: <span className="text-primary">{total} USD</span>{" "}
+                        </p>
+                        <div>
+                        <button onClick={limpiar} className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" >
+                        Vaciar carrito
+                    </button>
+                        </div>
+
+                    </div>
+                    
+                                        
                 </div>
                 </div>
             )}
