@@ -99,9 +99,9 @@ const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSiz
   };
 
   return (
-    <div className="flex justify-center space-x-4 mb-4">
+    <div className="flex justify-center ml-4 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
       
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center ">
 
         
           <legend>Ordenamiento</legend>
