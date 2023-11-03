@@ -6,11 +6,14 @@ import GoogleLoginButton from "./GoogleLoginButton";
 import Swal from "sweetalert2";
 
 const Login = () => {
-
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.user.loading);
 
-  const { register, handleSubmit, errors } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleLogin = async (data) => {
     try {
@@ -47,11 +50,11 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
-              ref={register({
-                required: "Este campo es requerido",
+              {...register("email", {
+                required: true,
                 pattern: {
-                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-                  message: "Ingresa un correo electrónico válido",
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "El correo electrónico no tiene un formato válido.",
                 },
               })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
@@ -70,11 +73,14 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
-              ref={register({
-                required: "Este campo es requerido",
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "La contraseña es obligatoria.",
+                },
                 minLength: {
-                  value: 6,
-                  message: "La contraseña debe tener al menos 6 caracteres",
+                  value: 8,
+                  message: "La contraseña debe tener al menos 8 caracteres.",
                 },
               })}
               placeholder="••••••••"
@@ -122,7 +128,7 @@ const Login = () => {
             <div>
               <h2>Iniciar sesión</h2>
               {/* Renderiza el botón de inicio de sesión con Google */}
-              <GoogleLoginButton/>
+              <GoogleLoginButton />
             </div>
           </div>
         </form>
