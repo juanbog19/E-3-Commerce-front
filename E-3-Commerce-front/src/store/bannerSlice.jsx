@@ -1,13 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosURL from "../tools/axiosInstance";
 
-const URL_BANNERS = "http://localhost:3001/banners";
 
 export const getBanners = createAsyncThunk(
     "banners/getBanners",
  async () => {
   try {
-    const resp = await axios.get(URL_BANNERS, {
+    const resp = await axiosURL.get('banners', {
       headers: {
         Accept: 'application/json',
       },
@@ -22,7 +21,7 @@ export const getBannerById = createAsyncThunk(
     "banners/getBannerById",
  async (id) => {
   try {
-    const resp = await axios.get(`${URL_BANNERS}/${id}`, {
+    const resp = await axiosURL.get(`banners/${id}`, {
       headers: {
         Accept: 'application/json',
       },
@@ -37,7 +36,7 @@ export const postBanner = createAsyncThunk(
     "banners/postBanner",
  async (obj) => {
   try {
-    const resp = await axios.post(URL_BANNERS, obj, {
+    const resp = await axiosURL.post('banners', obj, {
       headers: {
         Accept: 'application/json',
       },
@@ -52,7 +51,7 @@ export const editBanner = createAsyncThunk(
     "banners/editBanner",
  async ({ id, obj }) => {
   try {
-    const resp = await axios.put(`${URL_BANNERS}/${id}`, obj, {
+    const resp = await axiosURL.put(`banners/${id}`, obj, {
       headers: {
         Accept: 'application/json',
       },
@@ -67,7 +66,7 @@ export const deleteBanner = createAsyncThunk(
     "banners/deleteBanner",
  async (id) => {
   try {
-    const resp = await axios.delete(`${URL_BANNERS}/${id}`, {
+    const resp = await axiosURL.delete(`banners/${id}`, {
       headers: {
         Accept: 'application/json',
       },

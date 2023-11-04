@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const PayPalButton = window.paypal.Buttons.driver('react', { React, ReactDOM });
 
-export default function PaypalPayment() {
+export default function PaypalPayment({ total }) {
   //const [price, setPrice] = useState(0);
   const [pay, setPay] = useState('')
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function PaypalPayment() {
         {
           amount: {
             currency_code: 'USD',
-            value: '100',             //props.price para que se actualice al price correspondiente
+            value: total,             //props.price para que se actualice al price correspondiente
           },
         },
       ],
