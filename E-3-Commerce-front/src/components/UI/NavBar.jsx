@@ -2,52 +2,14 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import CartButton from "../cart/CartButton";
 import PhonePulse from "../../assets/PhonePulse.jpg";
-import "./navbar.css";
 import About from "../../components/pages/About";
 import Home from "../../components/pages/Home";
 import { FaShoppingCart } from "react-icons/fa";
 
-// const NavBar = () => {
-//   return (
-//     <header className="pt-0">
-//       <nav className="flex items-center justify-between bg-accent p-6 mb-2 font-mono font-normal border-b-2 border-[#374151]">
-//         <div className="flex items-center justify-between w-full">
-//           <div className="flex items-center">
-//             <Link to='/'>
-//               <img src={PhonePulse} alt="PhonePulse Logo" style={{ width: "18%", height: "auto" }}/>
-//             </Link>
-//           </div>
-
-//           <div className="flex items-center space-x-4">
-//             <Link to="/About">
-//               <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary">
-//                 About
-//               </button>
-//             </Link>
-
-//             <Link to="/">
-//               <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary">
-//                 Inicio
-//               </button>
-//             </Link>
-
-//             <Link to="/login">
-//               <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary">
-//                 Iniciar Sesion
-//               </button>
-//             </Link>
-//           </div>
-
-//           <CartButton />
-//         </div>
-//       </nav>
-//     </header>
-//   );
-// }
 const NavBar = () => {
   return (
     <>
-      <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+      <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link className="flex items-center" to="/">
             <img src={PhonePulse} className="h-8 mr-3" alt="PhonePulse" />
@@ -57,7 +19,7 @@ const NavBar = () => {
             <Link className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" to="/login">Area de Clientes</Link>
             <div className="ml-3 flex items-center justify-center">
               <Link to='/checkout'>
-                <FaShoppingCart></FaShoppingCart>             
+                <FaShoppingCart className="text-2xl text-gray-700"></FaShoppingCart>             
               </Link>
             </div>
           </div>

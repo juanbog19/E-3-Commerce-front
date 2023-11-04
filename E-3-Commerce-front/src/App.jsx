@@ -14,6 +14,8 @@ import SignUp from "./components/UI/SignUp";
 import Users from "./components/dashboard/Users";
 import Orders from "./components/dashboard/Orders";
 import Checkout from "./components/pages/Checkout";
+import BrandsEditForm from "./components/dashboard/BrandsEditForm";
+import ProductsEditForm from "./components/dashboard/ProductsEditForm";
 
 
 const App = () => {
@@ -33,8 +35,10 @@ const App = () => {
         <Route path='/admin' element={<Dashboard />} />
         <Route path='/admin/brands' element={<Brands />} />
         <Route path='/admin/brands/create' element={<BrandsCreateForm />} />
+        <Route path='/admin/brands/edit/:id' element={<BrandsEditForm />} />
         <Route path='/admin/products' element={<Products />} />
         <Route path='/admin/products/create' element={<ProductsCreateForm />} />
+        <Route path='/admin/products/edit/:id' element={<ProductsEditForm />} />
         <Route path='/admin/users' element={<Users />} />
         <Route path='/admin/orders' element={<Orders />} />
         <Route path='/checkout' element={<Checkout/>}/>
