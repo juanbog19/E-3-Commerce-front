@@ -49,10 +49,10 @@ export default function ProductsCreateForm() {
         battery: "",
         size: "",
         special_features: "",
-        id_brand: 1, // -> Cambiar y trabajar en la relacion
+        id_brand: "", // -> Cambiar y trabajar en la relacion
     });
 
-    console.log(newProduct);
+    //console.log(newProduct);
 
     const handleChange = (event) => {
         const { name, value } = event.target;

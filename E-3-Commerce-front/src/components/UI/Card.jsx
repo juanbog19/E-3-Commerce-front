@@ -15,7 +15,7 @@ const Card = ({ id, image, brand, model, price, memory, storage, size }) => {
         const item = { id, image, brand, model, price, memory, storage, size };
         dispatch(addItem(item));
         Swal.fire("Producto agregado", "Click para continuar", "success");
-        navigate('/checkout')
+        //navigate('/checkout')
       };
 
     return (
