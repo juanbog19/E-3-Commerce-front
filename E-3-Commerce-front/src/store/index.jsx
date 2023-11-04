@@ -9,7 +9,7 @@ import bannerSlice from "./bannerSlice";
 import productSlice from "./productsSlice";
 import filtersSlice from "./filterSlice";
 import orderingSlice from "./orderingSlice";
-// import brandsSlice from "./brandsSlice";
+import brandsSlice from "./brandsSlice";
 import userSlice from "./userSlice";
 import cartSlice from "./cartSlice";
 
@@ -22,7 +22,7 @@ const configReducer = {
 // Se combinan los reducers en uno solo.
 const reducers = combineReducers({
   banners: bannerSlice,
-  // brands: brandsSlice,
+  brands: brandsSlice,
   products: productSlice,
   filters: filtersSlice,
   ordering: orderingSlice,
