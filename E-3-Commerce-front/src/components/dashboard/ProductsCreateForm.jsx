@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import UploadWidget from "../UI/UploadWidget";
 import { useSelector, useDispatch } from "react-redux";
+import { getAllProducts } from "../../store/productsSlice";
+import { getAllBrands } from "../../store/BrandsSlice";
 
 export default function ProductsCreateForm() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    /* useEffect(() => {
+    useEffect(() => {
         dispatch(getAllBrands());
-    }, [dispatch]); */
+    }, [dispatch]);
 
     const navigate = useNavigate();
     const { brands } = useSelector((state) => state.brands);
