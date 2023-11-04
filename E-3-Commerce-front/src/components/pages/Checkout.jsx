@@ -1,5 +1,6 @@
 import CartIcon from "../cart/CartIcon";
 import CartItem from "../cart/CartITem";
+import PaypalPayment from "../UI/Paypal";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -77,6 +78,7 @@ const Checkout = () =>{
                         Vaciar carrito 
                         <FaShoppingCart></FaShoppingCart>
                     </button>
+                    <PaypalPayment total={total}/>
                         </div>
 
                     </div>
