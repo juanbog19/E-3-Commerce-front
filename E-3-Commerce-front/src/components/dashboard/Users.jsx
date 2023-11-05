@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
-import axios from 'axios'
 import { FaUserAlt, FaUserAltSlash } from "react-icons/fa";
+import axiosURL from '../../tools/axiosInstance'
 
 export default function Users() {
 
@@ -10,7 +10,7 @@ export default function Users() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resp = await axios.get('http://localhost:3001/users');
+        const resp = await axiosURL.get('/users');
         const responseData = resp.data || [];
         setUsers(responseData);
       } catch (error) {
@@ -22,7 +22,7 @@ export default function Users() {
 
   const handleChange = async (id) => {
     try {
-      await axios.put(`http://localhost:3001/users/ban/${id}`);
+      await axiosURL.put(`/users/ban/${id}`);
 
       const updatedUsers = users.map(user =>
         user.id === id ? { ...user, status: !user.status } : user

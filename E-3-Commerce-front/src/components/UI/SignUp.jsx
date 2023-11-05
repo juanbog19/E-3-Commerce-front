@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../../store/userSlice";
@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const loading = useSelector((state) => state.user.loading);
 
   const {
@@ -36,7 +36,7 @@ const SignUp = () => {
         confirmButtonText: 'Aceptar'
       });
 
-      history.push("/home"); // Redirigir a la página de inicio
+      navigate("/home"); // Redirigir a la página de inicio
     } catch (error) {
       // Si ocurre un error, mostrar una alerta de error
       Swal.fire({

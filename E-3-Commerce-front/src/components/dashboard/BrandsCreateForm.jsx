@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from './Sidebar'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axiosURL from '../../tools/axiosInstance'
 import UploadWidget from '../UI/UploadWidget'
 
 export default function BrandsCreateForm() {
@@ -33,7 +33,7 @@ export default function BrandsCreateForm() {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await axios.post('http://localhost:3001/brands', newBrand)
+            const response = await axiosURL.post('/brands', newBrand)
 
             console.log('Respuesta del servidor:', response.data);
 
