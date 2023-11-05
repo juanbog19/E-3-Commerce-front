@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import UploadWidget from '../UI/UploadWidget'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
+import axiosURL from '../../tools/axiosInstance'
 
 export default function BrandsEditForm() {
     const { id } = useParams();
@@ -23,7 +23,7 @@ export default function BrandsEditForm() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await axios.get(`http://localhost:3001/brands/${id}`);
+                const resp = await axiosURL.get(`/brands/${id}`);
                 const responseData = resp.data || {};
                 setBrands(responseData);
                 setNewBrand(responseData);
@@ -53,7 +53,7 @@ export default function BrandsEditForm() {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await axios.put(`http://localhost:3001/brands/${id}`, newBrand)
+            const response = await axiosURL.put(`/brands/${id}`, newBrand)
 
             console.log('Respuesta del servidor:', response.data);
 

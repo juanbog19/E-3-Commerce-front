@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import UploadWidget from '../UI/UploadWidget'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import axios from 'axios'
+import axiosURL from '../../tools/axiosInstance'
 
 export default function ProductsEditForm() {
 
@@ -51,7 +51,7 @@ export default function ProductsEditForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resp = await axios.get(`http://localhost:3001/products/${id}`);
+        const resp = await axiosURL.get(`/products/${id}`);
         const responseData = resp.data || {};
         setProducts(responseData);
         setNewProduct(responseData);
@@ -82,7 +82,7 @@ export default function ProductsEditForm() {
     event.preventDefault()
     
     try {
-      const response = await axios.put(`http://localhost:3001/products/${id}`, newProduct)
+      const response = await axiosURL.put(`/products/${id}`, newProduct)
 
       //console.log('Respuesta del servidor:', response);
 

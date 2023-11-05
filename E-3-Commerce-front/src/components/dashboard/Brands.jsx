@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import axiosURL from '../../tools/axiosInstance'
 import { FaMarker, FaTrashAlt } from "react-icons/fa";
 
 export default function Brands() {
@@ -11,7 +12,7 @@ export default function Brands() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await axios.get('http://localhost:3001/brands');
+                const resp = await axiosURL.get('/brands');
                 const responseData = resp.data || [];
                 setBrands(responseData);
             } catch (error) {

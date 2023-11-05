@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
-import axios from 'axios'
+import axiosURL from '../../tools/axiosInstance'
 
 export default function Orders() {
 
@@ -9,7 +9,7 @@ export default function Orders() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const resp = await axios.get('http://localhost:3001/orders');
+            const resp = await axiosURL.get('/orders');
             const responseData = resp.data || [];
             setOrders(responseData);
           } catch (error) {

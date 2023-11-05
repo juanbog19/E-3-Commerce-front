@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosURL from '../../tools/axiosInstance'
 import UploadWidget from "../UI/UploadWidget";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../../store/productsSlice";
@@ -73,10 +73,7 @@ export default function ProductsCreateForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(
-                "http://localhost:3001/products",
-                newProduct
-            );
+            const response = await axiosURL.post("/products", newProduct);
 
             console.log("Respuesta del servidor:", response.data);
 
