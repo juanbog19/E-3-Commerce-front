@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/userSlice";
@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loading = useSelector((state) => state.user.loading);
 
   const {
@@ -24,6 +25,8 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+
+      navigate("/home");
     } catch (error) {
       Swal.fire({
         icon: "error",

@@ -2,7 +2,7 @@ const Footer = () => {
     return (
         <div>
 <section>
-    <div className="mx-auto space-y-8 overflow-hidden sm:px-6 absolute inset-x-0 border-t-2 border-[#374151]">
+    <div className="mx-auto space-y-8 overflow-hidden sm:px-6 absolute inset-x-0 border-t-2 border-gray-200">
         <div className="flex justify-center mt-8 space-x-6">
             <a href="#" className="text-[#374151] hover:text-[#cb5930]">
                 <span className="sr-only">Facebook</span>
@@ -36,7 +36,7 @@ const Footer = () => {
             </a>
         </div>
         <p className="mt-8 text-base leading-6 text-center text-[#37415168]">
-            © The Phone Pulse Co. Fundada en Veinteveintitres 
+            © The Phone Pulse Co. Fundada en 2023 
             </p>
                 <p className="text-base leading-6 text-center text-[#37415168]">
                     Todos los derechos reservados.

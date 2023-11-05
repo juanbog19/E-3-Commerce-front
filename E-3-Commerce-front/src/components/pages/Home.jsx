@@ -66,7 +66,7 @@ const Home = () => {
   //console.log(products);
 
   const [currentPage, setCurrentPage] = useState(1) //lo seteo en 1 porque siempre arranco por la primer pagina
-  const productsPerPage = 8//cantidad de Brand que debe haber por pagina
+  const productsPerPage = 6//cantidad de Brand que debe haber por pagina
   const indexOfLastProduct = currentPage * productsPerPage // 1 * 6 = 6
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage // 6 - 6 = 0
   const renderProducts = filteredProducts ? filteredProducts : products

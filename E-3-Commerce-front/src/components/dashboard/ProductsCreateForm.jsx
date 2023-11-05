@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosURL from '../../tools/axiosInstance'
 import UploadWidget from "../UI/UploadWidget";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../../store/productsSlice";
@@ -12,7 +12,7 @@ export default function ProductsCreateForm() {
 
     useEffect(() => {
         dispatch(getAllBrands());
-    }, []);
+    }, [dispatch]);
 
     const navigate = useNavigate();
     const { brands } = useSelector((state) => state.brands);
@@ -49,10 +49,10 @@ export default function ProductsCreateForm() {
         battery: "",
         size: "",
         special_features: "",
-        id_brand: 1, // -> Cambiar y trabajar en la relacion
+        id_brand: "", // -> Cambiar y trabajar en la relacion
     });
 
-    console.log(newProduct);
+    //console.log(newProduct);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -73,10 +73,7 @@ export default function ProductsCreateForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(
-                "http://localhost:3001/products",
-                newProduct
-            );
+            const response = await axiosURL.post("/products", newProduct);
 
             console.log("Respuesta del servidor:", response.data);
 

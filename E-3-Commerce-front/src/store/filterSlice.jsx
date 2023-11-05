@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axiosURL from "../tools/axiosInstance";
 import axios from "axios";
 
 const baseURL = "https://e-3-commerce-back-production.up.railway.app/";
+
 
 export const fetchFilteredProducts = createAsyncThunk (
   "filters/fetchFilteredProducts",
   async ({ filterBy, filterValue }, { dispatch } ) => {
     try {
-      const response = await axios.get( `${baseURL}/productsFilter`, {
+      const response = await axiosURL.get( 'productsFilter', {
         params: {
           filterBy,
           filterValue,

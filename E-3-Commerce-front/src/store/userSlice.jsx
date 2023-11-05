@@ -1,12 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axiosURL from "../tools/axiosInstance";
 import axios from "axios";
 
 const baseURL = "https://e-3-commerce-back-production.up.railway.app/";
 
+
 export const loginUser = createAsyncThunk("user/login",
   async ({ userData, tokenId }) => {
   try {
-    const response = await axios.get(`${baseURL}login`, userData, { googleToken: tokenId }, {
+    const response = await axiosURL.get('login', userData, { googleToken: tokenId }, {
       headers: {
         Accept: 'application/json',
       }
@@ -17,9 +19,13 @@ export const loginUser = createAsyncThunk("user/login",
   }
 });
 
-export const signUpUser = createAsyncThunk("user/signup", async (userData) => {
+export const signUpUser = createAsyncThunk("user/signup", async ({ userData, tokenId }) => {
   try {
-    const response = await axios.post(`${baseURL}users`, userData); 
+    const response = await axiosURL.post('signup', userData, { googleToken: tokenId }, {
+      headers: {
+        Accept: 'application/json',
+      }
+    }); 
     return response.data;
   } catch (error) {
     throw error.response.data;
@@ -44,11 +50,15 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.pending, signUpUser.pending, (state) => {
+      .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, signUpUser.fulfilled, (state, action) => {
+      .addCase(signUpUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
         state.token = action.payload.token;
@@ -60,7 +70,24 @@ const userSlice = createSlice({
           state.error = 'Error de autenticación';
         }
       })
-      .addCase(loginUser.rejected, signUpUser.rejected, (state, action) => {
+      .addCase(signUpUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.token = action.payload.token;
+        if (action.payload.token) {
+          state.token = action.payload.token;
+          state.error = null;
+        } else {
+          state.token = null;
+          state.error = 'Error de autenticación';
+        }
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.token = null;
+        state.error = action.error.message;
+      })
+      .addCase(signUpUser.rejected, (state, action) => {
         state.loading = false;
         state.token = null;
         state.error = action.error.message;

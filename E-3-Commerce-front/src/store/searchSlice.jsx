@@ -1,17 +1,29 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axiosURL from "../tools/axiosInstance";
 
  const URL_SEARCH = "https://e-3-commerce-back-production.up.railway.app/products"
 
 
-export const searchSlice = createAsyncThunk(
+/* export const searchSlice = createAsyncThunk(
     'search/searchSlice',
 async (model) => {
-    const response = await fetch(`${URL_SEARCH}/?model=${model}`);
+    const response = await fetch(`products/?model=${model}`);
      const data = await response.json();
   return data;
-});
+}); */
+
+export const searchSlice = createAsyncThunk(
+  'search/searchSlice',
+  async (model) => {
+    try {
+      const response = await axiosURL.get(`products/?model=${model}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 ///////////////////////////////////////////////////////////////////////////////////////
-import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [],

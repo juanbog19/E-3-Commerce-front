@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosURL from "../tools/axiosInstance";
 
 const URL_BRANDS = "https://e-3-commerce-back-production.up.railway.app/brands";
 
@@ -7,7 +7,7 @@ export const getAllBrands = createAsyncThunk(
   "products/getAllBrands",
   async () => {
     try {
-      const resp = await axios.get(URL_BRANDS, {
+      const resp = await axiosURL.get('brands', {
         headers: {
           Accept: "application/json",
         },
