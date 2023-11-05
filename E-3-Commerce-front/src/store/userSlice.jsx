@@ -15,9 +15,13 @@ export const loginUser = createAsyncThunk("user/login",
   }
 });
 
-export const signUpUser = createAsyncThunk("user/signup", async (userData) => {
+export const signUpUser = createAsyncThunk("user/signup", async ({ userData, tokenId }) => {
   try {
-    const response = await axiosURL.post( 'signup', userData); 
+    const response = await axiosURL.post('signup', userData, { googleToken: tokenId }, {
+      headers: {
+        Accept: 'application/json',
+      }
+    }); 
     return response.data;
   } catch (error) {
     throw error.response.data;
@@ -65,6 +69,14 @@ const userSlice = createSlice({
       .addCase(signUpUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
+        state.token = action.payload.token;
+        if (action.payload.token) {
+          state.token = action.payload.token;
+          state.error = null;
+        } else {
+          state.token = null;
+          state.error = 'Error de autenticación';
+        }
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -73,6 +85,7 @@ const userSlice = createSlice({
       })
       .addCase(signUpUser.rejected, (state, action) => {
         state.loading = false;
+        state.token = null;
         state.error = action.error.message;
       });
   },
