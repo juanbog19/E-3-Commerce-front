@@ -1,46 +1,49 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../../store/userSlice";
+import GoogleSignUpButton from "./GoogleSignUpButton";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const loading = useSelector((state) => state.user.loading);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
 
   const handleSignUp = async (data) => {
     try {
-      // Verificar que las contraseñas coincidan
+
+      // Validar las contraseñas
       if (data.password !== data.confirmPassword) {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Las contraseñas no coinciden",
-        });
-        return;
+        throw new Error("Las contraseñas no coinciden");
       }
 
       // Enviar la solicitud de registro
       await dispatch(signUpUser(data));
 
-      // Mostrar SweetAlert de éxito
+      // Si el registro es exitoso, mostrar una alerta y redirigir
       Swal.fire({
-        icon: "success",
-        title: "¡Registro exitoso!",
-        text: "Bienvenido a EcommerceApp",
+        icon: 'success',
+        title: 'Registro exitoso',
+        text: '¡Te has registrado correctamente!',
+        confirmButtonText: 'Aceptar'
       });
+
+      history.push("/home"); // Redirigir a la página de inicio
     } catch (error) {
-      // Mostrar SweetAlert de error
+      // Si ocurre un error, mostrar una alerta de error
       Swal.fire({
-        icon: "error",
-        title: "Error",
+        icon: 'error',
+        title: 'Error',
         text: error.message,
+        confirmButtonText: 'Aceptar'
       });
     }
   };
@@ -60,13 +63,19 @@ const SignUp = () => {
               type="text"
               name="username"
               id="username"
-              {...register("username", { required: true })}
+              {...register("username", {
+                required: "El usuario es requerido",
+                pattern: {
+                  value: /^[a-zA-Z0-9_]{1,15}$/,
+                  message: "Debe de contener de 1 a 15 caracteres"
+                }
+                // Puedes agregar más reglas de validación aquí
+              })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               placeholder="Ingresa tu usuario"
-              required
             />
             {errors.username && (
-              <span className="text-red-500">Este campo es requerido</span>
+              <span className="text-red-500 text-xs mt-1">{ errors.username?.message }</span>
             )}
           </div>
           <div>
@@ -77,13 +86,18 @@ const SignUp = () => {
               type="email"
               name="email"
               id="email"
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: "El correo electrónico es requerido",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                  message: "Correo electrónico inválido",
+                },
+              })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               placeholder="nombre@dominio.com"
-              required
             />
             {errors.email && (
-              <span className="text-red-500">Este campo es requerido</span>
+              <span className="text-red-500 text-xs mt-1">{ errors.email?.message }</span>
             )}
           </div>
           <div>
@@ -94,14 +108,29 @@ const SignUp = () => {
               type="password"
               name="password"
               id="password"
-              {...register("password", { required: true, minLength: 6 })}
+              {...register("password", {
+                required: "La contraseña es requerida",
+                minLength: {
+                  value: 8,
+                  message: "Este campo es requerido y debe tener minimo 8 caracteres",
+                },
+                maxLength: {
+                  value: 15,
+                  message: "Este campo es requerido y debe tener maximo 15 caracteres",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}$/,
+                  message: "Este campo es requerido y debe tener al menos 1 Mayuscula, 1 minuscula, al menos 1 digito, sin espacios en blanco y al menos 1 caracter especial",
+                },
+                // Puedes agregar más reglas de validación aquí
+              })}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               required
             />
             {errors.password && (
-              <span className="text-red-500">
-                Este campo es requerido y debe tener al menos 6 caracteres
+              <span className="text-red-500 text-xs mt-1">
+                { errors.password?.message }
               </span>
             )}
           </div>
@@ -111,13 +140,15 @@ const SignUp = () => {
             </label>
             <input
               type="password"
-              {...register("confirmPassword", { required: true })}
+              {...register("confirmPassword", {
+                required: "La confirmación de contraseña es requerida",
+                validate: (value) => value === watch("password") || "Las contraseñas no coinciden",
+              })}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
-              required
             />
             {errors.confirmPassword && (
-              <span className="text-red-500">Este campo es requerido</span>
+              <span className="text-red-500 text-xs mt-1">{ errors.password?.message }</span>
             )}
           </div>
           <button
@@ -136,6 +167,11 @@ const SignUp = () => {
               >
                 Acceder
               </Link>
+            </div>
+            <div>
+              <h2>Registrar con Google</h2>
+              {/* Renderiza el botón de inicio de sesión con Google */}
+              <GoogleSignUpButton />
             </div>
           </div>
         </form>
