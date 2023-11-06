@@ -143,7 +143,6 @@
 
 
 import { Link, useNavigate } from "react-router-dom";
-import GoogleSignUpButton from "./GoogleSignUpButton";
 import { useState } from "react";
 import axiosURL from '../../tools/axiosInstance'
 
@@ -250,9 +249,6 @@ const handleSubmit = async (event) => {
               </Link>
             </div>
             <div>
-              <h2>Registrar con Google</h2>
-              {/* Renderiza el botón de inicio de sesión con Google */}
-              <GoogleSignUpButton />
             </div>
           </div>
         </form>
