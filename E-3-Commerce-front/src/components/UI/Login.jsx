@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/userSlice";
 import Swal from "sweetalert2";
 
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -126,7 +127,6 @@ const Login = () => {
                 Registrate
               </Link>
             </div>
-
           </div>
         </form>
       </div>

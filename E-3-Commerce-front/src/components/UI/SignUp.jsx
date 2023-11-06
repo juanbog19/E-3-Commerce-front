@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../../store/userSlice";
-import GoogleSignUpButton from "./GoogleSignUpButton";
+//import GoogleSignUpButton from "./GoogleSignUpButton";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
@@ -167,11 +167,6 @@ const SignUp = () => {
               >
                 Acceder
               </Link>
-            </div>
-            <div>
-              <h2>Registrar con Google</h2>
-              {/* Renderiza el botón de inicio de sesión con Google */}
-              <GoogleSignUpButton />
             </div>
           </div>
         </form>
