@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFilter, fetchFilteredProducts } from '../../store/filterSlice';
 import { useState } from 'react';
 
-const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSizeChange,onProcessorChange }) => {
+const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
 
    /* const dispatch = useDispatch();
     const filters = useSelector((state) => state.filters);
@@ -16,29 +16,28 @@ const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSiz
         dispatch(fetchFilteredProducts(filters));
     }; */
 
-    const [brand, setBrand] = useState("all");
-    const [ram, setRam] = useState("all");
-    const [storages, setStorages] = useState("all");
-    const [sizes, setSizes] = useState("all");
-    const [processors, setProcessors] = useState("all");
+   
 
   const { products } = useSelector((state) => state.products);
+  console.log(products);
 
   //Obtengo las option para mapear en el renderizado
-  const brands = products.map((p) => p.brand.name);
+  const brands = products && products.map((p) => p.brand && p.brand.name);
   const uniqueBrands = [...new Set(brands)];
 
-  const memory = products.map((p) => p.memory);
-  const uniqueMemory = [...new Set(memory)];
-
-  const storage = products.map((p) => p.storage);
-  const uniqueStorage = [...new Set(storage)];
-
-  const size = products.map((p) => p.size);
-  const uniqueSize = [...new Set(size)];
-
-  const processor = products.map((p)=>p.cpu);
+  const processor = products && products.map((p)=>p.cpu);
   const uniqueProcessor = [ ...new Set(processor)]
+
+  // const memory = products.map((p) => p.memory);
+  // const uniqueMemory = [...new Set(memory)];
+
+  // const storage = products.map((p) => p.storage);
+  // const uniqueStorage = [...new Set(storage)];
+
+  // const size = products.map((p) => p.size);
+  // const uniqueSize = [...new Set(size)];
+
+
 
   // const dispatch = useDispatch();
   // const filters = useSelector((state) => state.filters);
@@ -101,7 +100,7 @@ const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSiz
   return (
     <div className="flex justify-center ml-4 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
       
-      <div className="flex flex-col items-center ">
+      <div className="flex flex-col items-center mb-20 ">
 
         
           <legend>Ordenamiento</legend>
@@ -109,6 +108,9 @@ const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSiz
               <option value='A-Z'>Precio de menor a mayor</option>
               <option value='Z-A'>Precio de mayor a menor</option>
             </select>
+
+            <br></br>
+            <br></br>
         
 
         <legend>Marca</legend>
@@ -121,6 +123,13 @@ const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSiz
           ))}
         </select>
 
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
 
         <legend>CPU</legend>
         <select onChange={(event) => handleProcessor(event)} defaultValue="all">
@@ -132,6 +141,7 @@ const Filters = ({ onOrderChange,onBrandChange,onRamChange,onStorageChange,onSiz
           ))}
         </select>
       </div>
+      
 
       
       

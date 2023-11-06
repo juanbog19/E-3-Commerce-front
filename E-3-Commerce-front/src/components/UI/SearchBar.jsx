@@ -1,11 +1,13 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { searchProductsByModel, getAllProducts } from '../../store/productsSlice';
 import { FaRedo, FaSearch } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const SearchBar = () => {
 
   const [model, setModel] = useState('');
+
 
   const dispatch = useDispatch();
   console.log(model);
@@ -16,7 +18,7 @@ const SearchBar = () => {
 
   const handleOnClick = () => {
     if (!model) {
-      alert('Por favor digita algo antes de buscar.');
+      Swal.fire('Por favor digita algo antes de buscar.', "Click para continuar", "info");      
     } else {
       dispatch(searchProductsByModel(model));
       setModel('');
