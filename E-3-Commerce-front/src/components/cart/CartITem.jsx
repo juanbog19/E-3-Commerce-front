@@ -8,29 +8,39 @@ Finalmente, muestra el total del producto multiplicando el precio unitario por l
 useDispatch de react-redux para enviar acciones al store y utiliza las acciones addItem y removeItem del slice cartSlice 
 para agregar o eliminar elementos del carrito.
 */
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { addItem, removeItem, clearStore } from "../../store/cartSlice"; 
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt,FaShoppingCart } from "react-icons/fa";
 
 const CartItem = (props) => {
-  const { id, img, brand, model, price } = props;
+  const { id, img, brand, model, price} = props;
   
   const dispatch = useDispatch();
+  const [cantUnidades, setCantUnidades] = useState(1)
+  const { items } = useSelector((state)=>state.cart)
 
-  
+   
 
   const remove = () => {
     dispatch(removeItem(id));
+    setCantUnidades(cantUnidades - 1);
     Swal.fire("Producto eliminado", "Click para continuar", "info");
   };
+
+  const add = () =>{
+    dispatch(addItem({ ...props, amount: 1 }));
+    setCantUnidades(cantUnidades + 1);
+    Swal.fire("Producto agregado", "Click para continuar", "info");
+  }
 
   
 
   return (
     <li className="flex justify-between my-2 border-secondary">
-      
+           
       <div className="flex">
         {img ? (
           <img
@@ -50,13 +60,31 @@ const CartItem = (props) => {
       </div>
 
       <div className="text-right grid content-end">
-        <span className="text-semibold text-lg text-primary"> {price}USD</span>
-        <button
-            className="flex font-semibold text-sm text-stone-900 hover:text-primary text-xs"
-            onClick={remove}
-          >
-            Eliminar producto <FaTrashAlt></FaTrashAlt> 
-          </button>
+        <span className="text-semibold text-lg text-primary">Precio unitario {price}USD</span>
+
+        <div className="flex">
+
+          <div className="text-stone-600 text-xs">Unidades:{cantUnidades}</div>
+
+          <div>
+
+            <button
+              className="flex font-semibold text-sm text-stone-900 hover:text-primary text-xs"
+              onClick={remove}
+            >
+              Eliminar producto <FaTrashAlt/> 
+            </button>
+
+            <button
+              className="flex font-semibold text-sm text-stone-900 hover:text-primary text-xs"
+              onClick={add}
+            >
+              Agregar producto <FaShoppingCart/>
+            </button>
+
+          </div>
+        </div>
+        
       </div>     
     </li>
     

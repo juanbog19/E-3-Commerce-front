@@ -62,6 +62,7 @@ const Checkout = () =>{
                         model={ item.model }
                         price={ item.price }
                         img={ item.img }
+                        
                     />
                     ))}
                 </ul>
