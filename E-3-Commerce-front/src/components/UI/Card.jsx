@@ -49,7 +49,7 @@ const Card = ({ id, image, brand, model, price, memory, storage, size }) => {
                         </div>
                         <div className='flex items-center justify-between'>
                             <span className="text-3xl font-bold text-gray-900">${price}</span>
-                            <button onClick={add} className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Añadir al carrito</button>
+                            <button onClick={add} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Añadir al carrito</button>
                             
                         </div>
                         
