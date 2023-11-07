@@ -2,8 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/userSlice";
-import GoogleLoginButton from "./GoogleLoginButton";
 import Swal from "sweetalert2";
+
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div className="mt-20 flex justify-center">
+    <div className="flex justify-center mt-20">
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
         <form className="space-y-6" onSubmit={handleSubmit(handleLogin)}>
           <h5 className="flex justify-center text-xl font-medium text-gray-900 dark:text-black">
@@ -65,7 +65,7 @@ const Login = () => {
               required
             />
             {errors.email && (
-              <p className="text-red-500 text-xs">{errors.email.message}</p>
+              <p className="text-xs text-red-500">{errors.email.message}</p>
             )}
           </div>
           <div>
@@ -91,7 +91,7 @@ const Login = () => {
               required
             />
             {errors.password && (
-              <p className="text-red-500 text-xs">{errors.password.message}</p>
+              <p className="text-xs text-red-500">{errors.password.message}</p>
             )}
           </div>
           <div className="flex items-start">
@@ -126,12 +126,6 @@ const Login = () => {
               >
                 Registrate
               </Link>
-            </div>
-
-            <div>
-              <h2>Iniciar sesión</h2>
-              {/* Renderiza el botón de inicio de sesión con Google */}
-              <GoogleLoginButton />
             </div>
           </div>
         </form>
