@@ -1,8 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, setError } from "../../store/userSlice";
-import Swal from "sweetalert2";
+import { loginUser } from "../../store/userSlice";
 import { useState } from "react";
 
 

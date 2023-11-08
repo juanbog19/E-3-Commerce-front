@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../../store/userSlice";
-//import GoogleSignUpButton from "./GoogleSignUpButton";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
 import axiosURL from '../../tools/axiosInstance'
@@ -90,7 +89,7 @@ const SignUp = () => {
   }, [])
 
   return (
-    <div className="mt-20 flex justify-center">
+    <div className="flex justify-center mt-20">
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
         <form className="space-y-6" >
           <h5 className="flex justify-center text-xl font-medium text-gray-900 dark:text-black">
@@ -116,7 +115,7 @@ const SignUp = () => {
               placeholder="Ingresa tu usuario"
             />
             {errors.username && (
-              <span className="text-red-500 text-xs mt-1">{errors.username?.message}</span>
+              <span className="mt-1 text-xs text-red-500">{errors.username?.message}</span>
             )}
           </div>
           <div>
@@ -138,7 +137,7 @@ const SignUp = () => {
               placeholder="nombre@dominio.com"
             />
             {errors.email && (
-              <span className="text-red-500 text-xs mt-1">{errors.email?.message}</span>
+              <span className="mt-1 text-xs text-red-500">{errors.email?.message}</span>
             )}
           </div>
           <div>
@@ -170,7 +169,7 @@ const SignUp = () => {
               required
             />
             {errors.password && (
-              <span className="text-red-500 text-xs mt-1">
+              <span className="mt-1 text-xs text-red-500">
                 {errors.password?.message}
               </span>
             )}
@@ -189,7 +188,7 @@ const SignUp = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
             />
             {errors.confirmPassword && (
-              <span className="text-red-500 text-xs mt-1">{errors.password?.message}</span>
+              <span className="mt-1 text-xs text-red-500">{errors.password?.message}</span>
             )}
           </div>
           <button
