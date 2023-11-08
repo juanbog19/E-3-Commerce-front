@@ -3,18 +3,17 @@ import axiosURL from "../tools/axiosInstance";
 
 
 export const loginUser = createAsyncThunk("user/login",
-  async ({ userData, tokenId }) => {
-  try {
-    const response = await axiosURL.get('login', userData, { googleToken: tokenId }, {
-      headers: {
-        Accept: 'application/json',
-      }
-    }); 
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-});
+  async (user) => {
+    try {
+      const request = await axiosURL.post('/test/login', user);
+      const response = await request.data
+      //console.log(response)
+      //localStorage.setItem('user', JSON.stringify(response))
+      return response
+    } catch (error) {
+      throw error.response.data.msg; // -> Aqui se accede mas a fondo
+    }
+  });
 
 export const signUpUser = createAsyncThunk("user/signup", async ({ userData, tokenId }) => {
   try {
@@ -22,7 +21,7 @@ export const signUpUser = createAsyncThunk("user/signup", async ({ userData, tok
       headers: {
         Accept: 'application/json',
       }
-    }); 
+    });
     return response.data;
   } catch (error) {
     throw error.response.data;
@@ -32,9 +31,9 @@ export const signUpUser = createAsyncThunk("user/signup", async ({ userData, tok
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: null,
     loading: false,
-    error: null,
+    user: null,
+    errorLogin: null,
     token: null,
   },
   reducers: {
@@ -42,30 +41,24 @@ const userSlice = createSlice({
       state.token = action.payload;
     },
     setError(state, action) {
-      state.error = action.payload;
+      state.errorLogin = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.user = null;
+        state.errorLogin = null;
       })
       .addCase(signUpUser.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.errorLogin = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        state.token = action.payload.token;
-        if (action.payload.token) {
-          state.token = action.payload.token;
-          state.error = null;
-        } else {
-          state.token = null;
-          state.error = 'Error de autenticación';
-        }
+        state.errorLogin = null;
       })
       .addCase(signUpUser.fulfilled, (state, action) => {
         state.loading = false;
@@ -73,16 +66,16 @@ const userSlice = createSlice({
         state.token = action.payload.token;
         if (action.payload.token) {
           state.token = action.payload.token;
-          state.error = null;
+          state.errorLogin = null;
         } else {
           state.token = null;
-          state.error = 'Error de autenticación';
+          state.errorLogin = 'Error de autenticación';
         }
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.token = null;
-        state.error = action.error.message;
+        state.errorLogin = action.error.message
       })
       .addCase(signUpUser.rejected, (state, action) => {
         state.loading = false;
