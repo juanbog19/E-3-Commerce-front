@@ -6,7 +6,8 @@ import Card from '../UI/Card';
 import Paginated from '../UI/Paginated';
 import Filters from '../UI/Filters';
 import BackToTop from '../UI/BackToTop';
-import { getAllProducts } from '../../store/productsSlice';
+import { getAllProducts  } from '../../store/productsSlice';
+import { setPage } from '../../store/paginationSlice';
 
 const Home = () => {
 
@@ -48,7 +49,7 @@ const Home = () => {
   });
   //console.log(products);
 
-  const [currentPage, setCurrentPage] = useState(1) //lo seteo en 1 porque siempre arranco por la primer pagina
+  const currentPage = useSelector((state) => state.pagination.currentPage); //lo seteo en 1 porque siempre arranco por la primer pagina
   const productsPerPage = 6//cantidad de Brand que debe haber por pagina
   const indexOfLastProduct = currentPage * productsPerPage // 1 * 6 = 6
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage // 6 - 6 = 0
@@ -56,7 +57,7 @@ const Home = () => {
   const currentProduct = Array.isArray(renderProducts) ? renderProducts.slice(indexOfFirstProduct, indexOfLastProduct) : [];
 
   const paginado = (pageNumber) => { //establece el numero de pagina  
-    setCurrentPage(pageNumber)
+    dispatch(setPage(pageNumber));
   }
 
   useEffect(() => {
@@ -123,7 +124,13 @@ const Home = () => {
       </div>
 
       <div>
-        <Paginated productsPerPage={productsPerPage} allProducts={products.length} paginado={paginado} currentPage={currentPage}/>
+        <Paginated 
+        productsPerPage={productsPerPage} 
+        allProducts={products.length} 
+        filteredProducts={filteredProducts}
+        paginado={paginado} 
+        currentPage={currentPage}
+        />
       </div>
 
       <div className='mt-10'>
