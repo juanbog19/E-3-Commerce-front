@@ -15,16 +15,14 @@ export const loginUser = createAsyncThunk("user/login",
     }
   });
 
-export const signUpUser = createAsyncThunk("user/signup", async ({ userData, tokenId }) => {
+export const signUpUser = createAsyncThunk("user/signup", 
+async (user) => {
   try {
-    const response = await axiosURL.post('signup', userData, { googleToken: tokenId }, {
-      headers: {
-        Accept: 'application/json',
-      }
-    });
-    return response.data;
+    const request = await axiosURL.post('/users', user);
+    const response = await request.data
+    return response
   } catch (error) {
-    throw error.response.data;
+    throw error.response.data.error;
   }
 });
 
@@ -53,6 +51,7 @@ const userSlice = createSlice({
       })
       .addCase(signUpUser.pending, (state) => {
         state.loading = true;
+        state.user = null;
         state.errorLogin = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -63,14 +62,7 @@ const userSlice = createSlice({
       .addCase(signUpUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        state.token = action.payload.token;
-        if (action.payload.token) {
-          state.token = action.payload.token;
-          state.errorLogin = null;
-        } else {
-          state.token = null;
-          state.errorLogin = 'Error de autenticación';
-        }
+        state.errorLogin = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -80,7 +72,7 @@ const userSlice = createSlice({
       .addCase(signUpUser.rejected, (state, action) => {
         state.loading = false;
         state.token = null;
-        state.error = action.error.message;
+        state.errorLogin = action.error.message
       });
   },
 });
