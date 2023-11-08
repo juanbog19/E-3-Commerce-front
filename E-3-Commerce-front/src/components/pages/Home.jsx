@@ -5,7 +5,7 @@ import Footer from './Footer';
 import Card from '../UI/Card';
 import Paginated from '../UI/Paginated';
 import Filters from '../UI/Filters';
-import Ordenamiento from '../UI/Ordenamiento';
+import BackToTop from '../UI/BackToTop';
 import { getAllProducts } from '../../store/productsSlice';
 
 const Home = () => {
@@ -17,50 +17,54 @@ const Home = () => {
   }, []);
 
   const { products } = useSelector((state) => state.products);
+ // console.log(allProducts);
  
    
    //prueda filtrado para demo 1
    const [brandType, setBrandType] = useState("all");
-   const [ramType, setRamType] = useState("all");
-   const [storageType, setStorageType] = useState("all");
-   const [sizeType, setSizeType] = useState("all");
+  //  const [ramType, setRamType] = useState("all");
+  //  const [storageType, setStorageType] = useState("all");
+  //  const [sizeType, setSizeType] = useState("all");
    const [processorType, setProcessorType] = useState("all");
    
    const handleBrand = (brand) => {
      setBrandType(brand)
    };
  
-   const handleRam = (ram) => {
-     setRamType(ram)
-   };
+  //  const handleRam = (ram) => {
+  //    setRamType(ram)
+  //  };
  
-   const handleStorage = (storage) => {
-     setStorageType(storage)
-   };
+  //  const handleStorage = (storage) => {
+  //    setStorageType(storage)
+  //  };
  
-   const handleSize = (size) => {
-     setSizeType(size)
-   };
+  //  const handleSize = (size) => {
+  //    setSizeType(size)
+  //  };
  
    const handleProcessor = (processor) => {
      setProcessorType(processor)
    };
  
    const copyProducts = products
-   const filteredProducts = copyProducts.filter((product) => {
-     const brand = product.brand.name;
-     const ram = product.memory;
-     const storage = product.storage;
-     const size = product.size;
+   //console.log('esto es products:', products);
+   const filteredProducts = Array.isArray(copyProducts) && copyProducts.filter((product) => {
+     const brand =  product.brand;
+     //console.log('es brand',brand);
+     const brandName = brand && brand.name;
+    //  const ram = product.memory;
+    //  const storage = product.storage;
+    //  const size = product.size;
      const cpu = product.cpu
  
-     const brandCondition = brandType === "all" || brand === brandType;
-     const ramCondition = ramType === 'all' || ram === ramType;
-     const storageCondition = storageType === 'all' || storage === storageType;
-     const sizeCondition = sizeType === 'all' || size === sizeType;
+     const brandCondition = brandType === "all" || brandName === brandType;
+    //  const ramCondition = ramType === 'all' || ram === ramType;
+    //  const storageCondition = storageType === 'all' || storage === storageType;
+    //  const sizeCondition = sizeType === 'all' || size === sizeType;
      const cpuCondition = processorType === 'all' || cpu === processorType;
  
-     return brandCondition && ramCondition && storageCondition && sizeCondition && cpuCondition;
+     return brandCondition && cpuCondition;
    });
  
   //console.log(products);
@@ -96,7 +100,7 @@ const Home = () => {
     );
   }
 
-  console.log(currentProduct);
+  //console.log(currentProduct);
 
 
  
@@ -107,19 +111,13 @@ const Home = () => {
         <SearchBar />
       </div>
 
-      {/* <div>
-        <Ordenamiento onOrderChange={handleOrderChange}/>
-      </div>       */}
       <div className='flex'>
       <div>
-        <Filters 
+        {/* <Filters 
         onBrandChange={handleBrand}
-        onOrderChange={handleOrderChange}
-        onRamChange={handleRam}
-        onStorageChange={handleStorage}
-        onSizeChange={handleSize}  
+        onOrderChange={handleOrderChange}        
         onProcessorChange={handleProcessor}      
-        />
+        /> */}
       </div>
 
       <div className='flex flex-wrap justify-around'>
@@ -154,6 +152,7 @@ const Home = () => {
       <div>
         <Footer />
       </div>
+      <BackToTop/>
     </div>
   );
 

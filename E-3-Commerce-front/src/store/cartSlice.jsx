@@ -32,11 +32,13 @@ const cartSlice = createSlice({
           img: newItem.image,
         });
       } else {
-        existingItem.quant = existingItem.quant += newItem.amount;
+        // existingItem.quant = existingItem.quant += newItem.amount;
+        existingItem.quant += newItem.amount;
+
       }
 
       state.total = state.total + totalPrice;
-      console.log(current(state.items));
+      //console.log(current(state.items));
     },
     removeItem(state, action) {
       const index = state.items.findIndex((item) => item.id === action.payload);

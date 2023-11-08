@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosURL from "../tools/axiosInstance";
 
 
+
 export const getBanners = createAsyncThunk(
     "banners/getBanners",
  async () => {
