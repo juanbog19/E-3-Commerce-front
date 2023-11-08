@@ -21,19 +21,19 @@ const Checkout = () =>{
     const limpiar = () => {
         dispatch(clearStore());
         
-      };
+    };
 
 
 
     return(
         <div className="mt-20">
-            <h1 className="text-2xl text-gray-700 uppercase text-center mb-3">Tu carrito</h1>
+            <h1 className="mb-3 text-2xl text-center text-gray-700 uppercase">Tu carrito</h1>
 
         
         {/* SI NO HAY PRODUCTOS AGREGADOS AL CARRITO */}
         {!hasItems && (
-                <div className="text-center mt-10 bg-white border border-gray-200 shadow sm:p-6 md:p-8 dark:border-gray-300">
-                <h2 className="text-stone-600 mb-2">Tu carrito de compras esta vacío</h2>
+                <div className="mt-10 text-center bg-white border border-gray-200 shadow sm:p-6 md:p-8 dark:border-gray-300">
+                <h2 className="mb-2 text-stone-600">Tu carrito de compras esta vacío</h2>
 
                 <div className="w-40 mx-auto mb-3 text-stone-00">
                     <CartIcon />
@@ -51,9 +51,9 @@ const Checkout = () =>{
 
         {/* SI HAY PRODUCTOS AGREGADOS AL CARRITO */}
         {hasItems && (
-                <div className="flex bg-white p-4">
+                <div className="flex p-4 bg-white">
                 
-                <ul className="w-3/4 bg-white p-4 mx-auto p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
+                <ul className="w-3/4 p-4 mx-auto bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
                     {items.map(( item ) => (
                     <CartItem
                         key={ item.id }
@@ -71,8 +71,8 @@ const Checkout = () =>{
                 <div className="flex items-center justify-center w-1/4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
                     <div>
                         <p className="mb-5">Resumen de compra</p>
-                        <p className="text-stone-600 text-xs">Cantidad de productos: { cantItems } </p>
-                        <p className="font-semibold text-lg">
+                        <p className="text-xs text-stone-600">Cantidad de productos: { cantItems } </p>
+                        <p className="text-lg font-semibold">
                         Total: <span className="text-primary">{total} USD</span>{" "}
                         </p>
                         <div>
@@ -85,7 +85,6 @@ const Checkout = () =>{
 
                     </div>
                     
-                                        
                 </div>
                 </div>
             )}

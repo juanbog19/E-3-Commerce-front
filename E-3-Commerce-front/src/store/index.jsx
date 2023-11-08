@@ -29,7 +29,7 @@ const reducers = combineReducers({
   user: userSlice,
   setToken: userSlice,
   setError: userSlice,
-  cart:cartSlice
+  cart: cartSlice,
 });
 
 // Se aplica la persistencia al reducer combinado.

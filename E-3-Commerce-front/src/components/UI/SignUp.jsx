@@ -91,7 +91,7 @@ const SignUp = () => {
 
 
   return (
-    <div className="mt-20 flex justify-center">
+    <div className="flex justify-center mt-20">
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
         <form className="space-y-6" onSubmit={handleSignup}>
           <h5 className="flex justify-center text-xl font-medium text-gray-900 dark:text-black">

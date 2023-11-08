@@ -34,7 +34,7 @@ const BackToTop = () => {
           onClick={scrollToTop}
           className="fixed bottom-4 right-4 bg-purple-300 hover:bg-[#313131] text-white py-2 px-4 rounded-full"
         >
-         <FiArrowUp></FiArrowUp>
+        <FiArrowUp></FiArrowUp>
         </button>
       )}
     </>
