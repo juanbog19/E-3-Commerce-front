@@ -1,6 +1,8 @@
-const Paginated = ({ productsPerPage, allProducts, paginado, currentPage }) => {
+
+const Paginated = ({ productsPerPage, filteredProducts, currentPage, paginado }) => {
+
   const pageNumber = [];
-  const cantPaginas = Math.ceil(allProducts / productsPerPage);
+  const cantPaginas = Math.ceil(filteredProducts.length / productsPerPage);
 
   for (let i = 1; i <= cantPaginas; i++) {
     //el Math.ceil() devuelve el entero mayor o igual más próximo a un número dado.
@@ -9,8 +11,8 @@ const Paginated = ({ productsPerPage, allProducts, paginado, currentPage }) => {
   }
 
   return (
-    <nav className="w-full h-12 flex justify-center">
-      <div className="flex space-x-1 items-center bg-white rounded-full p-2">
+    <nav className="flex justify-center w-full h-12">
+      <div className="flex items-center p-2 space-x-1 bg-white rounded-full">
         {pageNumber &&
           pageNumber.map((number) => (
             <span key={number}>
