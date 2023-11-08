@@ -1,6 +1,7 @@
 import Banner from "../UI/Banner";
 import Card from "../UI/Card";
 import Footer from "./Footer";
+import BackToTop from "../UI/BackToTop";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -15,18 +16,17 @@ const Landing =()=>{
     const [banner,setBanner] = useState([]);
     const { banners } = useSelector((state)=>state.banners);
     const { products } = useSelector((state) => state.products);
-    console.log(products);
+   // console.log(products);
 
-    const renderProducts = products.slice(1,4);
-    console.log(renderProducts);
+    const renderProducts = products && products.slice(1,4);
+    //console.log(renderProducts);
 
     
     
 
-    // useEffect(()=>{
-    //     dispatch(getAllProducts());
-        
-    // });
+    useEffect(()=>{
+        dispatch(getAllProducts());        
+    });
     //console.log('renderproducts', renderProducts);
 
     // useEffect(()=>{
@@ -41,7 +41,7 @@ const Landing =()=>{
         <div className="mt-20">
 
             <div>
-                <Banner banner={renderProducts}/>
+                <Banner />
             </div>     
 
             <div>
@@ -79,7 +79,9 @@ const Landing =()=>{
 
             <div>
                 <Footer />
-            </div>
+            </div>            
+
+            <BackToTop/>
 
         </div>
     )

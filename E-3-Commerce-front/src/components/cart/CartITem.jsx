@@ -16,11 +16,13 @@ import { Link } from "react-router-dom";
 import { FaTrashAlt,FaShoppingCart } from "react-icons/fa";
 
 const CartItem = (props) => {
-  const { id, img, brand, model, price} = props;
+  const { id, img, brand, model, price, quant} = props;
   
   const dispatch = useDispatch();
   const [cantUnidades, setCantUnidades] = useState(1)
   const { items } = useSelector((state)=>state.cart)
+
+  
 
    
 
@@ -64,7 +66,7 @@ const CartItem = (props) => {
 
         <div className="flex">
 
-          <div className="text-stone-600 text-xs">Unidades:{cantUnidades}</div>
+          <div className="text-stone-600 text-xs">Unidades:{quant}</div>
 
           <div>
 

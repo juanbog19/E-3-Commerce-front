@@ -2,7 +2,7 @@ import {useParams, Link } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from "react";
 import {getProductsId} from '../../store/productsSlice';
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft,FaMicrochip,FaMobileAlt,FaSdCard,FaBatteryFull,FaSimCard } from "react-icons/fa";
 
 
 const Detail = () => {
@@ -36,33 +36,57 @@ const Detail = () => {
 
 
        <div className="w-2/3 mt-10">        
-       <h1 className="font-semibold text-lg">{product.brand.name} {product.model}</h1>   
-       <div>
-         <p>{product.special_features}</p>
-       </div>    
-       <div>
-         <p>RAM: {product.memory}GB</p>
-       </div>
 
-       <div>
-         <p>Almacenamiento: {product.storage}GB</p>
-       </div>
+          <div className="flex justify-center">
+              <h1 className="font-semibold text-6xl ">{product.brand.name} {product.model}</h1>         
+          </div>
 
-       <div>
-         <p>CPU: {product.cpu}</p>
-       </div>
+          
+          <div className="flex justify-center mt-5 mb-5 font-semibold text-4xl text-primary">
+                <p>{product.price}USD</p>
+          </div>
+         
+          
+          
+          <div className="mt-5 mb-5 text-xl ">
+            <p>{product.special_features}</p>
+          </div>    
+          <div className="flex justify-between border-b border-secondary">
+            <div className="flex">
+              <FaSdCard/>RAM
+            </div>
+            <p>{product.memory}GB</p>
+          </div>
 
-       <div>
-         <p>Bateria: {product.battery}mAh</p>
-       </div>
+          <div className="flex justify-between border-b border-secondary">
+            <div className="flex">
+              <FaSimCard/>Almacenamiento
+            </div>
+            <p> {product.storage}GB</p>
+          </div>
 
-       <div>
-         <p>Tamaño: {product.size}"</p>
-       </div>       
+          <div className="flex justify-between border-b border-secondary">
+            <div className="flex">
+            <FaMicrochip/> Procesador
+            </div>            
+            <p> {product.cpu}</p>
+          </div>
 
-       <div className="font-semibold">
-         <p>{product.price}USD</p>
-       </div>
+          <div className="flex justify-between border-b border-secondary">
+            <div className="flex">
+              <FaBatteryFull/>Batería
+            </div>
+            <p>{product.battery}mAh</p>
+          </div>
+
+          <div className="flex justify-between border-b border-secondary">
+            <div className="flex">
+              <FaMobileAlt/>Tamaño
+            </div>
+            <p> {product.size}"</p>
+          </div>       
+
+          
 
        </div>
        

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-const Banner = ({ banner }) => {  
+const Banner = () => {  
 
   // const slides = banner;
   const slides= [
-    "https://res.cloudinary.com/dm9glx5a7/image/upload/v1699380089/ecommerce/banner/PhonePulse_ym41va.gif",
   "https://res.cloudinary.com/dm9glx5a7/image/upload/v1699382733/ecommerce/banner/1_vi40h9.png",
-  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1699382730/ecommerce/banner/2_l0srhy.png"
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1699382730/ecommerce/banner/2_l0srhy.png",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1699380089/ecommerce/banner/PhonePulse_ym41va.gif"
   ];
   //console.log(slides);
   const [currentIndex, setCurrentIndex] = useState(0);
