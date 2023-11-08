@@ -3,7 +3,6 @@ import Home from "./components/pages/Home";
 import Detail from "./components/pages/Detail";
 import NavBar from "./components/UI/NavBar";
 import About from "./components/pages/About"
-import CartPayment from "./components/cart/CartPayment";
 import Dashboard from "./components/dashboard/Dashboard";
 import Brands from "./components/dashboard/Brands";
 import Products from "./components/dashboard/Products";
@@ -16,6 +15,7 @@ import Orders from "./components/dashboard/Orders";
 import Checkout from "./components/pages/Checkout";
 import BrandsEditForm from "./components/dashboard/BrandsEditForm";
 import ProductsEditForm from "./components/dashboard/ProductsEditForm";
+import Landing from "./components/pages/Landing";
 
 
 const App = () => {
@@ -25,12 +25,13 @@ const App = () => {
     <div>
       {!isDashboardRoute && <NavBar />}
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path="/cart" element={<CartPayment />} />
+      <Route path='/' element={<Landing />} />
+        <Route path='/tienda' element={<Home />} />
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/about' element={<About />} />
+        <Route path='/about' element={<About />} />        
+        <Route path='/checkout' element={<Checkout/>}/>
         {/* Rutas admin */}
         <Route path='/admin' element={<Dashboard />} />
         <Route path='/admin/brands' element={<Brands />} />
@@ -41,7 +42,6 @@ const App = () => {
         <Route path='/admin/products/edit/:id' element={<ProductsEditForm />} />
         <Route path='/admin/users' element={<Users />} />
         <Route path='/admin/orders' element={<Orders />} />
-        <Route path='/checkout' element={<Checkout/>}/>
       </Routes>
     </div>
   )

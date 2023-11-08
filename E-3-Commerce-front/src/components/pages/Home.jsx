@@ -5,6 +5,7 @@ import Footer from './Footer';
 import Card from '../UI/Card';
 import Paginated from '../UI/Paginated';
 import Filters from '../UI/Filters';
+import BackToTop from '../UI/BackToTop';
 import { getAllProducts } from '../../store/productsSlice';
 
 const Home = () => {
@@ -99,7 +100,7 @@ const Home = () => {
     );
   }
 
-  console.log(currentProduct);
+  //console.log(currentProduct);
 
 
  
@@ -112,11 +113,11 @@ const Home = () => {
 
       <div className='flex'>
       <div>
-        <Filters 
+        {/* <Filters 
         onBrandChange={handleBrand}
         onOrderChange={handleOrderChange}        
         onProcessorChange={handleProcessor}      
-        />
+        /> */}
       </div>
 
       <div className='flex flex-wrap justify-around'>
@@ -151,6 +152,7 @@ const Home = () => {
       <div>
         <Footer />
       </div>
+      <BackToTop/>
     </div>
   );
 

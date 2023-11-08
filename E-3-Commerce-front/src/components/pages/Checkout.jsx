@@ -40,10 +40,10 @@ const Checkout = () =>{
                 </div>
 
                 <Link
-                    className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
-                    to="/"
+                    className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    to="/tienda"
                 >
-                    Inicio
+                    Tienda
                 </Link>
                 </div>
             )}
@@ -62,6 +62,8 @@ const Checkout = () =>{
                         model={ item.model }
                         price={ item.price }
                         img={ item.img }
+                        quant={ item.quant }
+                        
                     />
                     ))}
                 </ul>
@@ -74,7 +76,7 @@ const Checkout = () =>{
                         Total: <span className="text-primary">{total} USD</span>{" "}
                         </p>
                         <div>
-                        <button onClick={limpiar} className="flex text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" >
+                        <button onClick={limpiar} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >
                         Vaciar carrito 
                         <FaShoppingCart></FaShoppingCart>
                     </button>
