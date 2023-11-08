@@ -6,15 +6,15 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { getBanners } from '../../store/bannerSlice';
+//import { getBanners } from '../../store/bannerSlice';
 import { getAllProducts } from '../../store/productsSlice';
 
 
 const Landing =()=>{
 
     const dispatch = useDispatch();
-    const [banner,setBanner] = useState([]);
-    const { banners } = useSelector((state)=>state.banners);
+    //const [banner,setBanner] = useState([]);
+    //const { banners } = useSelector((state)=>state.banners);
     const { products } = useSelector((state) => state.products);
    // console.log(products);
 
@@ -40,9 +40,9 @@ const Landing =()=>{
     return(
         <div className="mt-20">
 
-            <div>
+            {/* <div>
                 <Banner />
-            </div>     
+            </div>      */}
 
             <div>
                 <div className="flex justify-center mt-20">
@@ -53,7 +53,7 @@ const Landing =()=>{
                 </div>
 
                 <div className='flex flex-wrap justify-around'>                    
-                {
+                {/* {
                     renderProducts.map((p)=>(
                         <Card
                             key={p.id}
@@ -67,7 +67,7 @@ const Landing =()=>{
                             size={p.size}
                         />
                     ))
-                }
+                } */}
                 </div>
 
                 <div className="flex justify-center mt-20">

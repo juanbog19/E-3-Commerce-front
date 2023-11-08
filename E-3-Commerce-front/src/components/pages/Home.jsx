@@ -113,11 +113,11 @@ const Home = () => {
 
       <div className='flex'>
       <div>
-        {/* <Filters 
+        <Filters 
         onBrandChange={handleBrand}
         onOrderChange={handleOrderChange}        
         onProcessorChange={handleProcessor}      
-        /> */}
+        />
       </div>
 
       <div className='flex flex-wrap justify-around'>
