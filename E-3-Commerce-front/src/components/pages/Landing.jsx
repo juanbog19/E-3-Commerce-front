@@ -2,39 +2,25 @@ import Banner from "../UI/Banner";
 import Card from "../UI/Card";
 import Footer from "./Footer";
 import BackToTop from "../UI/BackToTop";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { getBanners } from '../../store/bannerSlice';
 import { getAllProducts } from '../../store/productsSlice';
 
 
 const Landing =()=>{
 
     const dispatch = useDispatch();
-    const [banner,setBanner] = useState([]);
-    const { banners } = useSelector((state)=>state.banners);
     const { products } = useSelector((state) => state.products);
    // console.log(products);
 
     const renderProducts = products && products.slice(1,4);
     //console.log(renderProducts);
 
-    
-    
-
     useEffect(()=>{
         dispatch(getAllProducts());        
-    });
-    //console.log('renderproducts', renderProducts);
-
-    // useEffect(()=>{
-    //     dispatch(getBanners());
-    //     setBanner(banners);
-    // },[banners])
-
-    // console.log(banners);
+    }, []);
 
 
     return(

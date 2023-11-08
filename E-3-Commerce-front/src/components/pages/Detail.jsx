@@ -6,7 +6,7 @@ import { FaArrowLeft,FaMicrochip,FaMobileAlt,FaSdCard,FaBatteryFull,FaSimCard } 
 
 
 const Detail = () => {
- 
+
   const {id} =useParams();
   const dispatch = useDispatch();
 
@@ -15,15 +15,10 @@ const Detail = () => {
   },[dispatch, id])
 
   const product = useSelector((state)=>state.products.product);
-  console.log('aqui mi product', product)
-
-  // if (!product) {   
-  //   return <div>Cargando...</div>;
-  // }
-  // const imageLink = product.image; 
+  // console.log('aqui mi product', product)
 
   return (
-    <div className="flex justify-center ml-4 mr-4 mt-20 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
+    <div className="flex justify-center mt-20 ml-4 mr-4 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
       {product &&(
       <div className="flex">
 
@@ -35,18 +30,15 @@ const Detail = () => {
 
 
 
-       <div className="w-2/3 mt-10">        
+      <div className="w-2/3 mt-10">        
 
           <div className="flex justify-center">
-              <h1 className="font-semibold text-6xl ">{product.brand.name} {product.model}</h1>         
+              <h1 className="text-6xl font-semibold ">{product.brand.name} {product.model}</h1>         
           </div>
-
           
-          <div className="flex justify-center mt-5 mb-5 font-semibold text-4xl text-primary">
+          <div className="flex justify-center mt-5 mb-5 text-4xl font-semibold text-primary">
                 <p>{product.price}USD</p>
           </div>
-         
-          
           
           <div className="mt-5 mb-5 text-xl ">
             <p>{product.special_features}</p>
@@ -83,17 +75,10 @@ const Detail = () => {
             <div className="flex">
               <FaMobileAlt/>Tamaño
             </div>
-            <p> {product.size}"</p>
+            <p> {product.size}</p>
           </div>       
-
-          
-
-       </div>
-       
+      </div>
     </div>  
-
-    
-    
       )}
 
       <Link to='/tienda'>
