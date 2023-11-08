@@ -3,10 +3,6 @@ import CartIcon from "../../assets/svg/CartIcon";
 
 
 const CartButton = () => {
-
-    //const cant = items.legnth;
-    //const hasItem = cant > 0 ? true : false
-
     
     return (
         <NavLink

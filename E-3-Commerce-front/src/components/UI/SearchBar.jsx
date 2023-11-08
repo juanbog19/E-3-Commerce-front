@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { searchProductsByModel, getAllProducts } from '../../store/productsSlice';
 import { FaRedo, FaSearch } from "react-icons/fa";

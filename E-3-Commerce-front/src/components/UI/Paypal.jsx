@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 
 const PayPalButton = window.paypal.Buttons.driver('react', { React, ReactDOM });
 
 export default function PaypalPayment({ total }) {
-  //const [price, setPrice] = useState(0);
-  const [pay, setPay] = useState('')
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setPrice(10.0);
-  // }, []);
 
   const createOrder = (data, actions) => {
     return actions.order.create({
@@ -35,13 +30,10 @@ export default function PaypalPayment({ total }) {
     console.log('el pago ha sido exitoso');
     navigate('/');                           //deberia redirigir a las órdenes del user
   }
-  const handleChange = (e) => {
-    setPay(e.target.value);
-  };
- 
+
   return (
     <center>
-      <div className='mt-20 flex justify-center'>
+      <div className='flex justify-center mt-20'>
         <PayPalButton
           createOrder={(data, actions) => createOrder(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
