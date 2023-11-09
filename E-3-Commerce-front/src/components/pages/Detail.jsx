@@ -3,10 +3,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from "react";
 import {getProductsId} from '../../store/productsSlice';
 import { FaArrowLeft,FaMicrochip,FaMobileAlt,FaSdCard,FaBatteryFull,FaSimCard } from "react-icons/fa";
-
+import Spinner from "../UI/Spinner";
 
 const Detail = () => {
 
+  const loading = useSelector((state) => state.products.loading)
   const {id} =useParams();
   const dispatch = useDispatch();
 
@@ -21,15 +22,12 @@ const Detail = () => {
     <div className="flex justify-center mt-20 ml-4 mr-4 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
       {product &&(
       <div className="flex">
-
         <div  className="w-1/3">
           <a href={product.image} target="_blank" rel="noopener noreferrer">
             <img src={product.image} alt={product.brand.name} />
           </a>
         </div>
-
-
-
+        {loading && < Spinner />}  
       <div className="w-2/3 mt-10">        
 
           <div className="flex justify-center">
@@ -42,7 +40,7 @@ const Detail = () => {
           
           <div className="mt-5 mb-5 text-xl ">
             <p>{product.special_features}</p>
-          </div>    
+          </div>  
           <div className="flex justify-between border-b border-secondary">
             <div className="flex">
               <FaSdCard/>RAM

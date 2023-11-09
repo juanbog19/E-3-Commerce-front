@@ -3,6 +3,7 @@ import Home from "./components/pages/Home";
 import Detail from "./components/pages/Detail";
 import NavBar from "./components/UI/NavBar";
 import About from "./components/pages/About"
+import ContactUs from "./components/pages/ContactUs"
 import Dashboard from "./components/dashboard/Dashboard";
 import Brands from "./components/dashboard/Brands";
 import Products from "./components/dashboard/Products";
@@ -30,7 +31,8 @@ const App = () => {
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/about' element={<About />} />        
+        <Route path='/about' element={<About />} />    
+        <Route path='/contacto' element={<ContactUs />} />    
         <Route path='/checkout' element={<Checkout/>}/>
         {/* Rutas admin */}
         <Route path='/admin' element={<Dashboard />} />
