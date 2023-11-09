@@ -15,16 +15,31 @@ export const loginUser = createAsyncThunk("user/login",
     }
   });
 
-export const signUpUser = createAsyncThunk("user/signup", 
-async (user) => {
-  try {
-    const request = await axiosURL.post('/users', user);
-    const response = await request.data
-    return response
-  } catch (error) {
-    throw error.response.data.error;
-  }
-});
+export const signUpUser = createAsyncThunk("user/signup",
+  async (user) => {
+    try {
+      const request = await axiosURL.post('/users', user);
+      const response = await request.data
+      return response
+    } catch (error) {
+      throw error.response.data.error;
+    }
+  });
+
+export const signInGoogle = createAsyncThunk("user/google",
+  async (res) => {
+    try {
+      const request = await axiosURL.post('/auth/google', res, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const response = await request.data.usuario
+      return response
+    } catch (error) {
+      throw error.response.data.msg
+    }
+  })
 
 const userSlice = createSlice({
   name: "user",
@@ -54,6 +69,11 @@ const userSlice = createSlice({
         state.user = null;
         state.errorLogin = null;
       })
+      .addCase(signInGoogle.pending, (state) => {
+        state.loading = true;
+        state.user = null;
+        state.errorLogin = null;
+      })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
@@ -64,12 +84,22 @@ const userSlice = createSlice({
         state.user = action.payload;
         state.errorLogin = null;
       })
+      .addCase(signInGoogle.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.errorLogin = null;
+      })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.token = null;
         state.errorLogin = action.error.message
       })
       .addCase(signUpUser.rejected, (state, action) => {
+        state.loading = false;
+        state.token = null;
+        state.errorLogin = action.error.message
+      })
+      .addCase(signInGoogle.rejected, (state, action) => {
         state.loading = false;
         state.token = null;
         state.errorLogin = action.error.message
