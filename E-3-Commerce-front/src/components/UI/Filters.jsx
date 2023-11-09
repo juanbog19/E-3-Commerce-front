@@ -27,11 +27,11 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
   return (
     <div className="flex justify-center ml-4 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
       
-      <div className="flex flex-col items-center mb-20 ">
+      <div className="flex flex-col items-center mb-20 p-4 bg-primary rounded-lg">
 
         
-          <legend>Ordenamiento</legend>
-            <select onChange={handleOrder}>
+          <legend className="text-white">Ordenamiento</legend>
+            <select className="p-2 bg-secondary text-white" onChange={handleOrder}>
               <option value='A-Z'>Precio de menor a mayor</option>
               <option value='Z-A'>Precio de mayor a menor</option>
             </select>
@@ -40,8 +40,8 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
             <br></br>
         
 
-        <legend>Marca</legend>
-        <select onChange={(event) => handleBrand(event)} defaultValue="all">
+        <legend className="text-white">Marca</legend>
+        <select className="p-2 bg-secondary text-white" onChange={(event) => handleBrand(event)} defaultValue="all">
           <option value="all">Todas las marcas</option>
           {uniqueBrands.map((b, index)=>(
             <option key={index} value={b} >
@@ -58,8 +58,8 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
         <br></br>
 
 
-        <legend>CPU</legend>
-        <select onChange={(event) => handleProcessor(event)} defaultValue="all">
+        <legend className="text-white">CPU</legend>
+        <select className="p-2 bg-secondary text-white" onChange={(event) => handleProcessor(event)} defaultValue="all">
           <option value="all">Todos los procesadores</option>
           {uniqueProcessor.map((sz, index) => (
             <option key={index} value={sz}>
