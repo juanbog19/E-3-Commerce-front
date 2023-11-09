@@ -31,7 +31,7 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
 
         
           <legend className="text-primary">Ordenamiento</legend>
-            <select className="p-2 bg-white text-black" onChange={handleOrder}>
+            <select className="p-2 bg-white text-black rounded-lg" onChange={handleOrder}>
               <option value='A-Z'>Precio de menor a mayor</option>
               <option value='Z-A'>Precio de mayor a menor</option>
             </select>
@@ -43,7 +43,7 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
         
 
         <legend className="text-primary">Marca</legend>
-        <select className="p-2 bg-white text-black" onChange={(event) => handleBrand(event)} defaultValue="all">
+        <select className="p-2 bg-white text-black rounded-lg" onChange={(event) => handleBrand(event)} defaultValue="all">
           <option value="all">Todas las marcas</option>
           {uniqueBrands.map((b, index)=>(
             <option key={index} value={b} >
@@ -59,7 +59,7 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
 
 
         <legend className="text-primary">CPU</legend>
-        <select className="p-2 bg-white text-black" onChange={(event) => handleProcessor(event)} defaultValue="all">
+        <select className="p-2 bg-white text-black rounded-lg" onChange={(event) => handleProcessor(event)} defaultValue="all">
           <option value="all">Todos los procesadores</option>
           {uniqueProcessor.map((sz, index) => (
             <option key={index} value={sz}>
