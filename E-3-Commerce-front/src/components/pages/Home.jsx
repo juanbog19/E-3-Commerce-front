@@ -1,7 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from '../UI/SearchBar';
 import Footer from './Footer';
 import Card from '../UI/Card';
@@ -10,6 +8,8 @@ import Filters from '../UI/Filters';
 import BackToTop from '../UI/BackToTop';
 import { getAllProducts  } from '../../store/productsSlice';
 import { setPage } from '../../store/paginationSlice';
+
+import { FaMoon, FaSun } from "react-icons/fa";
 
   const Home = () => {
     const [isDarkMode, setDarkMode] = useState(false);
@@ -98,7 +98,7 @@ import { setPage } from '../../store/paginationSlice';
             onClick={toggleDarkMode}
             className="p-2 text-primary hover:text-secondary"
           >
-            <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} />
+            {isDarkMode ? <button className="text-purple-500 text-2xl"><FaSun /></button> : <button className="text-purple-500 text-xl"><FaMoon /></button>}
           </button>
         </div>
       </div>
