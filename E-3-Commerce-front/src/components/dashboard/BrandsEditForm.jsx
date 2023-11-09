@@ -1,18 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
-import { useNavigate } from 'react-router-dom'
-import axiosURL from '../../tools/axiosInstance'
 import UploadWidget from '../UI/UploadWidget'
+import { useNavigate, useParams } from 'react-router-dom'
+import axiosURL from '../../tools/axiosInstance'
 
-export default function BrandsCreateForm() {
+export default function BrandsEditForm() {
+    const { id } = useParams();
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
+    const [brands, setBrands] = useState({
+        "image": "",
+        "name": "",
+        "description": ""
+    })
 
     const [newBrand, setNewBrand] = useState({
         "image": "",
         "name": "",
         "description": ""
     })
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const resp = await axiosURL.get(`/brands/${id}`);
+                const responseData = resp.data || {};
+                setBrands(responseData);
+                setNewBrand(responseData);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, [id]);
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -33,7 +53,7 @@ export default function BrandsCreateForm() {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await axiosURL.post('/brands', newBrand)
+            const response = await axiosURL.put(`/brands/${id}`, newBrand)
 
             console.log('Respuesta del servidor:', response.data);
 
@@ -50,6 +70,7 @@ export default function BrandsCreateForm() {
         }
     }
 
+    //console.log(brands)
     return (
         <div className='mt-4 ml-64'>
             <Sidebar />
@@ -57,7 +78,7 @@ export default function BrandsCreateForm() {
             <div className='flex justify-center'>
                 <div className='w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8  dark:border-gray-300'>
                     <form onSubmit={handleSubmit} className='space-y-6'>
-                        <h5 className='text-xl font-medium text-gray-900'>Crear una nueva marca</h5>
+                        <h5 className='text-xl font-medium text-gray-900'>Editar marca</h5>
                         <div>
                             <label htmlFor="image" className='block mb-2 text-sm font-medium text-gray-900 '>Cargar imagen en la nube:</label>
                             <input type="text" name="image" id="image" key="image" value={newBrand.image} onChange={handleChange} hidden />

@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice  } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosURL from "../tools/axiosInstance";
 
-const URL_PRODUCTS = "http://localhost:3001/products";
+
 
 export const getAllProducts = createAsyncThunk(
   "products/getAllProducts",
   async () => {
     try {
-      const resp = await axios.get(URL_PRODUCTS, {
+      const resp = await axiosURL.get( 'products', {
         headers: {
           Accept: 'application/json',
         },
@@ -23,7 +23,7 @@ export const searchProductsByModel = createAsyncThunk(
     "products/searchProductsByModel",
     async (model) => {
       try {
-        const response = await axios.get(`${URL_PRODUCTS}/?model=${model}`, {
+        const response = await axiosURL.get(`products/?model=${model}`, {
           headers: {
             Accept: 'application/json',
           },
@@ -34,12 +34,12 @@ export const searchProductsByModel = createAsyncThunk(
       }
     }
   );
-  
+
 export const getProductsId = createAsyncThunk(
   "products/getProductsId",
   async (id) =>{
     try {
-     const resp = await axios.get(`${URL_PRODUCTS}/${id}`, {
+     const resp = await axiosURL.get(`products/${id}`, {
       headers: {
         Accept: 'application/json',
       },
@@ -55,7 +55,7 @@ export const postProducts = createAsyncThunk(
   "products/postProducts",
   async (obj) => {
     try {
-      const resp = await axios.post(URL_PRODUCTS, obj, {
+      const resp = await axiosURL.post('products', obj, {
         headers: {
           Accept: 'application/json',
         },
@@ -71,7 +71,7 @@ export const putProducts = createAsyncThunk(
   "products/putProducts",
   async ({id, obj}) => {
     try {
-      const resp = await axios.put(`${URL_PRODUCTS}/${id}`, obj, {
+      const resp = await axiosURL.put(`products/${id}`, obj, {
         headers: {
           Accept: 'application/json',
         },
@@ -87,7 +87,7 @@ export const deleteProducts = createAsyncThunk(
   "products/deleteProducts",
   async (id) => {
     try {
-      const resp = await axios.delete(`${URL_PRODUCTS}/${id}`, {
+      const resp = await axiosURL.delete(`products/${id}`, {
         headers: {
           Accept: 'application/json',
         },
@@ -125,6 +125,7 @@ const productSlice = createSlice({
         state.loading = "failed";
         state.error = action.error.message;
       })
+
       .addCase(searchProductsByModel.pending, (state) => {
         state.loading = "loading";
       })
