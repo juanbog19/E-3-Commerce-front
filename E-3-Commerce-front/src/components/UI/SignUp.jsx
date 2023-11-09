@@ -77,7 +77,16 @@ const SignUp = () => {
           email: '',
           password: ''
         })
-        navigate('/')
+        Swal.fire({
+          icon: "success",
+          title: "Bienvenido/a",
+          text: "¡Registro exitoso!",
+          showConfirmButton: false,
+          timer: 1700
+        });
+        setTimeout(() => {
+          navigate('/');
+        }, 1700);
         dispatch(setError(null))
       }
     })
