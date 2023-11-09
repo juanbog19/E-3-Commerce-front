@@ -109,4 +109,7 @@ const userSlice = createSlice({
 
 export const { setToken, setError } = userSlice.actions;
 
+export const selectUserById = (state, userId) =>
+  state.users.users.find((user) => user.id === userId);
+
 export default userSlice.reducer;
