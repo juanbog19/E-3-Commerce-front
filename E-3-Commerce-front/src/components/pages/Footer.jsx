@@ -36,8 +36,10 @@ const Footer = () => {
             </a>
         </div>
         <p className="mt-8 text-base leading-6 text-center text-[#37415168]">
-            © The Phone Pulse Co. Fundada en Veinteveintitres <p>
-                </p>Todos los derechos reservados.
+            © The Phone Pulse Co. Fundada en Veinteveintitres 
+            </p>
+                <p className="text-base leading-6 text-center text-[#37415168]">
+                    Todos los derechos reservados.
         </p>
     </div>
 </section>
