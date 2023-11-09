@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from '../UI/SearchBar';
 import Footer from './Footer';
 import Card from '../UI/Card';
@@ -9,7 +11,12 @@ import BackToTop from '../UI/BackToTop';
 import { getAllProducts  } from '../../store/productsSlice';
 import { setPage } from '../../store/paginationSlice';
 
-const Home = () => {
+  const Home = () => {
+    const [isDarkMode, setDarkMode] = useState(false);
+  
+    const toggleDarkMode = () => {
+      setDarkMode((prevMode) => !prevMode);
+    };
 
   const dispatch = useDispatch();
 
@@ -82,9 +89,18 @@ const Home = () => {
 
   
   return (
+    <div className={`relative ${isDarkMode ? "dark-mode" : "light-mode"}`}>
     <div >
       <div>
         <SearchBar />
+        <div className="absolute right-4 top-4">
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 text-primary hover:text-secondary"
+          >
+            <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} />
+          </button>
+        </div>
       </div>
 
       <div className='flex'>
@@ -136,8 +152,8 @@ const Home = () => {
       <div className='mt-10'>
         <Footer />
       </div>
-
       <BackToTop/>
+    </div>
     </div>
   );
 
