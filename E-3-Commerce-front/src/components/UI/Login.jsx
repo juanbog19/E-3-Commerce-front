@@ -1,10 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, setError } from "../../store/userSlice";
+import { loginUser, setError, signInGoogle } from "../../store/userSlice";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
-import axiosURL from '../../tools/axiosInstance'
-
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -36,7 +34,16 @@ const Login = () => {
           email: '',
           password: ''
         })
-        navigate('/')
+        Swal.fire({
+          icon: "success",
+          title: "Bienvenido/a",
+          text: "¡Inicio de sesión exitoso!",
+          showConfirmButton: false,
+          timer: 1700
+        });
+        setTimeout(() => {
+          navigate('/');
+        }, 1700);
         dispatch(setError(null));
       }
     })
@@ -46,19 +53,27 @@ const Login = () => {
     dispatch(setError(null));
   }, []);
 
-  //Login con Google
-  async function handleCredentialResponse(response) {
+  //!Login con Google
+
+  function handleCredentialResponse(response) {
     try {
+
       const body = { id_token: response.credential };
-
-      const resp = await axiosURL.post('/auth/google', body, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      console.log(resp.data.usuario);
-      localStorage.setItem('email', resp.data.usuario.email);
+      dispatch(signInGoogle(body)).then((result) => {
+        console.log(':::::::::::', result.payload)
+        if (result.payload) {
+          Swal.fire({
+            icon: "success",
+            title: "Bienvenido/a",
+            text: "¡Inicio de sesión exitoso!",
+            showConfirmButton: false,
+            timer: 1700
+          });
+          setTimeout(() => {
+            navigate('/');
+          }, 1700);
+        }
+      })
     } catch (error) {
       console.error(error);
     }
@@ -157,7 +172,7 @@ const Login = () => {
             </div>
           </div>
           {errorLogin && (
-            <div className="flex items-center justify-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role='alert'>{errorLogin}</div>
+            <div className="flex items-center text-center justify-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role='alert'>{errorLogin}</div>
           )}
         </form>
       </div >
