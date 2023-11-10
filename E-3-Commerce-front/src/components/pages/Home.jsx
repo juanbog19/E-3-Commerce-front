@@ -8,7 +8,6 @@ import Filters from '../UI/Filters';
 import BackToTop from '../UI/BackToTop';
 import { getAllProducts } from '../../store/productsSlice';
 import { setPage } from '../../store/paginationSlice';
-
 import { FaMoon, FaSun } from "react-icons/fa";
 import { authLogout, loginUser } from '../../store/userSlice';
 
@@ -88,12 +87,6 @@ const Home = () => {
     );
   }
 
-  const logout = () => {
-    dispatch(authLogout())
-  }
-
-  const { user } = useSelector((state) => state.user);
-
   return (
     <div className={`relative ${isDarkMode ? "dark-mode" : "light-mode"}`}>
       <div >
@@ -106,7 +99,6 @@ const Home = () => {
             >
               {isDarkMode ? <button className="text-purple-500 text-2xl"><FaSun /></button> : <button className="text-purple-500 text-xl"><FaMoon /></button>}
             </button>
-            {user && <button onClick={logout}>Cerrar Sesión</button>}
           </div>
         </div>
 

@@ -7,7 +7,7 @@ const UserProfile = () => {
 //const ordering = useSelector((state) => state.user.orders);
 
   return (
-    <div className="my-10 border-collapse font-abril">
+    <div className="mt-20 my-10 border-collapse font-abril">
       <h1 className="mb-3 text-2xl text-center uppercase">
         Perfil Del Usuario
       </h1>
