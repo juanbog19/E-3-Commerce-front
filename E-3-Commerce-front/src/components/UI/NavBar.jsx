@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import PhonePulse from "../../assets/PhonePulse.jpg";
 import { FaShoppingCart } from "react-icons/fa";
+import { useSelector } from 'react-redux';
+import CardUser from './CardUser';
 
 const NavBar = () => {
+
+  const isLoggedin = useSelector(state => state.user.loggedin)
+  
   return (
     <>
       <nav className="fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-200 ">
@@ -12,7 +17,7 @@ const NavBar = () => {
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">PhonePulse</span>
           </Link>
           <div className="flex md:order-2">
-            <Link className="px-4 py-2 mr-3 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 md:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800" to="/login">Area de Clientes</Link>
+            {!isLoggedin ? <Link className="px-4 py-2 mr-3 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 md:mr-0" to="/login">Area de Clientes</Link> : <CardUser/>}
             <div className="flex items-center justify-center ml-3">
               <Link to='/checkout'>
                 <FaShoppingCart className="text-2xl text-gray-700"></FaShoppingCart>             
