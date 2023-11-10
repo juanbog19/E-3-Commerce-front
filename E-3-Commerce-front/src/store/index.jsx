@@ -14,6 +14,7 @@ import userSlice from "./userSlice";
 import cartSlice from "./cartSlice";
 import paginationSlice from "./paginationSlice";
 import userProfileSlice from "./userProfileSlice"
+import reviewSlice from "./reviewSlice";
 
 // Configuración de Redux Persist.
 const configReducer = {
@@ -34,6 +35,7 @@ const reducers = combineReducers({
   cart: cartSlice,
   pagination: paginationSlice,
   userProfile: userProfileSlice,
+  reviews:reviewSlice,
 });
 
 // Se aplica la persistencia al reducer combinado.

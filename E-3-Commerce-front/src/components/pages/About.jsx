@@ -20,8 +20,8 @@ const About = () => {
 
       <p className="mt-5 mb-5 text-xl ">
       Nuestra misión es simple pero poderosa: proporcionarles un destino único
-      donde puedan descubrir ofertas increíbles en teléfonos celulares nuevos
-      y reacondicionados. Creemos que todos deberían tener acceso a la tecnología
+      donde puedan descubrir ofertas increíbles en teléfonos celulares nuevos.
+       Creemos que todos deberían tener acceso a la tecnología
       de vanguardia sin quebrantar su bolsillo, y estamos comprometidos en hacerlo
       realidad.
       </p>
