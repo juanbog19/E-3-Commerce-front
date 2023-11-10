@@ -17,6 +17,7 @@ import Checkout from "./components/pages/Checkout";
 import BrandsEditForm from "./components/dashboard/BrandsEditForm";
 import ProductsEditForm from "./components/dashboard/ProductsEditForm";
 import Landing from "./components/pages/Landing";
+import UserProfile from "./components/pages/UserProfile";
 
 
 const App = () => {
@@ -28,12 +29,13 @@ const App = () => {
       <Routes>
       <Route path='/' element={<Landing />} />
         <Route path='/tienda' element={<Home />} />
+        <Route path='/myProfile' element={<UserProfile />} />
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/about' element={<About />} />    
         <Route path='/contacto' element={<ContactUs />} />    
-        <Route path='/checkout' element={<Checkout/>}/>
+        <Route path='/checkout' element={<Checkout />} />
         {/* Rutas admin */}
         <Route path='/admin' element={<Dashboard />} />
         <Route path='/admin/brands' element={<Brands />} />

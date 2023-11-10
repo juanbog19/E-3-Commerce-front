@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { getAllProducts } from '../../store/productsSlice';
+import Review from "../UI/Reviews";
 
 
 const Landing =()=>{
@@ -60,7 +61,7 @@ const Landing =()=>{
                     <h1 className="text-3xl">Nuestros clientes nos avalan</h1>
                     
                 </div>
-                <div className="flex justify-center mt-20 MB-20">ACA LAS REVIEW</div>            
+                <Review/>         
             </div>      
 
             <div>
