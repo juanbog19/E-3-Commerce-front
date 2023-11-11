@@ -59,7 +59,7 @@ const Landing =()=>{
                 </div>
 
                 <div className="flex justify-center mt-20">
-                    <h1 className="text-3xl">Nuestros clientes nos avalan</h1>
+                    <h1 className="text-3xl ">Nuestros clientes nos avalan</h1>
                 </div>
             </div>      
                 <Review/>
