@@ -6,10 +6,12 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
   console.log(products);
 
   //Obtengo las option para mapear en el renderizado
-  const brands = products && products.map((p) => p.brand && p.brand.name);
+  // const brands = products?.map((p) => p.brand && p.brand.name);
+  const brands = (Array.isArray(products) ? products : []).map((p) => p.brand && p.brand.name);
   const uniqueBrands = [...new Set(brands)];
 
-  const processor = products && products.map((p)=>p.cpu);
+  // const processor = products && products.map((p)=>p.cpu);
+  const processor = (Array.isArray(products) ? products : []).map((p) => p.cpu);
   const uniqueProcessor = [ ...new Set(processor)]
 
   const handleOrder = (e) => {
