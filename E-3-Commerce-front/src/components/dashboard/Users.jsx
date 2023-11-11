@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
-import { FaUserAlt, FaUserAltSlash } from "react-icons/fa";
+import { FaUserAlt, FaUserAltSlash, FaToggleOn, FaToggleOff } from "react-icons/fa";
 import axiosURL from '../../tools/axiosInstance'
 
 export default function Users() {
@@ -33,6 +33,19 @@ export default function Users() {
     }
   };
 
+  const handlePrivileges = async (id) => {
+    try {
+      await axiosURL.put(`/users/admin/${id}`);
+
+      const updatedUsers = users.map(user =>
+        user.id === id ? { ...user, rol: !user.rol } : user
+      );
+      setUsers(updatedUsers);
+    } catch (error) {
+      console.log('Error al actualizar los privilegios del usuario: ', error);
+    }
+  }
+
   return (
     <div className='ml-64'>
       <Sidebar />
@@ -44,6 +57,7 @@ export default function Users() {
               <tr>
                 <th scope='col' className='px-6 py-3'>Usuario</th>
                 <th scope='col' className='px-6 py-3'>Correo Electrónico</th>
+                <th scope='col' className='px-6 py-3'>Google</th>
                 <th scope='col' className='px-6 py-3'>Rol</th>
                 <th scope='col' className='px-6 py-3'>Estado</th>
                 <th scope='col' className='px-6 py-3'></th>
@@ -54,11 +68,19 @@ export default function Users() {
                 <tr className='bg-white border-b' key={user.id}>
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{user.username}</th>
                   <td className="px-6 py-4">{user.email}</td>
-                  <td className="px-6 py-4">{user.rol}</td>
+                  <td className="px-6 py-4">{user.google ? 'Si' : 'No'}</td>
+                  <td className="px-6 py-4">
+                    <div className='flex items-center '>
+                      {user.rol ? 'Administrador' : 'Usuario'}
+                      <button onClick={() => handlePrivileges(user.id)} className="ml-4 text-purple-500 text-2xl">
+                        {user.rol ? <FaToggleOn /> : <FaToggleOff />}
+                      </button>
+                    </div>
+                  </td>
                   <td className="px-6 py-4">{user.status ? <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Activo</span> : <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Inactivo</span>}</td>
                   <td className="px-6 py-4">
                     <button onClick={() => handleChange(user.id)} className="mr-2 text-white bg-purple-500 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-purple-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                      {user.status ? <FaUserAlt /> : <FaUserAltSlash/>}
+                      {user.status ? <FaUserAlt /> : <FaUserAltSlash />}
                     </button>
                   </td>
                 </tr>
