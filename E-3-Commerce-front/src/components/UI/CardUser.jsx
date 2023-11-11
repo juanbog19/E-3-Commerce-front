@@ -58,6 +58,11 @@ export default function CardUser() {
           <li>
             <Link to='myProfile' onClick={toggleMenu} className="block px-4 py-2 hover:bg-gray-100">Mi perfil</Link>
           </li>
+          {user.rol && (
+            <li>
+              <Link to='admin' onClick={toggleMenu} className="block px-4 py-2 hover:bg-gray-100">Administrador</Link>
+            </li>
+          )}
           <li>
             <Link to='#' className="block px-4 py-2 hover:bg-gray-100">Mis ordenes</Link>
           </li>
