@@ -8,6 +8,11 @@ const NavBar = () => {
 
   const isLoggedin = useSelector(state => state.user.loggedin)
   
+  const items = useSelector( ( state ) => state.cart.items )
+
+  const cantItems = items.length;
+  const hasItems = cantItems > 0 ? true : false;
+  
   return (
     <>
       <nav className="fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-200 ">
@@ -19,8 +24,9 @@ const NavBar = () => {
           <div className="flex md:order-2">
             {!isLoggedin ? <Link className="px-4 py-2 mr-3 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 md:mr-0" to="/login">Area de Clientes</Link> : <CardUser/>}
             <div className="flex items-center justify-center ml-3">
-              <Link to='/checkout'>
-                <FaShoppingCart className="text-2xl text-gray-700"></FaShoppingCart>             
+              <Link className='relative inline-flex items-center px-2 py-1.5 text-sm font-medium text-center' to='/checkout'>
+                <FaShoppingCart className="text-2xl text-gray-700"></FaShoppingCart>
+                {hasItems ? <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2">{cantItems}</div> : ''}             
               </Link>
             </div>
           </div>

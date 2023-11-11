@@ -1,28 +1,38 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetPage } from '../../store/paginationSlice';
 
 const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
+
+  const dispatch = useDispatch()
 
   const { products } = useSelector((state) => state.products);
   console.log(products);
 
   //Obtengo las option para mapear en el renderizado
-  const brands = products && products.map((p) => p.brand && p.brand.name);
+  // const brands = products?.map((p) => p.brand && p.brand.name);
+  const brands = (Array.isArray(products) ? products : []).map((p) => p.brand && p.brand.name);
   const uniqueBrands = [...new Set(brands)];
 
-  const processor = products && products.map((p)=>p.cpu);
+  // const processor = products && products.map((p)=>p.cpu);
+  const processor = (Array.isArray(products) ? products : []).map((p) => p.cpu);
   const uniqueProcessor = [ ...new Set(processor)]
 
   const handleOrder = (e) => {
     onOrderChange(e.target.value);
   }; 
 
-  const handleBrand = (e)=>{
-    onBrandChange(e.target.value)
+  const handleBrand = (e) => {
+    dispatch(resetPage())
+    const selectedBrand = e.target.value;
+    onBrandChange(selectedBrand);
   };
 
   const handleProcessor = (e) => {
-    onProcessorChange(e.target.value)
+    dispatch(resetPage())
+    const selectedProcessor = e.target.value;
+    onProcessorChange(selectedProcessor)
   };
+
 
   return (
     <div className="flex justify-center ml-4 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
