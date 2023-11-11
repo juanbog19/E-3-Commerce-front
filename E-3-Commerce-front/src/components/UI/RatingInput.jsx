@@ -5,25 +5,20 @@ export const RatingInput = ({ rating, handleInputChange }) => {
 
   return (
     <div>
-    <label className="block text-gray-700 text-sm font-bold mb-2">
+    <label className="block text-gray-700 text-lg font-bold mb-2">
       Calificar
-      <div className="flex">
+      <div className="flex items-center mt-2">
         {stars.map((star) => (
           <FaStar
             key={star}
             className={`text-yellow-500 ${
-              star <= rating ? "fill-current" : "fill-none"
-            } w-6 h-6 border-solid border border-black cursor-pointer transition-opacity duration-300 ${
+              star <= rating ? "text-yellow-600 animate-bounce" : "text-yellow-400"
+            } w-8 h-8 cursor-pointer transition-opacity duration-300 ${
               star <= rating ? "opacity-100" : "opacity-50"
             }`}
             onMouseEnter={() =>
               handleInputChange({
                 target: { name: "rating", value: star },
-              })
-            }
-            onMouseLeave={() =>
-              handleInputChange({
-                target: { name: "rating", value: rating },
               })
             }
             onClick={() =>
@@ -36,6 +31,8 @@ export const RatingInput = ({ rating, handleInputChange }) => {
       </div>
     </label>
   </div>
+  
+
   );
 
 }
