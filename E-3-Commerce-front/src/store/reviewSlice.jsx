@@ -17,7 +17,7 @@ export const getReviewById = createAsyncThunk(
 'reviews/getReviewById', 
   async (id) => {
   try {
-    const response = await axiosURL.get(`/api/reviews/${id}`);
+    const response = await axiosURL.get(`/reviews/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -25,7 +25,9 @@ export const getReviewById = createAsyncThunk(
 });
 
   
-  export const postReview = createAsyncThunk("reviews/postReview", async (reviewData) => {
+  export const postReview = createAsyncThunk(
+    "reviews/postReview", 
+    async (reviewData) => {
     try {
       const request = await axiosURL.post('/reviews', reviewData);
       const response = await request.data;
@@ -39,7 +41,7 @@ export const editReview = createAsyncThunk(
 'reviews/editReview', 
   async (reviewData) => {
   try {
-    const response = await axiosURL.put(`/api/reviews/${reviewData.id}`, reviewData);
+    const response = await axiosURL.put(`/reviews/${reviewData.id}`, reviewData);
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -50,7 +52,7 @@ export const banReview = createAsyncThunk(
 'reviews/banReview', 
    async (id) => {
   try {
-    await axiosURL.delete(`/api/reviews/${id}`);
+    await axiosURL.delete(`/reviews/${id}`);
     return id;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -66,7 +68,7 @@ const reviewsSlice = createSlice({
     reviews: [],
     review: null,
     loading: 'idle',
-    error: null,
+    errorReviews: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -80,7 +82,7 @@ const reviewsSlice = createSlice({
       })
       .addCase(getReviews.rejected, (state, action) => {
         state.loading = 'failed';
-        state.error = action.error.message;
+        state.errorReviews = action.error.message;
       })
       .addCase(getReviewById.pending, (state) => {
         state.loading = 'loading';
@@ -91,7 +93,7 @@ const reviewsSlice = createSlice({
       })
       .addCase(getReviewById.rejected, (state, action) => {
         state.loading = 'failed';
-        state.error = action.error.message;
+        state.errorReviews = action.error.message;
       })
       .addCase(postReview.fulfilled, (state, action) => {
         state.reviews.push(action.payload);

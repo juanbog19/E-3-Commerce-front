@@ -18,6 +18,7 @@ import BrandsEditForm from "./components/dashboard/BrandsEditForm";
 import ProductsEditForm from "./components/dashboard/ProductsEditForm";
 import Landing from "./components/pages/Landing";
 import UserProfile from "./components/pages/UserProfile";
+import OrderList from "./components/UI/OrderList";
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
       <Route path='/' element={<Landing />} />
         <Route path='/tienda' element={<Home />} />
         <Route path='/myProfile' element={<UserProfile />} />
+        <Route path='/orders' element={<OrderList />} />
         <Route path='/detail/:id' element={<Detail />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />

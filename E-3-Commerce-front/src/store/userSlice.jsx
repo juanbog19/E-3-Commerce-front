@@ -1,6 +1,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosURL from "../tools/axiosInstance";
 
+export const getUsers = createAsyncThunk(
+  "users/getUsers",
+  async () => {
+    try {
+      const request = await axiosURL.get("/users");
+      const response = await request.data;
+      return response;
+    } catch (error) {
+      throw error.response.data.error;
+    }
+  }
+);
+
+export const getUsersId = createAsyncThunk(
+  "users/getUsersId",
+  async (id) =>{
+    try {
+     const resp = await axiosURL.get(`users/${id}`, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    return resp.data;
+    } catch (error){
+      return Promise.reject(error.response.data.message);
+    }
+  }
+);
+
 
 export const loginUser = createAsyncThunk("user/login",
   async (user) => {
@@ -44,6 +73,8 @@ const userSlice = createSlice({
   initialState: {
     loading: false,
     user: null,
+    users:null,
+    selectedUser:null,
     loggedin: false,
     errorLogin: null,
     token: null,
@@ -67,6 +98,29 @@ const userSlice = createSlice({
         state.user = null;
         state.loggedin = false;
         state.errorLogin = null;
+      })
+      .addCase(getUsers.pending, (state) => {
+        state.loading = "loading";
+      })
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+        state.users = action.payload;
+      })
+      .addCase(getUsers.rejected, (state, action) => {
+        state.loading = "failed";
+        state.errorLogin = action.error.message;
+      })
+
+      .addCase(getUsersId.pending, (state) => {
+        state.loading = "loading";
+      })
+      .addCase(getUsersId.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+        state.selectedUser = action.payload;
+      })
+      .addCase(getUsersId.rejected, (state, action) => {
+        state.loading = "failed";
+        state.error = action.error.message;
       })
       .addCase(signUpUser.pending, (state) => {
         state.loading = true;
@@ -122,8 +176,5 @@ const userSlice = createSlice({
 export const { setToken, setError } = userSlice.actions;
 
 export const authLogout = userSlice.actions.logout;
-
-export const selectUserById = (state, userId) =>
-  state.users.users.find((user) => user.id === userId);
 
 export default userSlice.reducer;
