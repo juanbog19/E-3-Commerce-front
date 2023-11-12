@@ -1,9 +1,25 @@
 
 import { useSelector } from 'react-redux';
-//import OrderList from '../UI/OrderList';
+import { useEffect, useState } from 'react';
+import axiosURL from '../../tools/axiosInstance';
+import OrderList from '../UI/OrderList';
 
 const UserProfile = () => {
   const user = useSelector((state) => state.user.user);
+  const userId = user.id
+  const [order, setOrder] = useState([]);
+  //console.log(order);
+
+  useEffect(() => {
+    axiosURL.get(`/orders/user/${userId}`)
+      .then((response) => {
+        console.log('estas son las ordenes del usuario en myprofile',response.data);
+        setOrder(response.data); 
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   //const orders = useSelector((state) => state.user.orders);
 
   return (
@@ -19,14 +35,23 @@ const UserProfile = () => {
           Email: {user ? user.email : ''}
         </h2>
       </div>
-      {/* <ul className="border">
+      <ul className="border">
         <h3 className="mb-3 text-2xl text-center text-gray-700 uppercase border border-black">
           Order history
           </h3>
-        {orders.map((order) => (
-          <OrderList key={order.id} order={order} />
+
+          {/* cuando este hecho el slice agregar una prop "quant" */}
+        {order.map((order,index) => (
+          <OrderList 
+          key={index} 
+          id={order.id}
+          date={order.date}
+          brand={order.product.brand.name}
+          model={order.model}
+          amount={order.amount}
+          order={order.order} />
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 };
