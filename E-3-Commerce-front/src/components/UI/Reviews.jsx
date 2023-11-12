@@ -11,6 +11,8 @@ const Review = () => {
   const reviews = useSelector((state) => state.reviews.reviews);
   const users = useSelector((state) => state.user.users);
   const loggedInUser = useSelector((state) => state.user.loggedin);
+  
+  //console.log('esto es reviews:',reviews);
 
   const [newReviewData, setNewReviewData] = useState({
     comment: '',
@@ -89,7 +91,7 @@ const Review = () => {
                 ))}
               </span>
             </p>
-            <p className="text-xs mb-2">Usuario: {review.user_name}</p>
+            <p className="text-xs mb-2">Usuario: {review.user ? review.user.username : 'Usuario no disponible'}</p>
           </div>
         </div>
       ))}

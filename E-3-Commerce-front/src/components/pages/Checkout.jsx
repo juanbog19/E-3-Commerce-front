@@ -24,12 +24,6 @@ const Checkout = () =>{
         dispatch(clearStore());        
     };
 
-    const realizarCompra = ()=> {
-        dispatch()
-    }
-
-
-
     return(
         <div className="mt-20">
             <h1 className="mb-3 text-2xl text-center text-gray-700 uppercase">Tu carrito</h1>
@@ -99,7 +93,7 @@ const Checkout = () =>{
                                 </div>
                             ) : (
                                 <div>
-                                    <PaypalPayment total={total}/>
+                                    <PaypalPayment total={total} clearStore={limpiar} />
                                 </div>
                             )
                         }
