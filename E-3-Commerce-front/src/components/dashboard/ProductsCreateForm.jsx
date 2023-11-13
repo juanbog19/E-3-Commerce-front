@@ -97,6 +97,8 @@ export default function ProductsCreateForm() {
         }
     };
 
+    console.log(newProduct)
+
     return (
         <div className="mt-4 ml-64">
             <Sidebar />
@@ -145,7 +147,9 @@ export default function ProductsCreateForm() {
                                 name="id_brand"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
                                 onChange={handleChange}
+                                defaultValue=""
                             >
+                                <option disabled value="">Selecciona una opción</option>
                                 {brands.map((brand) => (
                                     <option key={brand.id} value={brand.id}>
                                         {brand.name}
