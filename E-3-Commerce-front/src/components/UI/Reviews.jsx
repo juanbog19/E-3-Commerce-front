@@ -30,11 +30,8 @@ const Review = () => {
   };
 
   const handlePostReview = useCallback(async () => {
-    if (!loggedInUser) {
-      Swal.fire('El usuario debe estar conectado para dejar su experiencia', "Click para continuar", "error");
-    }
     if (!hasPurchased) {
-      Swal.fire('Debes realizar una compra antes de dejar una revisión', 'Click para continuar', 'error');
+      Swal.fire('Debes realizar una compra antes de dejar tu experiencia', 'Click para continuar', 'error');
       return;
     }
     try {
@@ -48,7 +45,7 @@ const Review = () => {
     } catch (error) {
       Swal.fire('Error al agregar una nueva revisión:', "Click para continuar", "info", error.message);
     }
-  }, [dispatch, loggedInUser, hasPurchased, newReviewData]);
+  }, [dispatch, hasPurchased, newReviewData]);
 
   return (
     <div className="flex justify-center mt-20 border-black">
@@ -65,7 +62,7 @@ const Review = () => {
       </label>
       <RatingInput rating={newReviewData.rating} handleInputChange={handleInputChange} />
       <button
-        className="mt-5 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+       className="w-full text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
         onClick={handlePostReview}
       >
         Compartir
