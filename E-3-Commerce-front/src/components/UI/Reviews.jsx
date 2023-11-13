@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getReviews, postReview, banReview } from '../../store/reviewSlice';
+import { getReviews, postReview } from '../../store/reviewSlice';
 import Swal from 'sweetalert2';
 import { RatingInput } from './RatingInput';
 import { FaStar } from 'react-icons/fa';
@@ -11,6 +11,8 @@ const Review = () => {
   const reviews = useSelector((state) => state.reviews.reviews);
   const users = useSelector((state) => state.user.users);
   const loggedInUser = useSelector((state) => state.user.loggedin);
+  const hasPurchased = useSelector((state) => state.user.hasPurchased);
+
   
   //console.log('esto es reviews:',reviews);
 
@@ -29,7 +31,11 @@ const Review = () => {
 
   const handlePostReview = useCallback(async () => {
     if (!loggedInUser) {
-      Swal.fire('El usuario debe estar conectado para dejar su experiencia', "Click para continuar", "info");
+      Swal.fire('El usuario debe estar conectado para dejar su experiencia', "Click para continuar", "error");
+    }
+    if (!hasPurchased) {
+      Swal.fire('Debes realizar una compra antes de dejar una revisión', 'Click para continuar', 'error');
+      return;
     }
     try {
       await dispatch(postReview(newReviewData));
@@ -42,7 +48,7 @@ const Review = () => {
     } catch (error) {
       Swal.fire('Error al agregar una nueva revisión:', "Click para continuar", "info", error.message);
     }
-  }, [dispatch, loggedInUser, newReviewData]);
+  }, [dispatch, loggedInUser, hasPurchased, newReviewData]);
 
   return (
     <div className="flex justify-center mt-20 border-black">
