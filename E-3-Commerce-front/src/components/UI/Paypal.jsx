@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const PayPalButton = window.paypal.Buttons.driver('react', { React, ReactDOM });
 
-export default function PaypalPayment({ total }) {
+export default function PaypalPayment({ total, clearStore }) {
+
+  
   const navigate = useNavigate();
 
 
@@ -28,6 +32,7 @@ export default function PaypalPayment({ total }) {
 
   function handlePay() {
     console.log('el pago ha sido exitoso');
+    clearStore();
     navigate('/');                           //deberia redirigir a las órdenes del user
   }
 

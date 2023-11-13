@@ -12,6 +12,8 @@ const Checkout = () =>{
     //EMI SLICE
     const items = useSelector( ( state ) => state.cart.items );
     const total = useSelector( ( state ) => state.cart.total );
+    const isAuthenticated = useSelector( (state) => state.user.loggedin);
+    
     const dispatch = useDispatch();
     
 
@@ -19,11 +21,8 @@ const Checkout = () =>{
     const hasItems = cantItems > 0 ? true : false;
 
     const limpiar = () => {
-        dispatch(clearStore());
-        
+        dispatch(clearStore());        
     };
-
-
 
     return(
         <div className="mt-20">
@@ -76,18 +75,40 @@ const Checkout = () =>{
                         Total: <span className="text-primary">{total} USD</span>{" "}
                         </p>
                         <div>
-                        <button onClick={limpiar} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" >
+                        <button onClick={limpiar} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-5 mr-2 mb-2" >
                         Vaciar carrito 
                         <FaShoppingCart></FaShoppingCart>
                     </button>
-                    <PaypalPayment total={total}/>
-                        </div>
+                    <div>
+                        {
+                            !isAuthenticated ? (
+                                <div className="flex mt-5">                            
+                                    <Link
+                                    to='/login'>
+                                        <button className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                            Continuar compra
+                                        </button>                               
+                                    </Link>
+                                    <p className="text-lg text-semibold text-primary">Debes iniciar sesión para completar la compra</p>
+                                </div>
+                            ) : (
+                                <div>
+                                    <PaypalPayment total={total} clearStore={limpiar} />
+                                </div>
+                            )
+                        }
+                    </div>
+                   
+                    </div>
 
                     </div>
                     
                 </div>
+
                 </div>
             )}
+            
+          
 
         </div>
     )
