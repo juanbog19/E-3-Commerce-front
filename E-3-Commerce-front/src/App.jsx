@@ -19,35 +19,48 @@ import ProductsEditForm from "./components/dashboard/ProductsEditForm";
 import Landing from "./components/pages/Landing";
 import UserProfile from "./components/pages/UserProfile";
 import OrderList from "./components/UI/OrderList";
+import { useSelector } from "react-redux";
+import NotAllowed from "./components/dashboard/NotAllowed";
+import NotFound from "./components/pages/NotFound";
 
 
 const App = () => {
+  
   const location = useLocation();
   const isDashboardRoute = location.pathname.startsWith("/admin");
+  const isAdmin = useSelector(state => state.user.user?.rol)
+  const isLoggedin = useSelector(state => state.user?.loggedin)
+
   return (
     <div>
       {!isDashboardRoute && <NavBar />}
       <Routes>
-      <Route path='/' element={<Landing />} />
+        <Route path='/' element={<Landing />} />
         <Route path='/tienda' element={<Home />} />
         <Route path='/myProfile' element={<UserProfile />} />
         <Route path='/orders' element={<OrderList />} />
         <Route path='/detail/:id' element={<Detail />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/about' element={<About />} />    
-        <Route path='/contacto' element={<ContactUs />} />    
+        <Route path='/login' element={isLoggedin ? <NotFound/> :<Login /> } />
+        <Route path='/signup' element={isLoggedin ? <NotFound/> : <SignUp />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contacto' element={<ContactUs />} />
         <Route path='/checkout' element={<Checkout />} />
-        {/* Rutas admin */}
-        <Route path='/admin' element={<Dashboard />} />
-        <Route path='/admin/brands' element={<Brands />} />
-        <Route path='/admin/brands/create' element={<BrandsCreateForm />} />
-        <Route path='/admin/brands/edit/:id' element={<BrandsEditForm />} />
-        <Route path='/admin/products' element={<Products />} />
-        <Route path='/admin/products/create' element={<ProductsCreateForm />} />
-        <Route path='/admin/products/edit/:id' element={<ProductsEditForm />} />
-        <Route path='/admin/users' element={<Users />} />
-        <Route path='/admin/orders' element={<Orders />} />
+        {/* Rutas administrativas */}
+        {isAdmin ? (
+          <>
+            <Route path='/admin' element={<Dashboard />} />
+            <Route path='/admin/brands' element={<Brands />} />
+            <Route path='/admin/brands/create' element={<BrandsCreateForm />} />
+            <Route path='/admin/brands/edit/:id' element={<BrandsEditForm />} />
+            <Route path='/admin/products' element={<Products />} />
+            <Route path='/admin/products/create' element={<ProductsCreateForm />} />
+            <Route path='/admin/products/edit/:id' element={<ProductsEditForm />} />
+            <Route path='/admin/users' element={<Users />} />
+            <Route path='/admin/orders' element={<Orders />} />
+          </>
+        ) : (
+          <Route path='/admin/*' element={<NotAllowed />} />
+        )}
       </Routes>
     </div>
   )

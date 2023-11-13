@@ -69,9 +69,7 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1700
           });
-          setTimeout(() => {
-            navigate('/');
-          }, 1700);
+          navigate('/');
         }
       })
     } catch (error) {

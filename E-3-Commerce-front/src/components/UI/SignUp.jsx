@@ -84,9 +84,7 @@ const SignUp = () => {
           showConfirmButton: false,
           timer: 1700
         });
-        setTimeout(() => {
-          navigate('/');
-        }, 1700);
+        navigate('/');
         dispatch(setError(null))
       }
     })
