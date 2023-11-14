@@ -1,37 +1,41 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { searchProductsByModel, getAllProducts } from '../../store/productsSlice';
+import { getAllProducts, searchProducts } from '../../store/productsSlice';
 import { FaRedo, FaSearch } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { resetPage } from "../../store/paginationSlice";
 
 const SearchBar = () => {
 
-  const [model, setModel] = useState('');
+  //const [model, setModel] = useState('');
+  const [searchInput, setSearchInput] = useState('');
 
   const { error } = useSelector((state)=>state.products.products);
   console.log(error);
 
 
   const dispatch = useDispatch();
-  console.log(model);
+  //console.log(model);
 
   const handleInputChange = (event) => {
-    setModel(event.target.value);
-  };
+  //  setModel(event.target.value);
+  setSearchInput(event.target.value);  
+};
 
   const handleOnClick = () => {
-    if (!model) {
+    //if (!model) {
+    if (!searchInput) {
       Swal.fire('Por favor digita algo antes de buscar.', "Click para continuar", "info");      
     } else {
-      dispatch(searchProductsByModel(model));
+      dispatch(searchProducts(searchInput));
       dispatch(resetPage())
-      setModel('');
+      setSearchInput('');
     }
   };
 
   const handlerReset = () => {
-    setModel('');
+  //  setModel('');
+  setSearchInput('');
     dispatch(getAllProducts())
   };
 
@@ -45,7 +49,7 @@ const SearchBar = () => {
   return (
     <div className="flex justify-center mt-20 border-black">
       <div>
-        <input value={model} onChange={handleInputChange} onKeyPress={handleKeyPress} type='search' placeholder='Buscar un producto...' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block p-2.5 dark:bg-gray-200 dark:border-gray-400 dark:placeholder-gray-400 mt-5 mr-5" />
+        <input value={searchInput} onChange={handleInputChange} onKeyPress={handleKeyPress} type='search' placeholder='Buscar un producto...' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block p-2.5 dark:bg-gray-200 dark:border-gray-400 dark:placeholder-gray-400 mt-5 mr-5" />
       </div>
 
       <div>
@@ -64,7 +68,7 @@ const SearchBar = () => {
 
       <div>
         {error&&(
-              <div className="text-red-300 mt-5" role='alert'>{error}</div>
+              <div className="mt-5 text-red-300" role='alert'>{error}</div>
             )}
       </div>
 
@@ -77,4 +81,4 @@ const SearchBar = () => {
   )
 }
 
-export default SearchBar;
+export default SearchBar;
