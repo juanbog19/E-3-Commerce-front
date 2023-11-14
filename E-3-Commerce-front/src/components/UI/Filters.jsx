@@ -6,7 +6,6 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
   const dispatch = useDispatch()
 
   const { products } = useSelector((state) => state.products);
-  console.log(products);
 
   //Obtengo las option para mapear en el renderizado
   // const brands = products?.map((p) => p.brand && p.brand.name);
@@ -37,11 +36,11 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
   return (
     <div className="flex justify-center ml-4 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
       
-      <div className="flex flex-col items-center mb-20 p-4 bg-secondary rounded-lg">
+      <div className="flex flex-col items-center p-4 mb-20 rounded-lg bg-secondary">
 
         
           <legend className="text-primary">Ordenamiento</legend>
-            <select className="p-2 bg-white text-black rounded-lg" onChange={handleOrder}>
+            <select className="p-2 text-black bg-white rounded-lg" onChange={handleOrder}>
               <option value='A-Z'>Precio de menor a mayor</option>
               <option value='Z-A'>Precio de mayor a menor</option>
             </select>
@@ -53,7 +52,7 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
         
 
         <legend className="text-primary">Marca</legend>
-        <select className="p-2 bg-white text-black rounded-lg" onChange={(event) => handleBrand(event)} defaultValue="all">
+        <select className="p-2 text-black bg-white rounded-lg" onChange={(event) => handleBrand(event)} defaultValue="all">
           <option value="all">Todas las marcas</option>
           {uniqueBrands.map((b, index)=>(
             <option key={index} value={b} >
@@ -69,7 +68,7 @@ const Filters = ({ onOrderChange,onBrandChange,onProcessorChange }) => {
 
 
         <legend className="text-primary">CPU</legend>
-        <select className="p-2 bg-white text-black rounded-lg" onChange={(event) => handleProcessor(event)} defaultValue="all">
+        <select className="p-2 text-black bg-white rounded-lg" onChange={(event) => handleProcessor(event)} defaultValue="all">
           <option value="all">Todos los procesadores</option>
           {uniqueProcessor.map((sz, index) => (
             <option key={index} value={sz}>
