@@ -2,7 +2,7 @@ import {useParams, Link } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from "react";
 import {getProductsId} from '../../store/productsSlice';
-import { FaArrowLeft,FaMicrochip,FaMobileAlt,FaSdCard,FaBatteryFull,FaSimCard } from "react-icons/fa";
+import { FaArrowLeft,FaMicrochip,FaMobileAlt,FaSdCard,FaBatteryFull,FaSimCard, FaShoppingCart } from "react-icons/fa";
 import Spinner from "../UI/Spinner";
 import { addItem } from '../../store/cartSlice';
 import Swal from "sweetalert2";
@@ -99,7 +99,9 @@ const Detail = () => {
         </div>
         <div>
           <button onClick={add} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-          >Añadir al carrito</button>
+          >
+            <FaShoppingCart></FaShoppingCart>
+          </button>
         </div>
 
         <Link to='/tienda'>
