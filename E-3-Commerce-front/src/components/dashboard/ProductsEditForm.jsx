@@ -121,8 +121,6 @@ export default function ProductsEditForm() {
     }
   };
 
-  //console.log(products)
-
   return (
     <div className="mt-4 ml-64">
       <Sidebar />
