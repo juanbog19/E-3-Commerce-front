@@ -63,9 +63,9 @@ export default function CardUser() {
               <Link to='admin' onClick={toggleMenu} className="block px-4 py-2 hover:bg-gray-100">Administrador</Link>
             </li>
           )}
-          <li>
+          {/* <li>
             <Link to='#' className="block px-4 py-2 hover:bg-gray-100">Mis ordenes</Link>
-          </li>
+          </li> */}
         </ul>
         <div className="py-1">
           <Link onClick={logout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cerrar Sesión</Link>

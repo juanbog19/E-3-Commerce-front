@@ -97,8 +97,6 @@ export default function ProductsCreateForm() {
         }
     };
 
-    console.log(newProduct)
-
     return (
         <div className="mt-4 ml-64">
             <Sidebar />

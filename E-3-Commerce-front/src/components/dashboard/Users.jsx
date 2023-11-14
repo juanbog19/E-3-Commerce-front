@@ -60,7 +60,6 @@ export default function Users() {
                 <th scope='col' className='px-6 py-3'>Google</th>
                 <th scope='col' className='px-6 py-3'>Rol</th>
                 <th scope='col' className='px-6 py-3'>Estado</th>
-                <th scope='col' className='px-6 py-3'></th>
               </tr>
             </thead>
             <tbody>
@@ -77,12 +76,7 @@ export default function Users() {
                       </button>
                     </div>
                   </td>
-                  <td className="px-6 py-4">{user.status ? <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Activo</span> : <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Inactivo</span>}</td>
-                  <td className="px-6 py-4">
-                    <button onClick={() => handleChange(user.id)} className="mr-2 text-white bg-purple-500 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-purple-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                      {user.status ? <FaUserAlt /> : <FaUserAltSlash />}
-                    </button>
-                  </td>
+                  <td className="px-6 py-4"><button onClick={() => handleChange(user.id)} className={`text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full ${user.status ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{user.status ? 'Activo' : 'Baneado'}</button></td>
                 </tr>
               ))}
             </tbody>
