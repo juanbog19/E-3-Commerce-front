@@ -70,10 +70,10 @@ export default function Users() {
                   <td className="px-6 py-4">{user.google ? 'Si' : 'No'}</td>
                   <td className="px-6 py-4">
                     <div className='flex items-center '>
-                      {user.rol ? 'Administrador' : 'Usuario'}
-                      <button onClick={() => handlePrivileges(user.id)} className="ml-4 text-purple-500 text-2xl">
+                      <button onClick={() => handlePrivileges(user.id)} className="mr-4 text-purple-500 text-2xl">
                         {user.rol ? <FaToggleOn /> : <FaToggleOff />}
                       </button>
+                      {user.rol ? 'Administrador' : 'Usuario'}
                     </div>
                   </td>
                   <td className="px-6 py-4"><button onClick={() => handleChange(user.id)} className={`text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full ${user.status ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>{user.status ? 'Activo' : 'Baneado'}</button></td>
