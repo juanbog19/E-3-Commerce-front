@@ -50,7 +50,6 @@ const UserProfile = () => {
           amount={order.amount}
           order={order.order} />
         ))}
-      </ul>
     </div>
   );
 };
