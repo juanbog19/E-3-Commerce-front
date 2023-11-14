@@ -35,7 +35,7 @@ const UserProfile = () => {
           Email: {user ? user.email : ''}
         </h2>
       </div>
-      {/* <ul className="border">
+      <ul className="border">
         <h3 className="mb-3 text-2xl text-center text-gray-700 uppercase border border-black">
           Order history
           </h3>
@@ -50,6 +50,7 @@ const UserProfile = () => {
           amount={order.amount}
           order={order.order} />
         ))}
+        </ul>
     </div>
   );
 };
