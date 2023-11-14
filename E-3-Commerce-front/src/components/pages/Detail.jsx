@@ -115,6 +115,7 @@ const Detail = () => {
     </div>
     
     <div>
+      <h1 className="flex justify-center mt-20 text-3xl">Productos que podrían interesarte</h1>
       <CardsDetail brandProduct = {brand}/>        
     </div>     
 
