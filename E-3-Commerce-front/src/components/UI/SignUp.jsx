@@ -8,75 +8,37 @@ import { useEffect, useState } from "react";
 
 
 const SignUp = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const loading = useSelector((state) => state.user.loading);
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  //   watch,
-  // } = useForm();
-
-  // const handleSignUp = async (data) => {
-  //   try {
-
-  //     // Validar las contraseñas
-  //     if (data.password !== data.confirmPassword) {
-  //       throw new Error("Las contraseñas no coinciden");
-  //     }
-
-  //     // Enviar la solicitud de registro
-  //     await dispatch(signUpUser(data));
-
-  //     // Si el registro es exitoso, mostrar una alerta y redirigir
-  //     Swal.fire({
-  //       icon: 'success',
-  //       title: 'Registro exitoso',
-  //       text: '¡Te has registrado correctamente!',
-  //       confirmButtonText: 'Aceptar'
-  //     });
-
-  //     navigate("/home"); // Redirigir a la página de inicio
-  //   } catch (error) {
-  //     // Si ocurre un error, mostrar una alerta de error
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Error',
-  //       text: error.message,
-  //       confirmButtonText: 'Aceptar'
-  //     });
-  //   }
-  // };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const { loading, errorLogin } = useSelector((state) => state.user);
 
-  const [newUser, setNewUser] = useState({
-    username: '',
-    email: '',
-    password: ''
-  })
+  // const [newUser, setNewUser] = useState({
+  //   username: '',
+  //   email: '',
+  //   password: ''
+  // })
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target
 
-    setNewUser(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
+  //   setNewUser(prevState => ({
+  //     ...prevState,
+  //     [name]: value
+  //   }))
+  // }
 
-  const handleSignup = (event) => {
-    event.preventDefault()
+  const handleSignup = (data) => {
 
-    dispatch(signUpUser(newUser)).then((result) => {
+    dispatch(signUpUser(data)).then((result) => {
       if (result.payload) {
-        setNewUser({
-          username: '',
-          email: '',
-          password: ''
-        })
         Swal.fire({
           icon: "success",
           title: "Bienvenido/a",
@@ -94,13 +56,10 @@ const SignUp = () => {
     dispatch(setError(null));
   }, []);
 
-  //console.log(newUser)
-
-
   return (
     <div className="flex justify-center mt-20">
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
-        <form className="space-y-6" onSubmit={handleSignup}>
+        <form className="space-y-6" onSubmit={handleSubmit(handleSignup)}>
           <h5 className="flex justify-center text-xl font-medium text-gray-900 dark:text-black">
             Crear una cuenta
           </h5>
@@ -112,10 +71,18 @@ const SignUp = () => {
               type="text"
               name="username"
               id="username"
-              onChange={handleChange}
+              {...register("username", {
+                required: {
+                  value: true,
+                  message: "El usuario es obligatorio.",
+                },
+              })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               placeholder="Ingresa tu usuario"
             />
+            {errors.username && (
+              <span className="text-red-500 text-xs">{errors.username.message}</span>
+            )}
           </div>
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
@@ -125,10 +92,22 @@ const SignUp = () => {
               type="email"
               name="email"
               id="email"
-              onChange={handleChange}
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "El correo electrónico es obligatorio"
+                },
+                pattern: {
+                  value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
+                  message: "El correo electrónico no tiene un formato válido.",
+                },
+              })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               placeholder="nombre@dominio.com"
             />
+            {errors.email && (
+              <span className="text-red-500 text-xs">{errors.email.message}</span>
+            )}
           </div>
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
@@ -138,11 +117,22 @@ const SignUp = () => {
               type="password"
               name="password"
               id="password"
-              onChange={handleChange}
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "La contraseña es obligatoria.",
+                },
+                pattern: {
+                  value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i,
+                  message: "La contraseña debe tener mínimo ocho caracteres, al menos una letra, un número y un carácter especial.",
+                },
+              })}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
-              required
             />
+            {errors.password && (
+              <span className="text-red-500 text-xs">{errors.password.message}</span>
+            )}
           </div>
           <button
             type="submit"

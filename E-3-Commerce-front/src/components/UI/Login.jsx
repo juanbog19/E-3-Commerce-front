@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import { loginUser, setError, signInGoogle } from "../../store/userSlice";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
@@ -8,32 +9,32 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
 
   const { loading, errorLogin } = useSelector((state) => state.user);
 
-  const [user, setUser] = useState({
-    email: '',
-    password: ''
-  })
+  // const [user, setUser] = useState({
+  //   email: '',
+  //   password: ''
+  // })
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target
 
-    setUser(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
+  //   setUser(prevState => ({
+  //     ...prevState,
+  //     [name]: value
+  //   }))
+  // }
 
-  const handleLogin = (event) => {
-    event.preventDefault()
-
-    dispatch(loginUser(user)).then((result) => {
+  const handleLogin = (data) => {
+    dispatch(loginUser(data)).then((result) => {
       if (result.payload) {
-        setUser({
-          email: '',
-          password: ''
-        })
         Swal.fire({
           icon: "success",
           title: "Bienvenido/a",
@@ -46,8 +47,8 @@ const Login = () => {
         }, 1700);
         dispatch(setError(null));
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     dispatch(setError(null));
@@ -97,10 +98,12 @@ const Login = () => {
     )
   }, [])
 
+  //console.log(user)
+
   return (
     <div className="flex justify-center mt-20">
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
-        <form className="space-y-6" onSubmit={handleLogin}>
+        <form className="space-y-6" onSubmit={handleSubmit(handleLogin)}>
           <h5 className="flex justify-center text-xl font-medium text-gray-900 dark:text-black">
             Bienvenido/a de nuevo
           </h5>
@@ -116,11 +119,22 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
-              onChange={handleChange}
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "El correo electrónico es obligatorio"
+                },
+                pattern: {
+                  value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
+                  message: "El correo electrónico no tiene un formato válido.",
+                },
+              })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
               placeholder="nombre@dominio.com"
-              required
             />
+            {errors.email && (
+              <p className="text-red-500 text-xs">{errors.email.message}</p>
+            )}
           </div>
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
@@ -130,11 +144,23 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
-              onChange={handleChange}
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "La contraseña es obligatoria.",
+                },
+                pattern: {
+                  value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i,
+                  message: "La contraseña debe tener mínimo ocho caracteres, al menos una letra, un número y un carácter especial.",
+                },
+              })}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400 dark:text-black"
-              required
+
             />
+            {errors.password && (
+              <p className="text-red-500 text-xs">{errors.password.message}</p>
+            )}
           </div>
           <button
             type="submit"
