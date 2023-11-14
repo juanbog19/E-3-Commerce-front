@@ -2,32 +2,27 @@ import { useEffect } from "react";
 import axiosURL from '../../tools/axiosInstance';
 import { useState } from "react";
 
-const OrderList = () => {
 
-    const [order, setOrder] = useState([]);
+const OrderList = ({ id,date,brand,model,amount,order }) => {  
 
-    useEffect(() => {
-      axiosURL.get("/orders/")
-        .then((response) => {
-          setOrder(response.data); 
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }, []);
+  // console.log('estas son las ordenes del usuario en orderlist',order);
 
 
   return (
     <li className="py-2 mt-20 border-b">
-      <h4 className="text-lg font-bold">Order #{order.id}</h4>
-      <p className="text-gray-600">Date: {order.date}</p>
+      {/* <h4 className="text-lg font-bold">Order #{order.id}</h4>
+      <p className="text-gray-600">Date: {order.date}</p> */}
       <ul>
-        {order.map((item) => (
-          <li key={item.id} className="flex justify-between">
-            <span>{item.productName}</span>
-            <span>{item.quantity} x ${item.price}</span>
+        
+          <li key={id} className="flex justify-between">
+            <h1 className="text-lg font-bold">Order #{order}</h1>
+            <h4 className="text-lg font-bold">N° de órden: {id}</h4>
+            <p className="text-gray-600">Date: {date}</p>
+            <span>{brand} </span>
+            <span>{model}</span>
+            {/* usar el quant aca totalPrice = quant * amount y renderizar el total price*/}
+            <span> ${amount}</span>
           </li>
-        ))}
       </ul>
     </li>
   );

@@ -78,6 +78,7 @@ const userSlice = createSlice({
     loggedin: false,
     errorLogin: null,
     token: null,
+    hasPurchased:false,
   },
   reducers: {
     setToken(state, action) {
@@ -89,6 +90,10 @@ const userSlice = createSlice({
     logout(state){
       state.loggedin = false;
       state.user = null;
+      state.hasPurchased = false;
+    },
+    setHasPurchased(state, action) {
+      state.hasPurchased = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -173,7 +178,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setToken, setError } = userSlice.actions;
+export const { setToken, setError , setHasPurchased} = userSlice.actions;
 
 export const authLogout = userSlice.actions.logout;
 

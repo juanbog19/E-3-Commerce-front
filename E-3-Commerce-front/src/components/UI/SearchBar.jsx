@@ -27,11 +27,9 @@ const SearchBar = () => {
     if (!searchInput) {
       Swal.fire('Por favor digita algo antes de buscar.', "Click para continuar", "info");      
     } else {
-     // dispatch(searchProductsByModel(model));
-     dispatch(searchProducts(searchInput));
-     dispatch(resetPage())
-     setSearchInput('');     
-    //  setModel('');
+      dispatch(searchProductsByModel(model));
+      dispatch(resetPage())
+      setModel('');
     }
   };
 
@@ -51,7 +49,7 @@ const SearchBar = () => {
   return (
     <div className="flex justify-center mt-20 border-black">
       <div>
-        <input value={searchInput} onChange={handleInputChange} onKeyPress={handleKeyPress} type='search' placeholder='Buscar un producto...' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block p-2.5 dark:bg-gray-200 dark:border-gray-400 dark:placeholder-gray-400 mt-5 mr-5" />
+        <input value={model} onChange={handleInputChange} onKeyPress={handleKeyPress} type='search' placeholder='Buscar un producto...' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block p-2.5 dark:bg-gray-200 dark:border-gray-400 dark:placeholder-gray-400 mt-5 mr-5" />
       </div>
 
       <div>
