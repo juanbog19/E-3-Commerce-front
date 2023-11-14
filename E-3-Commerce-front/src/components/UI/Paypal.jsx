@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { postOrder } from '../../store/orderSlice';
+import Swal from 'sweetalert2';
 
 const PayPalButton = window.paypal.Buttons.driver('react', { React, ReactDOM });
 
 export default function PaypalPayment({ total, clearStore }) {
 
-  
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
@@ -31,9 +33,10 @@ export default function PaypalPayment({ total, clearStore }) {
   };
 
   function handlePay() {
-    console.log('el pago ha sido exitoso');
+    Swal.fire('El pago ha sido exitoso', 'Click para continuar', 'success');
+    dispatch(postOrder({}))
     clearStore();
-    navigate('/');                           //deberia redirigir a las órdenes del user
+    navigate('/tienda');                           //deberia redirigir a las órdenes del user
   }
 
   return (

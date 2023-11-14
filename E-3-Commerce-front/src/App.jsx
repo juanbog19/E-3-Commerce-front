@@ -23,7 +23,6 @@ import { useSelector } from "react-redux";
 import NotAllowed from "./components/dashboard/NotAllowed";
 import NotFound from "./components/pages/NotFound";
 
-
 const App = () => {
   
   const location = useLocation();

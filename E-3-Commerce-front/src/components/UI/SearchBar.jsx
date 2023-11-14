@@ -1,27 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { searchProductsByModel, getAllProducts } from '../../store/productsSlice';
+import { getAllProducts, searchProducts } from '../../store/productsSlice';
 import { FaRedo, FaSearch } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { resetPage } from "../../store/paginationSlice";
 
 const SearchBar = () => {
 
-  const [model, setModel] = useState('');
+  //const [model, setModel] = useState('');
+  const [searchInput, setSearchInput] = useState('');
 
   const { error } = useSelector((state)=>state.products.products);
   console.log(error);
 
 
   const dispatch = useDispatch();
-  console.log(model);
+  //console.log(model);
 
   const handleInputChange = (event) => {
-    setModel(event.target.value);
-  };
+  //  setModel(event.target.value);
+  setSearchInput(event.target.value);  
+};
 
   const handleOnClick = () => {
-    if (!model) {
+    //if (!model) {
+    if (!searchInput) {
       Swal.fire('Por favor digita algo antes de buscar.', "Click para continuar", "info");      
     } else {
       dispatch(searchProductsByModel(model));
@@ -31,7 +34,8 @@ const SearchBar = () => {
   };
 
   const handlerReset = () => {
-    setModel('');
+  //  setModel('');
+  setSearchInput('');
     dispatch(getAllProducts())
   };
 

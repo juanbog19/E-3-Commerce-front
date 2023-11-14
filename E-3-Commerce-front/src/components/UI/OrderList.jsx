@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import axiosURL from '../../tools/axiosInstance';
 import { useState } from "react";
 
+
 const OrderList = ({ id,date,brand,model,amount,order }) => {  
 
   // console.log('estas son las ordenes del usuario en orderlist',order);
@@ -22,7 +23,6 @@ const OrderList = ({ id,date,brand,model,amount,order }) => {
             {/* usar el quant aca totalPrice = quant * amount y renderizar el total price*/}
             <span> ${amount}</span>
           </li>
-        
       </ul>
     </li>
   );
