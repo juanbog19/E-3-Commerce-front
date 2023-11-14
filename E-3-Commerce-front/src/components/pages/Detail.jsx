@@ -7,7 +7,7 @@ import Spinner from "../UI/Spinner";
 
 const Detail = () => {
 
-  const loading = useSelector((state) => state.products.loading)
+  const loading = useSelector((state) => state.products?.loading)
   const {id} =useParams();
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ const Detail = () => {
     dispatch(getProductsId(id))
   },[dispatch, id])
 
-  const product = useSelector((state)=>state.products.product);
+  const product = useSelector((state)=>state.products?.product);
   // console.log('aqui mi product', product)
 
   return (
