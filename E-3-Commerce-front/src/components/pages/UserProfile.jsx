@@ -5,8 +5,8 @@ import axiosURL from '../../tools/axiosInstance';
 import OrderList from '../UI/OrderList';
 
 const UserProfile = () => {
-  const user = useSelector((state) => state.user.user);
-  const userId = user.id
+  const user = useSelector((state) => state.user?.user);
+  const userId = user?.id
   const [order, setOrder] = useState([]);
   //console.log(order);
 
