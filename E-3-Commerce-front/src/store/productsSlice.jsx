@@ -35,6 +35,24 @@ export const searchProductsByModel = createAsyncThunk(
     }
   );
 
+  export const searchProducts = createAsyncThunk(
+    "products/searchProducts",
+    async (searchInput) => {
+      try {
+        const response = await axiosURL.get(`search?search=${searchInput}`, {
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+        return response.data;
+      } catch (error) {
+        console.error("Error en la solicitud:", error); // agregado
+        throw new Error(error.response?.data?.message || "Error desconocido");
+        //throw new Error(error.response.data.message);
+      }
+    }
+  );
+
 export const getProductsId = createAsyncThunk(
   "products/getProductsId",
   async (id) =>{
@@ -161,6 +179,17 @@ const productSlice = createSlice({
       .addCase(deleteProducts.fulfilled, (state, action) => {
         const productId = action.payload;
         state.products = state.products.filter((product) => product.id !== productId);
+      })
+      .addCase(searchProducts.pending, (state) => {
+        state.loading = "loading";
+      })
+      .addCase(searchProducts.fulfilled, (state, action) => {
+        state.loading = "succeeded";
+        state.products = action.payload;
+      })
+      .addCase(searchProducts.rejected, (state, action) => {
+        state.loading = "failed";
+        state.error = action.error.message;
       });
   },
 });

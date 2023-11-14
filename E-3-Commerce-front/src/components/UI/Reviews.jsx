@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import { RatingInput } from './RatingInput';
 import { FaStar } from 'react-icons/fa';
 
-
 const Review = () => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews.reviews);
@@ -34,6 +33,7 @@ const Review = () => {
       Swal.fire('Debes realizar una compra antes de dejar tu experiencia', 'Click para continuar', 'error');
       return;
     }
+
     try {
       await dispatch(postReview(newReviewData));
       dispatch(getReviews());
@@ -100,7 +100,6 @@ const Review = () => {
       ))}
     </div>
   </div>
-
   );
 };
 
