@@ -92,14 +92,14 @@ const Home = () => {
       <div >
         <div>
           <SearchBar />
-          <div className="absolute right-4 top-4">
+          {/* <div className="absolute right-4 top-4">
             <button
               onClick={toggleDarkMode}
               className="p-2 text-primary hover:text-secondary"
             >
               {isDarkMode ? <button className="text-purple-500 text-2xl"><FaSun /></button> : <button className="text-purple-500 text-xl"><FaMoon /></button>}
             </button>
-          </div>
+          </div> */}
         </div>
 
         <div className='flex'>
