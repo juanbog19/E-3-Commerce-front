@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import axiosURL from '../../tools/axiosInstance';
-import { useState } from "react";
 
 
 const OrderList = ({ id,date,brand,model,amount,order }) => {  
@@ -9,23 +6,25 @@ const OrderList = ({ id,date,brand,model,amount,order }) => {
 
 
   return (
-    <li className="py-2 mt-20 border-b">
-      {/* <h4 className="text-lg font-bold">Order #{order.id}</h4>
-      <p className="text-gray-600">Date: {order.date}</p> */}
+    <li className="py-4 border-b">
       <ul>
-        
-          <li key={id} className="flex justify-between">
+        <li key={id} className="flex items-center justify-between p-4 bg-gray-100 border border-black">
+          <div className="flex flex-col">
             <h1 className="text-lg font-bold">Order #{order}</h1>
             <h4 className="text-lg font-bold">N° de órden: {id}</h4>
             <p className="text-gray-600">Date: {date}</p>
+          </div>
+          <div className="flex flex-col">
             <span>{brand} </span>
             <span>{model}</span>
-            {/* usar el quant aca totalPrice = quant * amount y renderizar el total price*/}
-            <span> ${amount}</span>
-          </li>
+            <span className="text-lg font-bold">${amount}</span>
+          </div>
+        </li>
       </ul>
     </li>
   );
 };
 
 export default OrderList;
+
+
