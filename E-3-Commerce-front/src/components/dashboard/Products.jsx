@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import { Link } from "react-router-dom";
 import axiosURL from "../../tools/axiosInstance";
@@ -20,23 +20,16 @@ export default function Products() {
     fetchData();
   }, []);
 
-  const handleDelete = async (itemId) => {
+  const handleChange = async (id) => {
     try {
-      await axiosURL.delete(`/products/${itemId}`);
-      alert("¡Eliminado con éxito!");
-      //setBeers((prevBeers) => prevBeers.filter((beer) => beer.id !== itemId));
-    } catch (error) {
-      console.error("Error al eliminar el producto", error);
-    }
-  };
+      await axiosURL.put(`/products/status/${id}`);
 
-  const handleRestore = async (itemId) => {
-    try {
-      await axiosURL.put(`/products/restore/${itemId}`);
-      alert("¡Restaurado con éxito!");
-      //setBeers((prevBeers) => prevBeers.filter((beer) => beer.id !== itemId));
+      const updatedProducts = products.map(product =>
+        product.id === id ? { ...product, deleted: !product.deleted } : product
+      );
+      setProducts(updatedProducts);
     } catch (error) {
-      console.error("Error al eliminar el producto", error);
+      console.log('Error al actualizar el estado del producto: ', error);
     }
   };
 
@@ -83,23 +76,13 @@ export default function Products() {
                 </div>
               </div>
               <div className="flex items-center justify-end flex-shrink-0 w-1/6">
+                <button onClick={() => handleChange(product.id)} className={`text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full ${product.deleted ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>{product.deleted ? 'Borrador' : 'Publicado'}</button>
                 <Link to={`/admin/products/edit/${product.id}`}>
-                  <button className="mr-2 text-white bg-purple-500 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-purple-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                    <FaMarker /> Editar
+                  <button className="flex items-center mr-2 text-white bg-purple-500 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-purple-100 font-medium rounded-lg text-sm px-5 py-2.5">
+                    <FaMarker className="mr-2" /> Editar
                   </button>
                 </Link>
-                <button
-                  className="text-white bg-purple-500 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-purple-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                  onClick={() => handleDelete(product.id)}
-                >
-                  <FaTrashAlt /> Borrar
-                </button>
-                <button
-                  className="text-white bg-purple-500 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-purple-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                  onClick={() => handleRestore(product.id)}
-                >
-                  <FaTrashRestoreAlt /> Restaurar
-                </button>
+
               </div>
             </li>
           ))}

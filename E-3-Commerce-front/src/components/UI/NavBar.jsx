@@ -1,10 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import PhonePulse from "../../assets/PhonePulse.jpg";
 import { FaShoppingCart } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import CardUser from './CardUser';
 
 const NavBar = () => {
+
+  const location = useLocation();
+  const isTiendaActive = location.pathname === '/tienda';
 
   const isLoggedin = useSelector(state => state.user.loggedin)
   
@@ -17,7 +20,7 @@ const NavBar = () => {
     <>
       <nav className="fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-200 ">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-          <Link className="flex items-center" to="/">
+          <Link className="flex items-center" to="/tienda">
             <img src={PhonePulse} className="h-8 mr-3" alt="PhonePulse" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">PhonePulse</span>
           </Link>
@@ -31,18 +34,46 @@ const NavBar = () => {
             </div>
           </div>
           <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-            <ul className="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
+          <ul className="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
               <li>
-                <Link className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0 md:dark:hover:text-purple-500 dark:text-gray dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" to="/">Inicio</Link>
+                <Link
+                  className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 md:dark:hover:text-purple-500 dark:text-gray dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
+                    location.pathname === '/' ? 'text-purple-500' : ''
+                  }`}
+                  to="/"
+                >
+                  Inicio
+                </Link>
               </li>
               <li>
-                <Link className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0 md:dark:hover:text-purple-500 dark:text-gray dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" to="/tienda">Tienda</Link>
+                <Link
+                  className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 md:dark:hover:text-purple-500 dark:text-gray dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
+                    isTiendaActive ? 'text-purple-500' : ''
+                  }`}
+                  to="/tienda"
+                >
+                  Tienda
+                </Link>
               </li>
               <li>
-                <Link className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0 md:dark:hover:text-purple-500 dark:text-gray dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" to="/about">Acerca de</Link>
+                <Link
+                  className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 md:dark:hover:text-purple-500 dark:text-gray dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
+                    location.pathname === '/about' ? 'text-purple-500' : ''
+                  }`}
+                  to="/about"
+                >
+                  Acerca de
+                </Link>
               </li>
               <li>
-                <Link className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0 md:dark:hover:text-purple-500 dark:text-gray dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" to="/contacto">Contáctanos</Link>
+                <Link
+                  className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 md:dark:hover:text-purple-500 dark:text-gray dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
+                    location.pathname === '/contacto' ? 'text-purple-500' : ''
+                  }`}
+                  to="/contacto"
+                >
+                  Contáctanos
+                </Link>
               </li>
             </ul>
           </div>

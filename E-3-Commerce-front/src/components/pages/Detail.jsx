@@ -4,19 +4,36 @@ import { useEffect } from "react";
 import {getProductsId} from '../../store/productsSlice';
 import { FaArrowLeft,FaMicrochip,FaMobileAlt,FaSdCard,FaBatteryFull,FaSimCard } from "react-icons/fa";
 import Spinner from "../UI/Spinner";
+import { addItem } from '../../store/cartSlice';
+import Swal from "sweetalert2";
 
 const Detail = () => {
 
-  const loading = useSelector((state) => state.products.loading)
+  const loading = useSelector((state) => state.products?.loading);
   const {id} =useParams();
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(getProductsId(id))
-  },[dispatch, id])
+  },[dispatch, id]);
 
-  const product = useSelector((state)=>state.products.product);
-  // console.log('aqui mi product', product)
+  const product = useSelector((state)=>state.products?.product);
+  console.log(product);
+
+    
+  const add = () => {
+    if (product) {
+      const item = {
+        id: product.id,
+        image: product.image,
+        brand: product.brand.name,
+        model: product.model,
+        price: product.price,
+      };
+      dispatch(addItem(item));
+      Swal.fire("Producto agregado", "Click para continuar", "success");
+    }
+  };
 
   return (
     <div className="flex justify-center mt-20 ml-4 mr-4 space-x-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
@@ -41,7 +58,7 @@ const Detail = () => {
           <div className="mt-5 mb-5 text-xl ">
             <p>{product.special_features}</p>
           </div>  
-          <div className="flex justify-between border-b border-secondary">
+          <div className="flex justify-between border-b border-secondary">            
             <div className="flex">
               <FaSdCard/>RAM
             </div>
@@ -79,6 +96,11 @@ const Detail = () => {
     </div>  
       )}
 
+      <div>
+        <button onClick={add} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+        >Añadir al carrito</button>
+      </div>
+
       <Link to='/tienda'>
         <button className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
         >
@@ -90,23 +112,3 @@ const Detail = () => {
 }
 
 export default Detail;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

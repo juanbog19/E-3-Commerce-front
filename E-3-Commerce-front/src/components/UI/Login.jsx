@@ -136,21 +136,6 @@ const Login = () => {
               required
             />
           </div>
-          <div className="flex items-start">
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="remember"
-                  type="checkbox"
-                  value=""
-                  className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-purple-300"
-                />
-              </div>
-              <label className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-700">
-                Mantener sesión activa
-              </label>
-            </div>
-          </div>
           <button
             type="submit"
             disabled={loading}
