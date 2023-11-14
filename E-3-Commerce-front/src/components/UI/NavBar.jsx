@@ -17,7 +17,7 @@ const NavBar = () => {
     <>
       <nav className="fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-200 ">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-          <Link className="flex items-center" to="/">
+          <Link className="flex items-center" to="/tienda">
             <img src={PhonePulse} className="h-8 mr-3" alt="PhonePulse" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">PhonePulse</span>
           </Link>
