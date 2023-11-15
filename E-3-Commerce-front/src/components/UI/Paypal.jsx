@@ -43,7 +43,7 @@ export default function PaypalPayment({ total, clearStore }) {
             order: transactionId,
             amount: total,
             id_user: loggedInUser.id,
-            id_product: selectedProduct.map(item => item.id),
+            id_products: selectedProduct.map(item => item.id),
           })
         );
 
