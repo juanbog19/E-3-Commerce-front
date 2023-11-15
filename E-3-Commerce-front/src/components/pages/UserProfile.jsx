@@ -1,56 +1,59 @@
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import axiosURL from '../../tools/axiosInstance';
+import { getAllOrders } from '../../store/orderSlice';
 import OrderList from '../UI/OrderList';
 
 const UserProfile = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.user);
-  const userId = user?.id
-  const [order, setOrder] = useState([]);
-  //console.log(order);
+  const userId = user?.id;
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axiosURL.get(`/orders/user/${userId}`)
+    dispatch(getAllOrders())
+      .unwrap()
       .then((response) => {
-        console.log('estas son las ordenes del usuario en myprofile',response.data);
-        setOrder(response.data); 
+        const userOrders = response.filter(order => order.id_user === userId);
+        console.log(userOrders);
+        setOrders(userOrders);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
-  //const orders = useSelector((state) => state.user.orders);
+  }, [dispatch, userId]);
 
   return (
-    <div className="my-10 mt-20 border-collapse font-abril">
-      <h1 className="mb-3 text-2xl text-center uppercase">
-        Perfil Del Usuario
+    <div className="max-w-4xl mx-auto my-10 mt-20 border-collapse font-abril">
+      <h1 className="mb-6 text-3xl font-bold text-center uppercase">
+        Perfil del Usuario
       </h1>
-      <div className="mb-3 text-2xl text-gray-700 uppercase align-middle border border-black">
-        <h2 className="mx-3">
+      <div className="p-4 mb-6 bg-gray-100 border border-black rounded-md">
+        <h2 className="mb-2 text-xl font-semibold">
           Nombre: {user ? user.username : ''}
         </h2>
-        <h2 className="mx-3">
+        <h2 className="text-xl font-semibold">
           Email: {user ? user.email : ''}
         </h2>
       </div>
-      <ul className="border">
-        <h3 className="mb-3 text-2xl text-center text-gray-700 uppercase border border-black">
-          Order history
-          </h3>
-          {/* cuando este hecho el slice agregar una prop "quant" */}
-        {order.map((order,index) => (
-          <OrderList 
-          key={index} 
-          id={order.id}
-          date={order.date}
-          brand={order.product.brand.name}
-          model={order.model}
-          amount={order.amount}
-          order={order.order} />
-        ))}
+      <div className="overflow-hidden border rounded-md">
+        <h3 className="px-4 py-3 text-xl font-bold text-gray-700 bg-gray-100 border-b border-black">
+          Historial de Órdenes
+        </h3>
+        <ul>
+          {orders.map((order, index) => (
+            <OrderList
+              key={index}
+              id={order.id}
+              date={order.date}
+              brand={order.product.brand.name}
+              model={order.product.model}
+              amount={order.amount}
+              order={order.order}
+            />
+          ))}
         </ul>
+      </div>
     </div>
   );
 };
