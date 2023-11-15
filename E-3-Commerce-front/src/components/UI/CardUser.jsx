@@ -3,6 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { authLogout } from "../../store/userSlice";
+import { cleanOrders } from "../../store/orderSlice";
 
 export default function CardUser() {
 
@@ -40,6 +41,7 @@ export default function CardUser() {
 
   const logout = () => {
     dispatch(authLogout())
+    dispatch(cleanOrders())
   }
 
   const { user } = useSelector((state) => state.user);

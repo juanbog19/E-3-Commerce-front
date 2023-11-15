@@ -1,3 +1,5 @@
+import Footer from "./Footer";
+
 const AboutUs = () => {
     return (
         <section className="py-6 bg-secondary dark:text-primary-100 border-black border-y-8">
@@ -28,7 +30,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="http://www.linkedin.com/in/juan-boglione"
                   title="LinkedIn"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +45,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://github.com/juanbog19"
                   title="GitHub"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +77,7 @@ const AboutUs = () => {
   
                   href="https://www.linkedin.com/in/juansalva/"
                   title="LinkedIn"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +93,7 @@ const AboutUs = () => {
   
                   href="https://github.com/juan1ennon83"
                   title="GitHub"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +124,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://www.linkedin.com/in/wxmontalvo/"
                   title="https://www.linkedin.com/in/wxmontalvo/"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +139,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://github.com/xmontalvvo"
                   title="https://github.com/xmontalvvo"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +170,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="#"
                   title="LinkedIn"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +185,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://github.com/EmiCastro1997"
                   title="https://github.com/EmiCastro1997"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +215,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://www.linkedin.com/in/karinaromero-fullstack/"
                   title="https://www.linkedin.com/in/karinaromero-fullstack/"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -228,7 +230,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://github.com/KariRomero"
                   title="https://github.com/KariRomero"
-                  className="text-[#585552] hhover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -257,7 +259,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://www.linkedin.com/in/ruben-rodriguez-carrillo/" 
                   title="https://www.linkedin.com/in/ruben-rodriguez-carrillo/"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -272,7 +274,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://github.com/OmarCarrillo1121"
                   title="https://github.com/OmarCarrillo1121"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -302,7 +304,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://www.linkedin.com/in/bladimir-gerson-parra-bermudez/"
                   title="https://www.linkedin.com/in/bladimir-gerson-parra-bermudez/"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -317,7 +319,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://github.com/ipproyectosysoluciones"
                   title="https://github.com/ipproyectosysoluciones"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -348,7 +350,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://www.linkedin.com/in/mariana-vallejos-4b5b0327a/" 
                   title="https://www.linkedin.com/in/mariana-vallejos-4b5b0327a/"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -363,7 +365,7 @@ const AboutUs = () => {
                   rel="noopener noreferrer"
                   href="https://github.com/Mariana8819"
                   title="https://github.com/Mariana8819"
-                  className="text-[#585552] hover:text-[#cb5930]"
+                  className="text-[#585552] hover:text-purple-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -376,6 +378,7 @@ const AboutUs = () => {
                 </a>
               </div>
             </div>
+
           </div>
         </section>
     )

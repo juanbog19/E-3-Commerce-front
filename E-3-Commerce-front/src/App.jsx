@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 import NotAllowed from "./components/dashboard/NotAllowed";
 import NotFound from "./components/pages/NotFound";
 import Reviews from "./components/dashboard/Reviews";
+import ThankYouPage from "./components/pages/ThankYouPage";
 
 const App = () => {
   const location = useLocation();
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contacto" element={<ContactUs />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/thankYouPage" element={<ThankYouPage/>} />
         {/* Rutas administrativas */}
         {isAdmin ? (
           <>

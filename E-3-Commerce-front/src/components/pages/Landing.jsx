@@ -8,13 +8,16 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { getAllProducts } from '../../store/productsSlice';
 import Review from "../UI/Reviews";
+import { getAllOrders, getOrderById } from "../../store/orderSlice";
+import { getReviews } from "../../store/reviewSlice";
 
 
 const Landing =()=>{
 
     const dispatch = useDispatch();
     const { products } = useSelector((state) => state.products);
-   // console.log(products);
+    const user = useSelector((state) => state.user?.user);
+    const userId = user?.id;
 
     const renderProducts = (Array.isArray(products) ? products : []).slice(1,4);
     //console.log(renderProducts);
@@ -22,6 +25,14 @@ const Landing =()=>{
     useEffect(()=>{
         dispatch(getAllProducts());        
     }, []);
+
+    useEffect(() => {
+        dispatch(getOrderById(userId))
+    }, [])
+
+    useEffect(() => {
+        dispatch(getReviews())
+    }, [])
 
 
     return(
