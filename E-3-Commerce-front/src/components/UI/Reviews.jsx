@@ -52,37 +52,42 @@ const Review = () => {
 
   return (
     <div className="flex justify-center mt-20 border-black">
-      <div className="w-1/3 p-4">
-        <label className="block mb-2 text-lg font-bold">
-          Comentanos tu experiencia:
-          <input
-            type="text"
-            name="comment"
-            value={newReviewData.comment}
-            onChange={handleInputChange}
-            className="border p-2 w-full mb-4 focus:outline-none focus:border-purple-500"
-          />
-        </label>
-        <RatingInput rating={newReviewData.rating} handleInputChange={handleInputChange} />
-        {!validateOrders.length >= 1 ? <p>Realiza una compra para poder dar una review</p> : <button
-          className="w-full text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
-          onClick={handlePostReview}
-        >
-          Compartir
-        </button>}
+      {validateOrders.length >= 1 ? (
+        <div className="w-1/3 p-4">
+          <label className="block mb-2 text-lg font-bold">
+            Coméntanos tu experiencia:
+            <input
+              type="text"
+              name="comment"
+              value={newReviewData.comment}
+              onChange={handleInputChange}
+              className="border p-2 w-full mb-4 focus:outline-none focus:border-purple-500"
+            />
+          </label>
+          <RatingInput rating={newReviewData.rating} handleInputChange={handleInputChange} />
+          <p>Realiza una compra para poder dar una review</p>
+          {!newReviewData.comment && (
+            <p className="text-purple-500 text-lg mt-6 animate-pulse">
+              ¡Ayúdanos a mejorar tu experiencia dejándonos tu comentario!
+            </p>
+          )}
+          {newReviewData.comment && (
+            <p className="text-green-500 text-sm mt-4">
+              ¡Gracias por compartir tu experiencia!
+            </p>
+          )}
+          <button
+            className="w-full text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
+            onClick={handlePostReview}
+          >
+            Compartir
+          </button>
+        </div>
+      ) : (
+        ''
+      )}
 
-        {!newReviewData.comment && (
-          <p className="text-purple-500 text-lg mt-6 animate-pulse">
-            ¡Ayúdanos a mejorar tu experiencia dejándonos tu comentario!
-          </p>
-        )}
-        {newReviewData.comment && (
-          <p className="text-green-500 text-sm mt-4">
-            ¡Gracias por compartir tu experiencia!
-          </p>
-        )}
-      </div>
-      <div className="w-2/3 p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 rounded-lg bg-purple-200">
+      <div className="mb-10 w-2/3 p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 rounded-lg bg-purple-200">
         {reviews.map((review) => (
           <div
             key={review.id}
@@ -103,6 +108,7 @@ const Review = () => {
           </div>
         ))}
       </div>
+
     </div>
   );
 };
