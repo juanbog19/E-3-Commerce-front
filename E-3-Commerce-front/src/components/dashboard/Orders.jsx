@@ -51,7 +51,7 @@ export default function Orders() {
                                     <td className="px-6 py-4">{order.amount} USD</td>
                                     <td className="px-6 py-4">{formatDateString(order.date)}</td>
                                     <td className="px-6 py-4">{order.user.username}</td>
-                                    <td className="px-6 py-4">{order.product.brand.name} {order.product.model}, {order.product.memory}RAM-{order.product.storage}GB</td>
+                                    <td className="px-6 py-4">{order.products.map(product => product.brand.name)} {order.products.map(product => product.model)}, {order.products.map(product => product.memory)}RAM-{order.products.map(product => product.storage)}GB</td>
                                 </tr>
                             ))}
                         </tbody>

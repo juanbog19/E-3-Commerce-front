@@ -38,6 +38,9 @@ export default function Reviews() {
     }
   };
 
+  //console.log(reviews.map(review => review.))
+  console.log(':::::::::',reviews.map(review => review.user.username))
+
   return (
     <div className="ml-64">
       <Sidebar />
@@ -50,13 +53,7 @@ export default function Reviews() {
             <thead className="text-xs text-gray-700 uppercase bg-gray-200">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Orden
-                </th>
-                <th scope="col" className="px-6 py-3">
                   Usuario
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Producto
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Comentario
@@ -65,24 +62,30 @@ export default function Reviews() {
                   Rating
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Creado
+                  Fecha
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Estado
                 </th>
+                {/* <th scope="col" className="px-6 py-3">
+                  Creado
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Estado
+                </th> */}
               </tr>
             </thead>
             <tbody>
               {reviews.map((review) => (
                 <tr className="bg-white border-b" key={review.id}>
-                  <th
+                  {/* <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                   >
                     {review.order.order}
-                  </th>
+                  </th> */}
                   <td className="px-6 py-4">{review.user.username}</td>
-                  <td className="px-6 py-4">{review.product.model}</td>
+                  {/* <td className="px-6 py-4">{review.product.model}</td> */}
                   <td className="px-6 py-4">{review.comment}</td>
                   <td className="px-6 py-4">{review.rating}</td>
                   {/* <td className="px-6 py-4">
