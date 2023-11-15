@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { getAllProducts } from '../../store/productsSlice';
 import Review from "../UI/Reviews";
 import { getAllOrders, getOrderById } from "../../store/orderSlice";
+import { getReviews } from "../../store/reviewSlice";
 
 
 const Landing =()=>{
@@ -27,6 +28,10 @@ const Landing =()=>{
 
     useEffect(() => {
         dispatch(getOrderById(userId))
+    }, [])
+
+    useEffect(() => {
+        dispatch(getReviews())
     }, [])
 
 
