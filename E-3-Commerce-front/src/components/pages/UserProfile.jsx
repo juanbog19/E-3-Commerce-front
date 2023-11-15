@@ -46,10 +46,11 @@ const UserProfile = () => {
               key={index}
               id={order.id}
               date={order.date}
-              brand={order.product.brand.name}
-              model={order.product.model}
+              brand={order.products.map(product => product.brand.name)}
+              model={order.products.map(product => product.model)}
               amount={order.amount}
               order={order.order}
+              quant={order.quant}
             />
           ))}
         </ul>
