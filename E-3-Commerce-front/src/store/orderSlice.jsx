@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosURL from "../tools/axiosInstance";
-import { setHasPurchased } from "./userSlice";
+
 
 
 
@@ -32,7 +32,11 @@ export const postOrder = createAsyncThunk(
     "orders/postOrder",
     async ({ order, amount, id_user, id_product }) => {
       try {
-        const response = await axiosURL.post('/orders', { order, amount, id_user, id_product }); 
+        const response = await axiosURL.post('/orders', { order, amount, id_user, id_product },{
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
         return response.data;
       } catch (error) {
         throw new Error(error.response.data.message);
@@ -76,15 +80,6 @@ const orderSlice = createSlice({
     error: null,
   },
   reducers: {
-    setLoggedInUser: (state, action) => {
-        state.loggedin = action.payload;
-      },
-      setUsers: (state, action) => {
-        state.users = action.payload;
-      },
-      setHasPurchased: (state, action) => {
-        state.hasPurchased = action.payload;
-      },
   },
   extraReducers: (builder) => {
     builder
@@ -112,15 +107,14 @@ const orderSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(postOrder.pending, (state) => {
-        state.status = "loading";
+        state.loading = "loading";
       })
       .addCase(postOrder.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.orders.push(action.payload);
-        dispatch(setHasPurchased(true));
       })
       .addCase(postOrder.rejected, (state, action) => {
-        state.status = "failed";
+        state.loading = "failed";
         state.error = action.error.message;
       })
       .addCase(editOrder.pending, (state) => {
