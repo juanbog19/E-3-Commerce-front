@@ -30,7 +30,7 @@ export default function PaypalPayment({ total, clearStore }) {
     });
   };
 
-  //console.log('VERIFICAR:::::: ',selectedProduct)
+  //console.log('VERIFICAR:::::: ',selectedProduct.map(item => item.id))
 
   const onApprove = async (data, actions) => {
     try {
@@ -43,7 +43,7 @@ export default function PaypalPayment({ total, clearStore }) {
             order: transactionId,
             amount: total,
             id_user: loggedInUser.id,
-            id_product: selectedProduct.id,
+            id_product: selectedProduct.map(item => item.id),
           })
         );
 
