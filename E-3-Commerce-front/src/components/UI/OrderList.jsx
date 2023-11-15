@@ -1,7 +1,8 @@
 const OrderList = ({ id, date, brand, model, amount, order, quant }) => {
 
 
-  
+  console.log(model)
+
   return (
     <li className="py-4 border-b">
       <ul>
@@ -12,9 +13,16 @@ const OrderList = ({ id, date, brand, model, amount, order, quant }) => {
             <p className="text-xs text-gray-500">Fecha de compra: {date}</p>
           </div>
           <div className="flex flex-col items-end">
-            <span className="text-sm">{brand} </span>
-            <span className="text-sm">{model} </span>
-            <span className="mt-2 text-lg font-bold">${amount} </span>
+            {brand.length === model.length && brand.length > 0 && (
+              <div className="flex flex-wrap">
+                {brand.map((_, i) => (
+                  <div key={i} className="text-sm">
+                    {brand[i]} - {model[i]}
+                  </div>
+                ))}
+              </div>
+            )}
+            <span className="mt-2 text-lg font-bold">${amount}</span>
           </div>
         </li>
       </ul>
