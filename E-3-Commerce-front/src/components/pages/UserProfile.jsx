@@ -24,7 +24,7 @@ const UserProfile = () => {
   }, [dispatch, userId]);
 
   return (
-    <div className="max-w-4xl mx-auto my-10 mt-20 border-collapse font-abril">
+    <div className="max-w-4xl mx-auto my-10 mt-20 border-collapse">
       <h1 className="mb-6 text-3xl font-bold text-center uppercase">
         Perfil del Usuario
       </h1>

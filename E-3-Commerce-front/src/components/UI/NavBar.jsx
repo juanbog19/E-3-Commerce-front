@@ -18,7 +18,7 @@ const NavBar = () => {
   
   return (
     <>
-      <nav className="fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-200 ">
+      <nav className="fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-500">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
           <Link className="flex items-center" to="/tienda">
             <img src={PhonePulse} className="h-8 mr-3" alt="PhonePulse" />
