@@ -36,14 +36,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/tienda" element={<Home />} />
-        <Route path="/myProfile" element={<UserProfile />} />
+        <Route path="/myProfile" element={isLoggedin ? <UserProfile /> : <NotFound /> } />
         <Route path="/orders" element={<OrderList />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/login" element={isLoggedin ? <NotFound /> : <Login />} />
-        <Route
-          path="/signup"
-          element={isLoggedin ? <NotFound /> : <SignUp />}
-        />
+        <Route path="/signup" element={isLoggedin ? <NotFound /> : <SignUp />} />
         <Route path="/about" element={<About />} />
         <Route path="/contacto" element={<ContactUs />} />
         <Route path="/checkout" element={<Checkout />} />
@@ -70,6 +67,7 @@ const App = () => {
         ) : (
           <Route path="/admin/*" element={<NotAllowed />} />
         )}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

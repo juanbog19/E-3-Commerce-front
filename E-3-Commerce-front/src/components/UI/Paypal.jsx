@@ -2,17 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import { postOrder } from '../../store/orderSlice';
+import { setHasPurchased } from '../../store/userSlice'; // Ajusta la ruta correcta
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 const PayPalButton = window.paypal.Buttons.driver('react', { React, ReactDOM });
 
 export default function PaypalPayment({ total, clearStore }) {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const loggedInUser = useSelector((state) => state.user.user);
+  const selectedProduct = useSelector((state) => state.cart.items);
+  const isLoggedIn = useSelector((state) => state.user.loggedin);
 
   const createOrder = (data, actions) => {
     return actions.order.create({
@@ -20,7 +22,7 @@ export default function PaypalPayment({ total, clearStore }) {
         {
           amount: {
             currency_code: 'USD',
-            value: total,             //props.price para que se actualice al price correspondiente
+            value: total,
           },
         },
       ],
@@ -28,16 +30,42 @@ export default function PaypalPayment({ total, clearStore }) {
     });
   };
 
-  const onApprove = (data, actions) => {
-    return actions.order.capture(handlePay());
-  };
+  //console.log('VERIFICAR:::::: ',selectedProduct.map(item => item.id))
 
-  function handlePay() {
-    Swal.fire('El pago ha sido exitoso', 'Click para continuar', 'success');
-    dispatch(postOrder({}))
-    clearStore();
-    navigate('/tienda');                           //deberia redirigir a las órdenes del user
-  }
+  const onApprove = async (data, actions) => {
+    try {
+      if (isLoggedIn && loggedInUser && selectedProduct) {
+        const orderResponse = await actions.order.capture();
+        const { id: transactionId } = orderResponse;
+
+        dispatch(
+          postOrder({
+            order: transactionId,
+            amount: total,
+            id_user: loggedInUser.id,
+            id_product: selectedProduct.map(item => item.id),
+          })
+        );
+
+        dispatch(setHasPurchased(true)); 
+
+        Swal.fire('El pago ha sido exitoso', 'Click para continuar', 'success');
+        clearStore();
+        navigate('/myProfile');
+      } else {
+        //console.log(error)
+        Swal.fire('Usuario no autenticado o producto no seleccionado', 'Click para continuar', 'error');
+      }
+    } catch (error) {
+      console.error('Error al capturar la orden:', error);
+  
+      // Muestra el error específico en la consola del navegador
+      console.error('Error específico:', error);
+  
+      // Muestra un mensaje de error detallado al usuario
+      Swal.fire(`Hubo un error al procesar el pago: ${error.message}`, 'Click para continuar', 'error');
+   }
+  };
 
   return (
     <center>

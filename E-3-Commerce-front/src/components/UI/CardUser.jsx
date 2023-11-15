@@ -68,7 +68,7 @@ export default function CardUser() {
           </li> */}
         </ul>
         <div className="py-1">
-          <Link onClick={logout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cerrar Sesión</Link>
+          <Link onClick={logout} to="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cerrar Sesión</Link>
         </div>
       </div>
     </div>

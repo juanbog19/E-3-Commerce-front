@@ -83,6 +83,7 @@ const userSlice = createSlice({
   reducers: {
     setToken(state, action) {
       state.token = action.payload;
+      state.loggedin=true;
     },
     setError(state, action) {
       state.errorLogin = action.payload;
