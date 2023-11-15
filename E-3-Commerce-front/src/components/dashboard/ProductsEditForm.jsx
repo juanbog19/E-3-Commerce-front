@@ -4,11 +4,20 @@ import UploadWidget from "../UI/UploadWidget";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axiosURL from "../../tools/axiosInstance";
+import { useForm } from "react-hook-form";
 
 export default function ProductsEditForm() {
   const { id } = useParams();
+  console.log(id);
   const navigate = useNavigate();
   const { brands } = useSelector((state) => state.brands);
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     const fetchBrands = async () => {
@@ -16,7 +25,7 @@ export default function ProductsEditForm() {
         const resp = await axiosURL.get(`brands`);
         const responseData = resp.data || {};
         setBrandsNames(responseData);
-        console.log(brandsNames);
+        //console.log(brandsNames);
       } catch (error) {
         console.log(error);
       }
@@ -36,30 +45,30 @@ export default function ProductsEditForm() {
   };
 
   const [products, setProducts] = useState({
-    model: "",
-    image: "",
-    price: "",
-    memory: "",
-    storage: "",
-    cpu: "",
-    battery: "",
-    size: "",
-    special_features: "",
-    id_brand: "",
+    // model: "",
+    // image: "",
+    // price: "",
+    // memory: "",
+    // storage: "",
+    // cpu: "",
+    // battery: "",
+    // size: "",
+    // special_features: "",
+    // id_brand: "",
   });
 
-  const [newProduct, setNewProduct] = useState({
-    model: "",
-    image: "",
-    price: "",
-    memory: "",
-    storage: "",
-    cpu: "",
-    battery: "",
-    size: "",
-    special_features: "",
-    id_brand: "",
-  });
+  // const [newProduct, setNewProduct] = useState({
+  //   //   model: "",
+  //   //   image: "",
+  //   //   price: "",
+  //   //   memory: "",
+  //   //   storage: "",
+  //   //   cpu: "",
+  //   //   battery: "",
+  //   //   size: "",
+  //   //   special_features: "",
+  //   //   id_brand: "",
+  // });
 
   const [brandsNames, setBrandsNames] = useState([]);
 
@@ -68,8 +77,21 @@ export default function ProductsEditForm() {
       try {
         const resp = await axiosURL.get(`/products/${id}`);
         const responseData = resp.data || {};
-        setProducts(responseData);
-        setNewProduct(responseData);
+        console.log(responseData);
+        // setProducts(responseData);
+        // setNewProduct(responseData);
+        // console.log(products);
+        // console.log(newProduct);
+        setValue("image", responseData.image);
+        setValue("id_brand", responseData.brand.id);
+        setValue("model", responseData.model);
+        setValue("price", responseData.price);
+        setValue("memory", responseData.memory);
+        setValue("storage", responseData.storage);
+        setValue("cpu", responseData.cpu);
+        setValue("battery", responseData.battery);
+        setValue("size", responseData.size);
+        setValue("special_features", responseData.special_features);
       } catch (error) {
         console.log(error);
       }
@@ -77,42 +99,59 @@ export default function ProductsEditForm() {
     fetchData();
   }, [id]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
 
-    setNewProduct((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  //   setNewProduct((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
+
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleSetImageUrl = (url) => {
-    setNewProduct((prevState) => ({
-      ...prevState,
-      image: url,
-    }));
+    setImageUrl(url);
+    setValue("image", url);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // const handleSetImageUrl = (url) => {
+  //   setNewProduct((prevState) => ({
+  //     ...prevState,
+  //     image: url,
+  //   }));
+  // };
+
+  const onSubmit = async (data) => {
+    //event.preventDefault();
 
     try {
-      const response = await axiosURL.put(`/products/${id}`, newProduct);
+      const response = await axiosURL.put(`/products/${id}`, data);
 
       //console.log('Respuesta del servidor:', response);
 
-      setNewProduct({
-        model: "",
-        image: "",
-        price: "",
-        memory: "",
-        storage: "",
-        cpu: "",
-        battery: "",
-        size: "",
-        special_features: "",
-        id_brand: "",
-      });
+      // setNewProduct({
+      //   model: "",
+      //   image: "",
+      //   price: "",
+      //   memory: "",
+      //   storage: "",
+      //   cpu: "",
+      //   battery: "",
+      //   size: "",
+      //   special_features: "",
+      //   id_brand: "",
+      // });
+      setValue("image", "");
+      setValue("id_brand", "");
+      setValue("model", "");
+      setValue("price", "");
+      setValue("memory", "");
+      setValue("storage", "");
+      setValue("cpu", "");
+      setValue("battery", "");
+      setValue("size", "");
+      setValue("special_features", "");
 
       navigate("/admin/products");
     } catch (error) {
@@ -127,9 +166,9 @@ export default function ProductsEditForm() {
 
       <div className="flex justify-center ">
         <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8  dark:border-gray-300">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <h5 className="text-xl font-medium text-gray-900">
-              Crear un nuevo producto
+              Editar un producto
             </h5>
             <div>
               <label
@@ -140,18 +179,27 @@ export default function ProductsEditForm() {
               </label>
               <input
                 type="text"
-                name="image"
-                id="image"
-                key="image"
-                value={newProduct.image}
-                onChange={handleChange}
-                hidden
+                {...register("image", {
+                  required: {
+                    value: true,
+                    message: "Este campo es obligatorio.",
+                  },
+                })}
+                // name="image"
+                // id="image"
+                // key="image"
+                // value={newProduct.image}
+                // onChange={handleChange}
+                //hidden
               />
+              {errors.image && (
+                <p className="text-red-500 text-xs">{errors.image.message}</p>
+              )}
               <UploadWidget setImageUrlCallback={handleSetImageUrl} />
               <div className="flex justify-center">
-                {newProduct.image && (
+                {imageUrl && (
                   <img
-                    src={newProduct.image}
+                    src={imageUrl}
                     className="mt-3 w-14 h-14"
                     alt="New Brand Image"
                   />
@@ -167,9 +215,12 @@ export default function ProductsEditForm() {
               </label>
               <select
                 name="id_brand"
-                value={newProduct.id_brand}
+                {...register("id_brand", {
+                  required: "Este campo es obligatorio",
+                })}
+                // value={newProduct.id_brand}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
-                onChange={handleChange}
+                // onChange={handleChange}
               >
                 {brandsNames.map((brand) => (
                   <option key={brand.id} value={brand.id}>
@@ -177,6 +228,11 @@ export default function ProductsEditForm() {
                   </option>
                 ))}
               </select>
+              {errors.id_brand && (
+                <p className="text-red-500 text-xs">
+                  {errors.id_brand.message}
+                </p>
+              )}
             </div>
             <div>
               <label
@@ -187,15 +243,27 @@ export default function ProductsEditForm() {
               </label>
               <input
                 type="text"
+                {...register("model", {
+                  required: {
+                    value: true,
+                    message: "Este campo es obligatorio.",
+                  },
+                  pattern: {
+                    value: /^(?!\s*$).+/i,
+                    message: "El nombre debe ser uno valido.",
+                  },
+                })}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
                 placeholder="Ingresa el modelo del producto"
                 name="model"
                 id="model"
                 key="model"
-                value={newProduct.model}
-                onChange={handleChange}
-                required
+                // value={newProduct.model}
+                // onChange={handleChange}
               />
+              {errors.model && (
+                <p className="text-red-500 text-xs">{errors.model.message}</p>
+              )}
             </div>
             <div>
               <label
@@ -206,15 +274,28 @@ export default function ProductsEditForm() {
               </label>
               <input
                 type="text"
+                {...register("price", {
+                  required: {
+                    value: true,
+                    message: "Este campo es obligatorio.",
+                  },
+                  pattern: {
+                    value:
+                      /^(?:-(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))|(?:0|(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))))(?:.\d+|)$/,
+                    message: "Solo se admiten valores numericos.",
+                  },
+                })}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
                 placeholder="Ingresa el precio del producto"
                 name="price"
                 id="price"
                 key="price"
-                value={newProduct.price}
-                onChange={handleChange}
-                required
+                // value={newProduct.price}
+                // onChange={handleChange}
               />
+              {errors.price && (
+                <p className="text-red-500 text-xs">{errors.price.message}</p>
+              )}
             </div>
             <div>
               <label
@@ -225,15 +306,27 @@ export default function ProductsEditForm() {
               </label>
               <input
                 type="text"
+                {...register("memory", {
+                  required: {
+                    value: true,
+                    message: "Este campo es obligatorio.",
+                  },
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "Solo se admiten valores numericos.",
+                  },
+                })}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
                 placeholder="Ingresa la memoria del producto"
                 name="memory"
                 id="memory"
                 key="memory"
-                value={newProduct.memory}
-                onChange={handleChange}
-                required
+                // value={newProduct.memory}
+                // onChange={handleChange}
               />
+              {errors.memory && (
+                <p className="text-red-500 text-xs">{errors.memory.message}</p>
+              )}
             </div>
             <div>
               <label
@@ -244,15 +337,27 @@ export default function ProductsEditForm() {
               </label>
               <input
                 type="text"
+                {...register("storage", {
+                  required: {
+                    value: true,
+                    message: "Este campo es obligatorio.",
+                  },
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "Solo se admiten valores numericos.",
+                  },
+                })}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
                 placeholder="Ingresa el almacenamiento del producto"
                 name="storage"
                 id="storage"
                 key="storage"
-                value={newProduct.storage}
-                onChange={handleChange}
-                required
+                // value={newProduct.storage}
+                // onChange={handleChange}
               />
+              {errors.storage && (
+                <p className="text-red-500 text-xs">{errors.storage.message}</p>
+              )}
             </div>
             <div>
               <label
@@ -263,15 +368,27 @@ export default function ProductsEditForm() {
               </label>
               <input
                 type="text"
+                {...register("cpu", {
+                  required: {
+                    value: true,
+                    message: "Este campo es obligatorio.",
+                  },
+                  pattern: {
+                    value: /^(?!\s*$).+/i,
+                    message: "El nombre debe ser uno valido.",
+                  },
+                })}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
                 placeholder="Ingresa el cpu del producto"
                 name="cpu"
                 id="cpu"
                 key="cpu"
-                value={newProduct.cpu}
-                onChange={handleChange}
-                required
+                // value={newProduct.cpu}
+                // onChange={handleChange}
               />
+              {errors.cpu && (
+                <p className="text-red-500 text-xs">{errors.cpu.message}</p>
+              )}
             </div>
             <div>
               <label
@@ -282,15 +399,27 @@ export default function ProductsEditForm() {
               </label>
               <input
                 type="text"
+                {...register("battery", {
+                  required: {
+                    value: true,
+                    message: "Este campo es obligatorio.",
+                  },
+                  pattern: {
+                    value: /^\d+$/,
+                    message: "Solo se admiten valores numericos.",
+                  },
+                })}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
                 placeholder="Ingresa la bateria del producto"
                 name="battery"
                 id="battery"
                 key="battery"
-                value={newProduct.battery}
-                onChange={handleChange}
-                required
+                // value={newProduct.battery}
+                // onChange={handleChange}
               />
+              {errors.battery && (
+                <p className="text-red-500 text-xs">{errors.battery.message}</p>
+              )}
             </div>
             <div>
               <label
@@ -301,15 +430,28 @@ export default function ProductsEditForm() {
               </label>
               <input
                 type="text"
+                {...register("size", {
+                  required: {
+                    value: true,
+                    message: "Este campo es obligatorio.",
+                  },
+                  pattern: {
+                    value:
+                      /^(?:-(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))|(?:0|(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))))(?:.\d+|)$/,
+                    message: "Solo se admiten valores numericos.",
+                  },
+                })}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
                 placeholder="Ingresa el tamaño del producto"
                 name="size"
                 id="size"
                 key="size"
-                value={newProduct.size}
-                onChange={handleChange}
-                required
+                // value={newProduct.size}
+                // onChange={handleChange}
               />
+              {errors.size && (
+                <p className="text-red-500 text-xs">{errors.size.message}</p>
+              )}
             </div>
             <div>
               <label
@@ -320,15 +462,22 @@ export default function ProductsEditForm() {
               </label>
               <input
                 type="text"
+                {...register("special_features", {
+                  required: "Este campo es obligatorio",
+                })}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-300 dark:placeholder-gray-400"
                 placeholder="Ingresa información adicional del producto"
                 name="special_features"
                 id="special_features"
                 key="special_features"
-                value={newProduct.special_features}
-                onChange={handleChange}
-                required
+                // value={newProduct.special_features}
+                // onChange={handleChange}
               />
+              {errors.special_features && (
+                <p className="text-red-500 text-xs">
+                  {errors.special_features.message}
+                </p>
+              )}
             </div>
             <button
               type="submit"
