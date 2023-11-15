@@ -13,7 +13,7 @@ export default function PaypalPayment({ total, clearStore }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.user.user);
-  const selectedProduct = useSelector((state) => state.products.selectedProduct);
+  const selectedProduct = useSelector((state) => state.cart.items);
   const isLoggedIn = useSelector((state) => state.user.loggedin);
 
   const createOrder = (data, actions) => {
@@ -29,6 +29,8 @@ export default function PaypalPayment({ total, clearStore }) {
       description: 'Compra exitosa',
     });
   };
+
+  //console.log('VERIFICAR:::::: ',selectedProduct)
 
   const onApprove = async (data, actions) => {
     try {
@@ -51,7 +53,7 @@ export default function PaypalPayment({ total, clearStore }) {
         clearStore();
         navigate('/myProfile');
       } else {
-        console.log(error)
+        //console.log(error)
         Swal.fire('Usuario no autenticado o producto no seleccionado', 'Click para continuar', 'error');
       }
     } catch (error) {
