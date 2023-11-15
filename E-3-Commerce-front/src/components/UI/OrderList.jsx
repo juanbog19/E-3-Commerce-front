@@ -1,4 +1,5 @@
-const OrderList = ({ id, date, brand, model, amount, order }) => {
+const OrderList = ({ id, date, brand, model, amount, order, quant }) => {
+
 
   console.log(model)
 

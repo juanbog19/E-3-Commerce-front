@@ -50,6 +50,7 @@ const UserProfile = () => {
               model={order.products.map(product => product.model)}
               amount={order.amount}
               order={order.order}
+              quant={order.quant}
             />
           ))}
         </ul>
