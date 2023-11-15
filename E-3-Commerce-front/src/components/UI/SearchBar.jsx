@@ -66,11 +66,11 @@ const SearchBar = () => {
         
       </div>     
 
-      <div>
+      {/* <div>
         {error&&(
               <div className="mt-5 text-red-300" role='alert'>{error}</div>
             )}
-      </div>
+      </div> */}
 
 
       
