@@ -1,7 +1,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getAllOrders } from '../../store/orderSlice';
+import { getAllOrders, getOrderById } from '../../store/orderSlice';
 import OrderList from '../UI/OrderList';
 
 const UserProfile = () => {
@@ -11,7 +11,7 @@ const UserProfile = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    dispatch(getAllOrders())
+    dispatch(getOrderById(userId))
       .unwrap()
       .then((response) => {
         const userOrders = response.filter(order => order.id_user === userId);
@@ -50,7 +50,6 @@ const UserProfile = () => {
               model={order.products.map(product => product.model)}
               amount={order.amount}
               order={order.order}
-              quant={order.quant}
             />
           ))}
         </ul>

@@ -20,7 +20,7 @@ export const getOrderById = createAsyncThunk(
   "orders/getOrderById",
   async (id) => {
     try {
-      const response = await axiosURL.get(`/orders/${id}`);
+      const response = await axiosURL.get(`/orders/user/${id}`);
       return response.data;
     } catch (error) {
       throw new Error(error.response.data.message);
@@ -76,10 +76,14 @@ const orderSlice = createSlice({
   initialState: {
     orders: [],
     order: null,
-    loading: "idle",
+    loading: false,
     error: null,
   },
   reducers: {
+    cleanOrders(state){
+      state.orders = [];
+      state.loading = false
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -99,11 +103,11 @@ const orderSlice = createSlice({
         state.loading = "loading";
       })
       .addCase(getOrderById.fulfilled, (state, action) => {
-        state.loading = "succeeded";
-        state.order = action.payload;
+        state.loading = true;
+        state.orders = action.payload;
       })
       .addCase(getOrderById.rejected, (state, action) => {
-        state.loading = "failed";
+        state.loading = false;
         state.error = action.error.message;
       })
       .addCase(postOrder.pending, (state) => {
@@ -146,5 +150,7 @@ const orderSlice = createSlice({
       });
   },
 });
+
+export const cleanOrders = orderSlice.actions.cleanOrders;
 
 export default orderSlice.reducer;
