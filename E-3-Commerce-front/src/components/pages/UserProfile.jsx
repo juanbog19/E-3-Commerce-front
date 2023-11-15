@@ -80,13 +80,13 @@ const UserProfile = () => {
          </h2>
        </div>
        <div className="overflow-hidden border rounded-md">
-         <h3 className="px-4 py-3 text-xl font-bold text-gray-700 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
+         <h3 className="px-4 py-3 mb-4 text-xl font-bold text-gray-700 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
            Historial de Órdenes
          </h3>
 </div>
-      <ul className="flex flex-col mb-5 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300"> 
+      <ul className="flex flex-col p-4 mb-5 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300"> 
         {orders.map((order) => (
-          <div key={order.id}>
+          <div key={order.id} className='p-4 mb-4 bg-gray-100 border border-purple-800 rounded-lg shadow-md'>
             <h3 className="text-lg font-semibold">Orden ID: {order.id}</h3>
             <p>Fecha: {order.date}</p>            
             {order.products && order.products.length > 0 ? (
@@ -95,13 +95,15 @@ const UserProfile = () => {
                   key={product.id}
                   id={product.id}                 
                   brand={product.brand ? product.brand.name : 'No se encontró marca'}
-                  model={product.model ? product.model : 'No se encontró modelo'}
-                  amount={order.amount}                  
+                  model={product.model ? product.model : 'No se encontró modelo'}                 
                 />
               ))
             ) : (
               <p>No hay productos en esta orden.</p>
             )}
+            <div className="flex justify-end text-lg font-bold ">
+              <span>Total: ${order.amount}</span>
+            </div>
           </div>
         ))}
       </ul>
