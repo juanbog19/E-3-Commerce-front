@@ -1,7 +1,4 @@
-const OrderList = ({ id, date, brand, model, amount, order, quant }) => {
-
-
-  console.log(model)
+const OrderList = ({ id, date, brand, model, amount, order }) => {
 
   return (
     <li className="py-4 border-b">
@@ -13,15 +10,17 @@ const OrderList = ({ id, date, brand, model, amount, order, quant }) => {
             <p className="text-xs text-gray-500">Fecha de compra: {date}</p>
           </div>
           <div className="flex flex-col items-end">
-            {brand.length === model.length && brand.length > 0 && (
-              <div className="flex flex-wrap">
-                {brand.map((_, i) => (
-                  <div key={i} className="text-sm">
-                    {brand[i]} - {model[i]}
-                  </div>
-                ))}
+            {(brand.length > 0 && brand.length === model.length) ? (
+              brand.map((_, i) => (
+              <div key={i} className="text-sm">
+                {brand[i]} - {model[i]}
               </div>
-            )}
+            ))
+            ) : (
+            <div className="text-sm">
+              {brand.length > 0 && `${brand[0]} - ${model[0]}`}
+            </div>
+          )}
             <span className="mt-2 text-lg font-bold">${amount}</span>
           </div>
         </li>
