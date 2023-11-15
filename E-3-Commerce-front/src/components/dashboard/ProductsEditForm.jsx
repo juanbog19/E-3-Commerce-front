@@ -190,7 +190,7 @@ export default function ProductsEditForm() {
                 // key="image"
                 // value={newProduct.image}
                 // onChange={handleChange}
-                //hidden
+                hidden
               />
               {errors.image && (
                 <p className="text-red-500 text-xs">{errors.image.message}</p>
