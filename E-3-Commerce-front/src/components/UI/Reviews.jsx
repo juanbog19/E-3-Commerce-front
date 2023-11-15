@@ -8,7 +8,7 @@ import { FaStar } from 'react-icons/fa';
 const Review = () => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.reviews.reviews);
-  const users = useSelector((state) => state.user.users);
+  const users = useSelector((state) => state.user.user);
   const loggedInUser = useSelector((state) => state.user.loggedin);
   //const hasPurchased = useSelector((state) => state.user.hasPurchased);
   const compraExitosa = useSelector((state) => state.orders.loading)
@@ -21,7 +21,7 @@ const Review = () => {
   const [newReviewData, setNewReviewData] = useState({
     comment: '',
     rating: 0,
-    id_user: loggedInUser ? loggedInUser.id : null,
+    id_user: loggedInUser ? users.id : null,
   });
 
   const handleInputChange = (e) => {
@@ -42,18 +42,27 @@ const Review = () => {
       dispatch(getReviews());
       setNewReviewData({
         comment: '',
-        rating: newReviewData.rating,
+        rating: 0,
         id_user: loggedInUser.id,
-      });
+      });      
     } catch (error) {
       Swal.fire('Error al agregar una nueva revisión:', "Click para continuar", "info", error.message);
     }
   }, [dispatch, newReviewData]);
 
+  const formatDateString = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Los meses son base 0
+    const year = date.getFullYear().toString().slice(2, 4);
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
-    <div className="flex justify-center mt-20 border-black">
+    <div className="flex flex-col justify-center items-center mt-20 border-black">
       {validateOrders.length >= 1 ? (
-        <div className="w-1/3 p-4">
+        <div className="w-1/3 p-4 border-gray-200 rounded-lg shadow mb-5">
           <label className="block mb-2 text-lg font-bold">
             Coméntanos tu experiencia:
             <input
@@ -61,7 +70,9 @@ const Review = () => {
               name="comment"
               value={newReviewData.comment}
               onChange={handleInputChange}
+              placeholder='Escribe un comentario sobre tu experiencia...'
               className="border p-2 w-full mb-4 focus:outline-none focus:border-purple-500"
+              required
             />
           </label>
           <RatingInput rating={newReviewData.rating} handleInputChange={handleInputChange} />
@@ -69,11 +80,6 @@ const Review = () => {
           {!newReviewData.comment && (
             <p className="text-purple-500 text-lg mt-6 animate-pulse">
               ¡Ayúdanos a mejorar tu experiencia dejándonos tu comentario!
-            </p>
-          )}
-          {newReviewData.comment && (
-            <p className="text-green-500 text-sm mt-4">
-              ¡Gracias por compartir tu experiencia!
             </p>
           )}
           <button
@@ -93,18 +99,26 @@ const Review = () => {
             key={review.id}
             className="border rounded-md p-4 transition-transform transform hover:scale-105 bg-purple-100 hover:bg-purple-300"
           >
-            <div>
-              <p className="text-lg font-bold mb-2">Comentario: {review.comment}</p>
-              <p className="text-sm mb-2">
-                Le doy {review.rating} estrellas a esta página{' '}
+            <section>
+              <div className='flex items-center mb-4'>
+                <div className='font-medium '>
+                  <p>{review.user ? review.user.username : 'Usuario no disponible'}</p>
+                  <p className='block text-sm text-gray-500'>{formatDateString(review.date)}</p>
+                </div>
+              </div>
+              <div className='flex items-center mb-1 space-x-1 rtl:space-x-reverse'>
                 <span style={{ display: 'flex' }}>
                   {Array.from({ length: review.rating }, (_, index) => (
                     <FaStar key={index} className="text-yellow-500" />
                   ))}
                 </span>
-              </p>
-              <p className="text-xs mb-2">Usuario: {review.user ? review.user.username : 'Usuario no disponible'}</p>
-            </div>
+              </div>
+              <p className="mb-2 text-gray-500">{review.comment}</p>
+              {/* <p className="text-sm mb-2">
+                Le doy {review.rating} estrellas a esta página{' '}
+
+              </p> */}
+            </section>
           </div>
         ))}
       </div>

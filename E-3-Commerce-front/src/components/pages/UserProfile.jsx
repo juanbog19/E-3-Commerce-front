@@ -7,21 +7,13 @@ import OrderList from '../UI/OrderList';
 const UserProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.user);
+  const productsById = useSelector(state => state.orders.orders)
   const userId = user?.id;
-  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     dispatch(getOrderById(userId))
-      .unwrap()
-      .then((response) => {
-        const userOrders = response.filter(order => order.id_user === userId);
-        console.log(userOrders);
-        setOrders(userOrders);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [dispatch, userId]);
+
+  }, []);
 
   return (
     <div className="max-w-4xl mx-auto my-10 mt-20 border-collapse font-abril">
@@ -41,7 +33,7 @@ const UserProfile = () => {
           Historial de Órdenes
         </h3>
         <ul>
-          {orders.map((order, index) => (
+          {productsById.map((order, index) => (
             <OrderList
               key={index}
               id={order.id}

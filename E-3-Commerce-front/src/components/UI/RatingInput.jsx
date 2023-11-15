@@ -5,8 +5,8 @@ export const RatingInput = ({ rating, handleInputChange }) => {
 
   return (
     <div>
-    <label className="block text-gray-700 text-lg font-bold mb-2">
-      Calificar
+    <label className="flex items-center block text-gray-700 text-lg font-bold mb-2">
+      Califícanos: 
       <div className="flex items-center mt-2">
         {stars.map((star) => (
           <FaStar
