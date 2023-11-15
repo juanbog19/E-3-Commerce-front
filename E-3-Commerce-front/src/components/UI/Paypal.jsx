@@ -51,7 +51,7 @@ export default function PaypalPayment({ total, clearStore }) {
 
         Swal.fire('El pago ha sido exitoso', 'Click para continuar', 'success');
         clearStore();
-        navigate('/myProfile');
+        navigate('/thankYouPage');
       } else {
         //console.log(error)
         Swal.fire('Usuario no autenticado o producto no seleccionado', 'Click para continuar', 'error');

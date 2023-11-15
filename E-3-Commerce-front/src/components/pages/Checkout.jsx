@@ -13,10 +13,21 @@ const Checkout = () =>{
     const items = useSelector( ( state ) => state.cart.items );
     const total = useSelector( ( state ) => state.cart.total );
     const isAuthenticated = useSelector( (state) => state.user.loggedin);
+    console.log(items);
     
     const dispatch = useDispatch();
-    
 
+    const itemsTotal = items ? items.map((i)=>i.quant) : [];
+    const initialValue = 0;
+    const quantTotal = itemsTotal.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    initialValue,
+    );
+
+    console.log(':::::::::::::', quantTotal);
+    
+    
+    console.log(quantTotal);
     const cantItems = items.length;
     const hasItems = cantItems > 0 ? true : false;
 
@@ -70,7 +81,8 @@ const Checkout = () =>{
                 <div className="flex items-center justify-center w-1/4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
                     <div>
                         <p className="mb-5">Resumen de compra</p>
-                        <p className="text-xs text-stone-600">Cantidad de productos: { cantItems } </p>
+                        {/* <p className="text-xs text-stone-600">Cantidad de modelos: { cantItems } </p> */}
+                        <p className="text-xs text-stone-600">Cantidad de productos: { quantTotal } </p>
                         <p className="text-lg font-semibold">
                         Total: <span className="text-primary">{total} USD</span>{" "}
                         </p>

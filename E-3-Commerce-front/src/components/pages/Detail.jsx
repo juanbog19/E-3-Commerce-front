@@ -48,7 +48,7 @@ const Detail = () => {
               <img src={product.image} alt={product.brand.name} />
             </a>
           </div>
-          {loading && < Spinner />}  
+          {/* {loading && < Spinner />}   */}
         <div className="w-2/3 mt-10">        
 
             <div className="flex justify-center">
