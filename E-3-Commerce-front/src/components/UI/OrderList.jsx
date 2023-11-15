@@ -1,4 +1,5 @@
-const OrderList = ({ id, date, brand, model, amount, order }) => {
+const OrderList = ({ id, date, brand, model, amount, order, quant }) => {
+
 
   
   return (
@@ -12,8 +13,8 @@ const OrderList = ({ id, date, brand, model, amount, order }) => {
           </div>
           <div className="flex flex-col items-end">
             <span className="text-sm">{brand} </span>
-            <span className="text-sm">{model}</span>
-            <span className="mt-2 text-lg font-bold">${amount}</span>
+            <span className="text-sm">{model} </span>
+            <span className="mt-2 text-lg font-bold">${amount} </span>
           </div>
         </li>
       </ul>
