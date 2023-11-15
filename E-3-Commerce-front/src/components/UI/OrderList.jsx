@@ -1,9 +1,9 @@
 const OrderList = ({ id, date, brand, model, amount, order }) => {
 
   return (
-    <li className="py-4 border-b">
+    <li >
       <ul>
-        <li key={id} className="flex items-center justify-between p-4 bg-gray-100 border border-purple-500 rounded-md">
+        <li key={id} className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
           <div className="flex flex-col">
             <h1 className="mb-2 text-lg font-bold">Orden #{order}</h1>
             <h4 className="text-sm font-semibold text-gray-600">N° de órden: {id}</h4>

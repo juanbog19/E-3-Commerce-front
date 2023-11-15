@@ -21,7 +21,7 @@ const Detail = () => {
 
   const product = useSelector((state)=>state.products?.product);
   console.log(product);
-  const brand = product.brand.name;
+  const brand = product ? product.brand.name : [];
 
     
   const add = () => {

@@ -28,7 +28,7 @@ const UserProfile = () => {
       <h1 className="mb-6 text-3xl font-bold text-center uppercase">
         Perfil del Usuario
       </h1>
-      <div className="p-4 mb-6 bg-gray-100 border border-black rounded-md">
+      <div className="p-4 mb-6 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
         <h2 className="mb-2 text-xl font-semibold">
           Nombre: {user ? user.username : ''}
         </h2>
@@ -37,7 +37,7 @@ const UserProfile = () => {
         </h2>
       </div>
       <div className="overflow-hidden border rounded-md">
-        <h3 className="px-4 py-3 text-xl font-bold text-gray-700 bg-gray-100 border-b border-black">
+        <h3 className="px-4 py-3 text-xl font-bold text-gray-700 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300">
           Historial de Órdenes
         </h3>
         <ul>
