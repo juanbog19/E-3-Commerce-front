@@ -30,9 +30,9 @@ export const getOrderById = createAsyncThunk(
 
 export const postOrder = createAsyncThunk(
     "orders/postOrder",
-    async ({ order, amount, id_user, id_product }) => {
+    async ({ order, amount, id_user, id_products }) => {
       try {
-        const response = await axiosURL.post('/orders', { order, amount, id_user, id_product },{
+        const response = await axiosURL.post('/orders', { order, amount, id_user, id_products },{
           headers: {
             'Content-Type': 'application/json',
           }
