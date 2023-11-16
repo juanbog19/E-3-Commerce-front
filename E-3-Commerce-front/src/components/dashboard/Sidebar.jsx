@@ -11,12 +11,14 @@ import {
 } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { authLogout } from "../../store/userSlice";
+import { cleanOrders } from "../../store/orderSlice";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
 
   const logout = () => {
     dispatch(authLogout());
+    dispatch(cleanOrders())
   };
 
   return (
