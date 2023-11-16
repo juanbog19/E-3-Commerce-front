@@ -50,7 +50,7 @@ export default function Orders() {
                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{order.order}</th>
                                     <td className="px-6 py-4">{order.amount} USD</td>
                                     <td className="px-6 py-4">{formatDateString(order.date)}</td>
-                                    <td className="px-6 py-4">{order.user.username}</td>
+                                    <td className="px-6 py-4">{order.user?.username}</td>
                                     <td className="px-6 py-4">
                                         {order.products.map(product => (
                                             <div key={product.id}>
