@@ -15,10 +15,21 @@ const NavBar = () => {
 
   const cantItems = items.length;
   const hasItems = cantItems > 0 ? true : false;
+
+
+
+
+
+  const itemsTotal = items ? items.map((i)=>i.quant) : [];
+  const initialValue = 0;
+  const quantTotal = itemsTotal.reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+  initialValue,
+  );
   
   return (
     <>
-      <nav className="fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-200 ">
+      <nav className="fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-500">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
           <Link className="flex items-center" to="/tienda">
             <img src={PhonePulse} className="h-8 mr-3" alt="PhonePulse" />
@@ -29,7 +40,7 @@ const NavBar = () => {
             <div className="flex items-center justify-center ml-3">
               <Link className='relative inline-flex items-center px-2 py-1.5 text-sm font-medium text-center' to='/checkout'>
                 <FaShoppingCart className="text-2xl text-gray-700"></FaShoppingCart>
-                {hasItems ? <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2">{cantItems}</div> : ''}             
+                {hasItems ? <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2">{quantTotal}</div> : ''}             
               </Link>
             </div>
           </div>
