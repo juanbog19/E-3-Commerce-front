@@ -3,7 +3,7 @@ const OrderList = ({ id, brand, model, amount }) => {
     <div className="flex items-center justify-between">
       <div className="text-md">
         <h1 className="text-base font-extralight">
-          Producto: {brand} {model}
+          - {brand} {model}
         </h1>
       </div>
 

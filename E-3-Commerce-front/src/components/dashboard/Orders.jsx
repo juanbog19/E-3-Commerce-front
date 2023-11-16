@@ -8,25 +8,25 @@ export default function Orders() {
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            const resp = await axiosURL.get('/orders');
-            const responseData = resp.data || [];
-            setOrders(responseData);
-          } catch (error) {
-            console.log(error);
-          }
+            try {
+                const resp = await axiosURL.get('/orders');
+                const responseData = resp.data || [];
+                setOrders(responseData);
+            } catch (error) {
+                console.log(error);
+            }
         };
         fetchData();
-      }, []);
+    }, []);
 
-      const formatDateString = (dateString) => {
+    const formatDateString = (dateString) => {
         const date = new Date(dateString);
         const day = date.getDate().toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Los meses son base 0
         const year = date.getFullYear().toString().slice(2, 4);
-    
+
         return `${day}/${month}/${year}`;
-      };
+    };
 
     return (
         <div className='ml-64'>
@@ -51,7 +51,13 @@ export default function Orders() {
                                     <td className="px-6 py-4">{order.amount} USD</td>
                                     <td className="px-6 py-4">{formatDateString(order.date)}</td>
                                     <td className="px-6 py-4">{order.user.username}</td>
-                                    <td className="px-6 py-4">{order.products.map(product => product.brand.name)} {order.products.map(product => product.model)}, {order.products.map(product => product.memory)}RAM-{order.products.map(product => product.storage)}GB</td>
+                                    <td className="px-6 py-4">
+                                        {order.products.map(product => (
+                                            <div key={product.id}>
+                                                {product.brand.name} {product.model}
+                                            </div>
+                                        ))}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
