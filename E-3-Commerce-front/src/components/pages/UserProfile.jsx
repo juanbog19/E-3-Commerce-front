@@ -65,6 +65,15 @@ const UserProfile = () => {
     dispatch(getOrderById(userId));
   }, [dispatch, userId]);
 
+  const formatDateString = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Los meses son base 0
+    const year = date.getFullYear().toString().slice(2, 4);
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <div className="max-w-4xl mx-auto my-10 mt-20 border-collapse">
       
@@ -87,8 +96,8 @@ const UserProfile = () => {
       <ul className="flex flex-col p-4 mb-5 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:border-gray-300"> 
         {orders.map((order) => (
           <div key={order.id} className='p-4 mb-4 bg-gray-100 border border-purple-800 rounded-lg shadow-md'>
-            <h3 className="text-lg font-semibold">Orden ID: {order.id}</h3>
-            <p>Fecha: {order.date}</p>            
+            <h3 className="text-lg font-semibold">Orden #: {order.id}</h3>
+            <p>Fecha: {formatDateString(order.date)}</p>            
             {order.products && order.products.length > 0 ? (
               order.products.map((product) => (
                 <OrderList
