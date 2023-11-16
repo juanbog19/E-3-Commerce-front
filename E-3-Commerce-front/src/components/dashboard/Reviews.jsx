@@ -14,7 +14,7 @@ export default function Reviews() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resp = await axiosURL.get("/reviews");
+        const resp = await axiosURL.get("/reviewsAll");
         const responseData = resp.data || [];
         console.log(responseData);
         setReviews(responseData);
@@ -39,7 +39,7 @@ export default function Reviews() {
   };
 
   //console.log(reviews.map(review => review.))
-  console.log(':::::::::',reviews.map(review => review.user.username))
+  //console.log(':::::::::',reviews.map(review => review.user.username))
 
   return (
     <div className="ml-64">
